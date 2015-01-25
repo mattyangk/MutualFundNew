@@ -45,7 +45,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 				throw new RollbackException("This customer:" + id
 						+ " does not exist");
 			} else {
-				double balance = customer.getBalance();
+				double balance = ConvertUtil.convertAmountLongToDouble(customer.getBalance());
 				double newBalance = balance - amount;
 				if (newBalance < 0)
 					throw new AmountOutOfBoundException(balance, amount);
