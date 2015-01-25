@@ -6,8 +6,8 @@ import org.genericdao.PrimaryKey;
 public class PositionBean {
 	private int customer_id;
 	private int fund_id;
-	private double shares;
-	private double available_shares;
+	private long shares;
+	private long available_shares;
 	
 	public int getCustomer_id() {
 		return customer_id;
@@ -21,17 +21,19 @@ public class PositionBean {
 	public void setFund_id(int fund_id) {
 		this.fund_id = fund_id;
 	}
-	public double getShares() {
+	public long getShares() {
 		return shares;
 	}
-	public void setShares(double shares) {
+	public void setShares(long shares) {
 		this.shares = shares;
 	}
-	public double getAvailable_shares() {
+	public long getAvailable_shares() {
 		return available_shares;
 	}
-	public void setAvailable_shares(double available_shares) {
+	public void setAvailable_shares(long available_shares) {
 		this.available_shares = available_shares;
 	}
+	
+	
 		
 }

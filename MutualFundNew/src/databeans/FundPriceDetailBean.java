@@ -7,8 +7,7 @@ public class FundPriceDetailBean {
 	private String name;
 	private String symbol;
 	private Date price_date;
-	private double price;
-	
+	private long price;
 	public int getFund_id() {
 		return fund_id;
 	}
@@ -33,13 +32,12 @@ public class FundPriceDetailBean {
 	public void setPrice_date(Date price_date) {
 		this.price_date = price_date;
 	}
-	public double getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
-	
 	
 	
 }

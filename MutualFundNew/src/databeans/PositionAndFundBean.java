@@ -5,8 +5,8 @@ public class PositionAndFundBean {
 	private String name;
 	private String symbol;
 	private int customer_id;
-	private double shares;
-	private double available_shares;
+	private long shares;
+	private long available_shares;
 	public int getFund_id() {
 		return fund_id;
 	}
@@ -31,19 +31,17 @@ public class PositionAndFundBean {
 	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
 	}
-	public double getShares() {
+	public long getShares() {
 		return shares;
 	}
-	public void setShares(double shares) {
+	public void setShares(long shares) {
 		this.shares = shares;
 	}
-	public double getAvailable_shares() {
+	public long getAvailable_shares() {
 		return available_shares;
 	}
-	public void setAvailable_shares(double available_shares) {
+	public void setAvailable_shares(long available_shares) {
 		this.available_shares = available_shares;
 	}
 	
-	
-
 }

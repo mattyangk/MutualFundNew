@@ -11,12 +11,11 @@ public class TransactionBean {
 	private int fund_id;
 	private Date execute_date;
 	private Date transaction_date;
-	private double shares;
+	private long shares;
 	private String trasaction_type;
-	private double amount;
+	private long amount;
 	private boolean is_complete;
 	private boolean is_success;
-	
 	
 	public int getTransaction_id() {
 		return transaction_id;
@@ -42,10 +41,16 @@ public class TransactionBean {
 	public void setExecute_date(Date execute_date) {
 		this.execute_date = execute_date;
 	}
-	public double getShares() {
+	public Date getTransaction_date() {
+		return transaction_date;
+	}
+	public void setTransaction_date(Date transaction_date) {
+		this.transaction_date = transaction_date;
+	}
+	public long getShares() {
 		return shares;
 	}
-	public void setShares(double shares) {
+	public void setShares(long shares) {
 		this.shares = shares;
 	}
 	public String getTrasaction_type() {
@@ -54,10 +59,10 @@ public class TransactionBean {
 	public void setTrasaction_type(String trasaction_type) {
 		this.trasaction_type = trasaction_type;
 	}
-	public double getAmount() {
+	public long getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
+	public void setAmount(long amount) {
 		this.amount = amount;
 	}
 	public boolean isIs_complete() {
@@ -66,18 +71,11 @@ public class TransactionBean {
 	public void setIs_complete(boolean is_complete) {
 		this.is_complete = is_complete;
 	}
-	public Date getTransaction_date() {
-		return transaction_date;
-	}
-	public void setTransaction_date(Date transaction_date) {
-		this.transaction_date = transaction_date;
-	}
 	public boolean isIs_success() {
 		return is_success;
 	}
 	public void setIs_success(boolean is_success) {
 		this.is_success = is_success;
 	}
-	
 
 }

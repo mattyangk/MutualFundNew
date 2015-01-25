@@ -8,7 +8,7 @@ import org.genericdao.PrimaryKey;
 public class FundPriceHistoryBean {
 	private int fund_id;
 	private Date price_date;
-	private double price;
+	private long price;
 	
 	public int getFund_id() {
 		return fund_id;
@@ -22,11 +22,13 @@ public class FundPriceHistoryBean {
 	public void setPrice_date(Date price_date) {
 		this.price_date = price_date;
 	}
-	public double getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
+	
+	
 	
 }

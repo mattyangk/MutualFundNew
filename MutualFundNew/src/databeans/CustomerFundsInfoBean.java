@@ -5,9 +5,7 @@ public class CustomerFundsInfoBean {
 	private int fund_id;
 	private String fund_name;
 	private String fund_symbol;
-	private double shares;
-	
-	
+	private long shares;
 	public int getFund_id() {
 		return fund_id;
 	}
@@ -20,24 +18,17 @@ public class CustomerFundsInfoBean {
 	public void setFund_name(String fund_name) {
 		this.fund_name = fund_name;
 	}
-	public double getShares() {
-		return shares;
-	}
-	public void setShares(double shares) {
-		this.shares = shares;
-	}
-	
 	public String getFund_symbol() {
 		return fund_symbol;
 	}
 	public void setFund_symbol(String fund_symbol) {
 		this.fund_symbol = fund_symbol;
 	}
-	
-	
-	
-	
-	
-	
+	public long getShares() {
+		return shares;
+	}
+	public void setShares(long shares) {
+		this.shares = shares;
+	}
 
 }
