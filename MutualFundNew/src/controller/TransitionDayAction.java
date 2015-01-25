@@ -20,6 +20,8 @@ import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import util.ConvertUtil;
+
 public class TransitionDayAction extends Action {
 
 	private FormBeanFactory<TransitionForm> formBeanFactory = FormBeanFactory
@@ -82,13 +84,13 @@ public class TransitionDayAction extends Action {
 				onefund.setFund_id(allFunds[i].getFund_id());
 				onefund.setFund_name(allFunds[i].getName());
 				onefund.setLast_date(theDate);
-				onefund.setLast_price(fundpriceHistoryDAO.findLatestPrice(onefund.getFund_id()));
+				onefund.setLast_price(ConvertUtil.convertAmountDoubleToLong(fundpriceHistoryDAO.findLatestPrice(onefund.getFund_id())));
 				onefund.setFund_symbol(allFunds[i].getSymbol());
 				System.out.println(i);
 
 				double lastPrice = fundpriceHistoryDAO
 						.findLatestPrice(allFunds[i].getFund_id());
-				onefund.setLast_price(lastPrice);
+				onefund.setLast_price(ConvertUtil.convertAmountDoubleToLong(lastPrice));
 				funds[i] = onefund;
 			}
 
@@ -155,7 +157,7 @@ public class TransitionDayAction extends Action {
 				}
 				
 				one.setFund_id(Integer.parseInt(fund_id[i]));
-				one.setPrice(Double.parseDouble(price[i]));
+				one.setPrice(ConvertUtil.convertAmountDoubleToLong(Double.parseDouble(price[i])));
 				one.setPrice_date(newLateDate);
 				fundpriceHistoryDAO.create(one);
 				System.out.println("updating");
@@ -263,7 +265,7 @@ public class TransitionDayAction extends Action {
 					
 					transactions[i].setExecute_date(form
 							.getTransitionDateAsDate());
-					transactions[i].setShares(roundedShares);
+					transactions[i].setShares(ConvertUtil.coverShareDoubleToLong(roundedShares));
 					transactions[i].setIs_complete(true);
 					transactions[i].setIs_success(true);
 					transactionDAO.update(transactions[i]);
@@ -284,9 +286,9 @@ public class TransitionDayAction extends Action {
 						PositionBean newPosition = new PositionBean();
 						newPosition.setCustomer_id(customerID);
 						newPosition.setFund_id(fundID);
-						newPosition.setShares(roundedShares);
+						newPosition.setShares(ConvertUtil.coverShareDoubleToLong(roundedShares));
 						System.out.println("roundedShares :" + roundedShares);
-						newPosition.setAvailable_shares(roundedShares);
+						newPosition.setAvailable_shares(ConvertUtil.coverShareDoubleToLong(roundedShares));
 						// insert new data into position table.
 						positionDAO.create(newPosition);
 					}
@@ -332,10 +334,10 @@ public class TransitionDayAction extends Action {
 					
 					/////////////////////////////////////////////////////
 
-					transactions[i].setAmount(amount);
+					transactions[i].setAmount(ConvertUtil.convertAmountDoubleToLong(amount));
 					transactions[i].setExecute_date(form
 							.getTransitionDateAsDate());
-					transactions[i].setShares(newShares);
+					transactions[i].setShares(ConvertUtil.coverShareDoubleToLong(newShares));
 					System.out.println("newShares :" + newShares);
 					transactions[i].setIs_complete(true);
 					transactions[i].setIs_success(true);

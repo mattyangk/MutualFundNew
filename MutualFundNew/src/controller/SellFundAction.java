@@ -16,6 +16,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import util.ConvertUtil;
 import databeans.CustomerBean;
 import databeans.FundBean;
 import databeans.PositionAndFundBean;
@@ -108,7 +109,7 @@ public class SellFundAction extends Action {
 			transaction.setFund_id(fund.getFund_id());
 			transaction.setIs_complete(false);
 			transaction.setIs_success(false);
-			transaction.setShares(form.getShareAsDouble());
+			transaction.setShares(ConvertUtil.coverShareDoubleToLong(form.getShareAsDouble()));
 			transaction.setTransaction_date(new Date());
 			transaction.setTrasaction_type("sell");
 			

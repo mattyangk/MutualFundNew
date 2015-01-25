@@ -7,6 +7,7 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import util.ConvertUtil;
 import databeans.CustomerBean;
 import exception.AmountOutOfBoundException;
 
@@ -49,7 +50,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 				if (newBalance < 0)
 					throw new AmountOutOfBoundException(balance, amount);
 				else {
-					customer.setBalance(newBalance);
+					customer.setBalance(ConvertUtil.convertAmountDoubleToLong(newBalance));
 					update(customer);
 				}
 			}
@@ -69,8 +70,8 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 				throw new RollbackException("This customer:" + customer_id
 						+ " does not exist");
 			} else {
-				customer.setCash(amount);
-				customer.setBalance(amount);
+				customer.setCash(ConvertUtil.convertAmountDoubleToLong(amount));
+				customer.setBalance(ConvertUtil.convertAmountDoubleToLong(amount));
 				update(customer);
 
 			}

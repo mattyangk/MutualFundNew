@@ -7,6 +7,7 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import util.ConvertUtil;
 import databeans.PositionBean;
 import databeans.TransactionBean;
 import exception.AmountOutOfBoundException;
@@ -41,7 +42,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 					throw new AmountOutOfBoundException(availableShares,
 							sellingShares);
 				else {
-					position.setAvailable_shares(newAvailableShares);
+					position.setAvailable_shares(ConvertUtil.coverShareDoubleToLong(newAvailableShares));
 					update(position);
 				}
 			}
@@ -63,8 +64,8 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 						+ " does not exist");
 			} else {
 				
-					position.setShares(shares);
-					position.setAvailable_shares(shares);
+					position.setShares(ConvertUtil.coverShareDoubleToLong(shares));
+					position.setAvailable_shares(ConvertUtil.coverShareDoubleToLong(shares));
 					update(position);
 				
 			}

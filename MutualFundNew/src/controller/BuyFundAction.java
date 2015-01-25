@@ -16,6 +16,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import util.ConvertUtil;
 import databeans.CustomerBean;
 import databeans.FundBean;
 import databeans.TransactionBean;
@@ -86,7 +87,7 @@ public class BuyFundAction extends Action {
 
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomer_id());
-			transaction.setAmount(form.getFundAmountAsDouble());
+			transaction.setAmount(ConvertUtil.convertAmountDoubleToLong(form.getFundAmountAsDouble()));
 			transaction.setFund_id(fund.getFund_id());
 			transaction.setIs_complete(false);
 			transaction.setIs_success(false);

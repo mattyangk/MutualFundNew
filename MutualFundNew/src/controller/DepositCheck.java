@@ -14,6 +14,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import util.ConvertUtil;
 import databeans.CustomerBean;
 import databeans.TransactionBean;
 import formbeans.DepositCheckForm;
@@ -66,7 +67,7 @@ public class DepositCheck extends Action {
 				
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomer_id());
-			transaction.setAmount(form.getDepositAmountAsDouble());
+			transaction.setAmount(ConvertUtil.convertAmountDoubleToLong(form.getDepositAmountAsDouble()));
 			transaction.setTrasaction_type("deposit");
 			transaction.setIs_complete(false);
 			transaction.setTransaction_date(new Date());
