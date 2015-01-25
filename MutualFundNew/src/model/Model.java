@@ -84,8 +84,8 @@ public class Model {
 		   initialCustomer.setLastname("Customer");
 		   initialCustomer.setState("Pennsylvania");
 		   initialCustomer.setCity("Pittsburgh");
-		   initialCustomer.setCash(100);
-		   initialCustomer.setBalance(50);
+		   initialCustomer.setCash(10000);
+		   initialCustomer.setBalance(10000);
 		   initialCustomer.setZip("15213");
 		   initialCustomer.setAddr_line1("5000 Forbes Ave");
 		   initialCustomer.setAddr_line2("ISR Lounge");
