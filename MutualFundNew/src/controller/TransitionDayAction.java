@@ -173,12 +173,12 @@ public class TransitionDayAction extends Action {
 			for (int i = 0; i < transactions.length; i++) {
 				CustomerBean customer = customerDAO.read(transactions[i]
 						.getCustomer_id());
-				double cash = customer.getCash();
+				double cash = ConvertUtil.convertAmountLongToDouble(customer.getCash());
 
 				switch (transactions[i].getTrasaction_type()) {
 				case "deposit": {
 					System.out.println("action : deposit");
-					double addMoney = transactions[i].getAmount();
+					double addMoney = ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount());
 					System.out.println("new cash - deposit : "
 							+ (cash + addMoney));
 					customerDAO.updateCash(transactions[i].getCustomer_id(),
@@ -192,8 +192,8 @@ public class TransitionDayAction extends Action {
 				}
 				case "request": {
 					System.out.println("action : request");
-					double awayMoney = transactions[i].getAmount();
-					if (customer.getCash() >= awayMoney) {
+					double awayMoney = ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount());
+					if (ConvertUtil.convertAmountLongToDouble(customer.getCash()) >= awayMoney) {
 						System.out.println("new cash - request  : "
 								+ (cash - awayMoney));
 						customerDAO.updateCash(
@@ -223,7 +223,7 @@ public class TransitionDayAction extends Action {
 					int fundID = transactions[i].getFund_id();
 
 					// TEST CASH
-					if (cash < transactions[i].getAmount()) {
+					if (cash <  ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount())) {
 						transactions[i].setIs_success(false);
 						transactions[i].setIs_complete(true);
 						transactionDAO.update(transactions[i]);
@@ -235,7 +235,7 @@ public class TransitionDayAction extends Action {
 					// UPDATE CASH
 					double newFundPrice = fundpriceHistoryDAO
 							.findLatestPrice(transactions[i].getFund_id());
-					double newShares = transactions[i].getAmount()
+					double newShares = ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount())
 							/ newFundPrice;// be careful to the number;
 					
 					System.out.println("original newShares : "+newShares);
@@ -254,7 +254,7 @@ public class TransitionDayAction extends Action {
 						continue;
 					}
 					
-					double amountDeducted = transactions[i].getAmount();
+					double amountDeducted = ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount());
 					double newCash = cash - amountDeducted;
 
 					System.out.println("original newCash : "+newCash);
@@ -269,14 +269,14 @@ public class TransitionDayAction extends Action {
 					transactions[i].setIs_complete(true);
 					transactions[i].setIs_success(true);
 					transactionDAO.update(transactions[i]);
-					System.out.println("Transaction Amt : "+transactions[i].getAmount());
+					System.out.println("Transaction Amt : "+ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount()));
 					System.out.println("Cash : "+cash);
 					System.out.println("Amount being set : "+(newCash));
 					customerDAO.updateCash(transactions[i].getCustomer_id(),newCash);
 
 					if (positionDAO.read(fundID,customerID) != null) {
 						PositionBean onePosition = positionDAO.read(fundID,customerID);
-						double currentShares = onePosition.getShares();
+						double currentShares = ConvertUtil.convertShareLongToDouble(onePosition.getShares());
 						System.out.println("newShares :" + currentShares
 								+ roundedShares);
 						
@@ -302,8 +302,8 @@ public class TransitionDayAction extends Action {
 					double newFundPrice = fundpriceHistoryDAO
 							.findLatestPrice(transactions[i].getFund_id());
 
-					double amount = transactions[i].getShares() * newFundPrice;
-					double newShares = transactions[i].getShares();
+					double amount = ConvertUtil.convertAmountLongToDouble(transactions[i].getShares()) * newFundPrice;
+					double newShares = ConvertUtil.convertShareLongToDouble(transactions[i].getShares());
 
 					////////////////////////////////////////////////////
 					
@@ -348,7 +348,7 @@ public class TransitionDayAction extends Action {
 																		// done
 						// TODO POSITIONDAO.READ ORDER
 						PositionBean onePosition = positionDAO.read(fundID,customerID);
-						double currentShares = onePosition.getShares();
+						double currentShares = ConvertUtil.convertShareLongToDouble(onePosition.getShares());
 						if( currentShares - newShares <0){
 							throw new RollbackException("Some errors with funds");
 						}
