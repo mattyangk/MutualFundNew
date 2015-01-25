@@ -36,7 +36,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 						+ fund_id + "customer_id" + customer_id
 						+ " does not exist");
 			} else {
-				double availableShares = position.getAvailable_shares();
+				double availableShares = ConvertUtil.convertShareLongToDouble(position.getAvailable_shares());
 				double newAvailableShares = availableShares - sellingShares;
 				if (newAvailableShares < 0)
 					throw new AmountOutOfBoundException(availableShares,
