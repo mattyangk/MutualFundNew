@@ -42,11 +42,11 @@
 			</tr>
 
 			<tr>
-				<td>Cash:<fmt:formatNumber value="${customer.cash}"
+				<td>Cash:<fmt:formatNumber value="${customer.cash/100}"
 					type="currency" /></td>
 				</tr>
 			<tr>
-				<td>Available Balance:<fmt:formatNumber value="${customer.balance}"
+				<td>Available Balance:<fmt:formatNumber value="${customer.balance/100}"
 					type="currency" /></td>
 			</tr>
 		</table>
@@ -84,7 +84,7 @@
 
 						<td>${fund.fund_symbol}</td>
 
-						<td><fmt:formatNumber value="${fund.shares}" type="number"
+						<td><fmt:formatNumber value="${fund.shares/1000}" type="number"
 								maxFractionDigits="3" minFractionDigits="3"/></td>
 
 					</tr>

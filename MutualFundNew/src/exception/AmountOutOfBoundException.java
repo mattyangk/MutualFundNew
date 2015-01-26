@@ -28,7 +28,7 @@ public class AmountOutOfBoundException extends Exception {
 		bdTrans = bdTrans.setScale(2, RoundingMode.HALF_UP);
 		double displayTransAmt = bdTrans.doubleValue();
 		
-		DecimalFormat df = new DecimalFormat("#.00"); 
+		DecimalFormat df = new DecimalFormat("0.00"); 
 		
 		return "Invalid Transaction !! Available Balance of $ " + df.format(displayOwnAmount) + " is less than Transaction Amount of $"+ df.format(displayTransAmt) + " !!\n";
 	}

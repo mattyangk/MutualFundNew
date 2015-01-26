@@ -40,7 +40,7 @@
 				<tr>
 					<td><a href="showCustomerInfo.do?customername=${customer.username}">${customer.username}</a></td>
 					<td>${customer.firstname} ${customer.lastname}</td>
-					<td><fmt:formatNumber value="${customer.cash}"
+					<td><fmt:formatNumber value="${customer.cash/100}"
 					type="currency" /></td>
 				</tr>
 			</c:forEach>

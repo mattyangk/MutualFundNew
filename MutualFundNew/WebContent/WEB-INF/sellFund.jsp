@@ -1,3 +1,4 @@
+<%@page import="util.ConvertUtil"%>
 <%@ page import="databeans.PositionAndFundBean"%>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	PositionAndFundBean[] funds = (PositionAndFundBean[]) request.getAttribute("positionAndFunds");
-    DecimalFormat df = new DecimalFormat(".000");
+    DecimalFormat df = new DecimalFormat("0.000");
 %>
 <jsp:include page="header.jsp" />
 <script src="js/validate.js"></script>
@@ -27,8 +28,8 @@
 		
 		$("#fund_id").text("<%=funds[0].getFund_id()%>");
         $("#symbol").text("<%=funds[0].getSymbol()%>");
-		$("#shares").text("<%=df.format(funds[0].getShares())%>");
-		$("#ashares").text("<%=df.format(funds[0].getAvailable_shares())%>");
+		$("#shares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[0].getShares()))%>");
+		$("#ashares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[0].getAvailable_shares()))%>");
 		
 		$("select").change(function() {
 			var str = "";
@@ -45,8 +46,8 @@
 					//alert (str);
 					$("#fund_id").text("<%=funds[i].getFund_id()%>");
 			        $("#symbol").text("<%=funds[i].getSymbol()%>");
-					$("#shares").text("<%=funds[i].getShares()%>");
-					$("#ashares").text("<%=funds[i].getAvailable_shares()%>");
+			        $("#shares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[i].getShares()))%>");
+					$("#ashares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[i].getAvailable_shares()))%>");
 				}
 			<%
 				}

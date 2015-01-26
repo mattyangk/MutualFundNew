@@ -109,7 +109,7 @@
 							</c:choose>
 							<td>${transaction.trasaction_type}</td>
 							<td><fmt:formatNumber value="${transaction.amount}"  type="number"
-								maxFractionDigits="2" minFractionDigits="2" pattern=".00"/></td>
+								maxFractionDigits="2" minFractionDigits="2" pattern="0.00"/></td>
 							<c:if test="${transaction.is_success}">
 								<td>Completed</td>
 							</c:if>

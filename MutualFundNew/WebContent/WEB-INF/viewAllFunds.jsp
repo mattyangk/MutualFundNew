@@ -40,7 +40,7 @@
 				<tr>
 					<td><a href="researchFund.do?fundname=${fund.name}">${fund.name}</a></td>
 					<td>${fund.symbol}</td>
-					<td><fmt:formatNumber value="${fund.price}" type="number"
+					<td><fmt:formatNumber value="${fund.price/100}" type="number"
 								maxFractionDigits="2" minFractionDigits="2" /></td>
 				</tr>
 			</c:forEach>
