@@ -96,6 +96,7 @@ public class LoginAction extends Action {
 					return "manage.jsp";
 				} else {
 					errors.add("User Name or password is not correct");
+					return "index.jsp";
 				}
 			}
 
@@ -105,12 +106,12 @@ public class LoginAction extends Action {
 					//System.out.println("adding employee to session" + employee.getUsername());
 					session.setAttribute("employee", employee);
 					return "manage.jsp";
-				} 
-			}
-			else {
+			
+			} else {
 				errors.add("User Name or password is not correct");
 				// System.out.println("Incorrect password");
 				return "index.jsp";
+			}
 			}
 			
 
