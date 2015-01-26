@@ -99,7 +99,7 @@
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
-								<c:when test="${empty transaction.shares }">
+								<c:when test="${!transaction.is_complete && transaction.trasaction_type.equals('buy') }">
 									<td>(pending)</td>
 								</c:when>
 								<c:otherwise>
@@ -108,8 +108,19 @@
 								</c:otherwise>
 							</c:choose>
 							<td>${transaction.trasaction_type}</td>
-							<td><fmt:formatNumber value="${transaction.amount/100}"  type="number"
+							
+							<c:choose>
+								<c:when test="${!transaction.is_complete && transaction.trasaction_type.equals('sell')}">
+									<td>(pending)</td>
+								</c:when>
+								<c:otherwise>
+									<td><fmt:formatNumber value="${transaction.amount/100}"  type="number"
 								maxFractionDigits="2" minFractionDigits="2" pattern="0.00"/></td>
+								</c:otherwise>
+							</c:choose>
+							
+							
+							
 							<c:if test="${transaction.is_success}">
 								<td>Completed</td>
 							</c:if>
