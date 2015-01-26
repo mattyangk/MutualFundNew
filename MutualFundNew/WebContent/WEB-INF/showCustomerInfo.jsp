@@ -22,14 +22,14 @@
 
 		<tr>
 
-			<td>User Name:${customer.username }</td>
+			<td>User Name: ${customer.username }</td>
 
 
 		</tr>
 
 		<tr>
 
-			<td>First Name:${customer.firstname }</td>
+			<td>First Name: ${customer.firstname }</td>
 
 		</tr>
 
@@ -53,33 +53,33 @@
 
 		<tr>
 
-			<td>City:${customer.city }</td>
+			<td>City: ${customer.city }</td>
 
 		</tr>
 
 		<tr>
 
-			<td>State:${customer.state}</td>
+			<td>State: ${customer.state}</td>
 
 		</tr>
 
 		<tr>
 
-			<td>Zip:${customer.zip }</td>
+			<td>Zip: ${customer.zip }</td>
 
 		</tr>
 
 
 		<tr>
 
-			<td>Cash:<fmt:formatNumber value="${customer.cash/100}"
+			<td>Cash: <fmt:formatNumber value="${customer.cash/100}"
 					type="currency" /></td>
 
 		</tr>
 
 		<tr>
 
-			<td>Available Balance:<fmt:formatNumber value="${customer.balance/100}"
+			<td>Available Balance: <fmt:formatNumber value="${customer.balance/100}"
 					type="currency" /></td>
 
 		</tr>

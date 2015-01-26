@@ -54,13 +54,19 @@
 			</tr>
 
 			<tr>
-				<td>city</td>
+				<td>City</td>
 				<td><input type="text" name="city" class="form-control"
+					value="" /></td>
+			</tr>
+			
+			<tr>
+				<td>State</td>
+				<td><input type="text" name="state" class="form-control"
 					value="" /></td>
 			</tr>
 
 			<tr>
-				<td>zip</td>
+				<td>Zip</td>
 				<td><input type="text" name="zip" class="form-control"
 					value="" /></td>
 			</tr>
