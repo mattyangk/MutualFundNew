@@ -69,7 +69,7 @@ public class RequestCheckAction extends Action{
 //			System.out.println(customer.getUsername());
 //			System.out.println(customer.getCash());
 			
-			customerDAO.updateBalance(customer.getCustomer_id(), ConvertUtil.convertAmountDoubleToLong(form.getRequestAmountAsDouble()));
+			customerDAO.updateBalance(customer.getCustomer_id(), form.getRequestAmountAsDouble());
 			
 			TransactionBean transaction = new TransactionBean();
 			transaction.setAmount(ConvertUtil.convertAmountDoubleToLong(form.getRequestAmountAsDouble()));
