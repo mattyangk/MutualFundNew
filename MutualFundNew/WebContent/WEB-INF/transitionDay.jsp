@@ -4,13 +4,17 @@
 
 <%@ page language="java" contentType="text/html; charset=GB18030"
 	pageEncoding="GB18030"%>
+
 <jsp:include page="header.jsp" />
+<script src="js/validate.js"></script>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<h1 class="page-header">Transition Day</h1>
 	<div>
 		<jsp:include page="error.jsp" />
 		<jsp:include page="message.jsp" />
 
+		<p class="priceInputFeedback" style="color: red"></p>
 		<form action="transitionDayAction.do" method="POST">
 			<table class="table">
 

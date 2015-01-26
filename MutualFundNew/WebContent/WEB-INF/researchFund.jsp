@@ -1,3 +1,4 @@
+<%@page import="util.ConvertUtil"%>
 <%@page import="databeans.FundBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -37,7 +38,7 @@
 		%>
 		
 		data.setValue(<%=i%>, 0, '<%=priceList[i].getPrice_date().getYear() + 1900 + "-" + (priceList[i].getPrice_date().getMonth() + 1) + "-" + priceList[i].getPrice_date().getDate()%>');
-		data.setValue(<%=i%>, 1, <%=priceList[i].getPrice()%>);
+		data.setValue(<%=i%>, 1, <%=ConvertUtil.convertAmountLongToDouble(priceList[i].getPrice()) %>);
 		<%
 			}
 		%>

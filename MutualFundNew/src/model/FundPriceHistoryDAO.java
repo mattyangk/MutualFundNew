@@ -10,6 +10,7 @@ import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 
+import util.ConvertUtil;
 import databeans.FundPriceHistoryBean;
 import databeans.TransactionBean;
 
@@ -35,7 +36,7 @@ public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean>{
 			return -1;
 		} else {
 			sortByDateDsc(history);
-			return history[0].getPrice();
+			return ConvertUtil.convertAmountLongToDouble(history[0].getPrice());
 		}
 	}
 	

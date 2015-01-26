@@ -76,7 +76,7 @@ public class SellFundAction extends Action {
 				positionAndFund.setShares(position.getShares());
 				positionAndFund.setSymbol(funds[i].getSymbol());
 				positionAndFunds.add(positionAndFund);
-				System.out.println("test  " + positionAndFund.getName());
+				System.out.println("test  " + positionAndFund.getAvailable_shares());
 			}
 			
 			
