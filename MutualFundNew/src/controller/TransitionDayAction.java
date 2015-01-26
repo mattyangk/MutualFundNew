@@ -302,9 +302,11 @@ public class TransitionDayAction extends Action {
 					double newFundPrice = fundpriceHistoryDAO
 							.findLatestPrice(transactions[i].getFund_id());
 
-					double amount = ConvertUtil.convertAmountLongToDouble(transactions[i].getShares()) * newFundPrice;
+					double amount = ConvertUtil.convertShareLongToDouble(transactions[i].getShares()) * newFundPrice;
 					double newShares = ConvertUtil.convertShareLongToDouble(transactions[i].getShares());
 
+					//System.out.println("the price is " + newFundPrice + "the amount is " + amount + " and the newShare is " + newShares);
+					
 					////////////////////////////////////////////////////
 					
 					System.out.println("original amount : "+amount);
