@@ -11,86 +11,72 @@
 		<jsp:include page="error.jsp" />
 		<jsp:include page="message.jsp" />
 
-			<form action="transitionDayAction.do" method="POST">
-				<table class="table">
+		<form action="transitionDayAction.do" method="POST">
+			<table class="table">
 
+				<tr>
+					<td>Last Trading Day:</td>
+					<c:choose>
+						<c:when test="${empty theLastDate}">
+							<td>No Last Trading Date</td>
+						</c:when>
+						<c:otherwise>
+							<td>${theLastDate}</td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+
+				<tr>
+					<td>Trading Day:</td>
+					<td><input type="text" name="transitionDate" value=" " /></td>
+				</tr>
+			</table>
+
+
+			<table class="table">
+				<thead>
 					<tr>
-						<td>Last Trading Day:</td>
-						<c:choose>
-							<c:when test="${empty theLastDate}">
-								<td>No Last Trading Date</td>
-							</c:when>
-							<c:otherwise>
-								<td>${theLastDate}</td>
-							</c:otherwise>
-						</c:choose>
+						<th>FundName</th>
+						<th>Ticker</th>
+						<th>Last trading date</th>
+						<th>Last trading price</th>
+						<th>New Closing Price</th>
+
 					</tr>
-
-					<tr>
-						<td>Trading Day:</td>
-						<td><input type="text" name="transitionDate" value=" " /></td>
-					</tr>
-				</table>
+				</thead>
 
 
-				<table class="table">
-					<thead>
-						<tr>
-							<th>FundName</th>
-							<th>Ticker</th>
-							<th>Last trading date</th>
-							<th>Last trading price</th>
-							<th>New Closing Price</th>
-							
-						</tr>
-					</thead>
+				<tbody>
+					<c:if test="${requestScope.allFunds!= null}">
+						<c:forEach items="${requestScope.allFunds}" var="oneFund">
+							<tr>
+								<td>${oneFund.fund_name}</td>
+								<td>${oneFund.fund_symbol}</td>
+								<td>${oneFund.last_date}</td>
+								<c:choose>
+									<c:when test="${oneFund.last_price/100 < 0}">
+										<td>Not Available</td>
+									</c:when>
+									<c:otherwise>
+										<td><fmt:formatNumber value="${oneFund.last_price/100}"
+												type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+									</c:otherwise>
+								</c:choose>
+								<td><input type="text" name="price" value="" /> <input
+									type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
+							</tr>
 
+						</c:forEach>
+					</c:if>
 
-					<tbody>
-						<c:if test="${requestScope.allFunds!= null}">
-							<c:forEach items="${requestScope.allFunds}" var="oneFund">
-								<tr>
-									<td>${oneFund.fund_name}</td>
-									<td>${oneFund.fund_symbol}</td>
-									<td>${oneFund.last_date}</td>
-									<c:choose>
-										<c:when test="${oneFund.last_price == -1.0}">
-											<td>Not Available</td>
-										</c:when>
-										<c:otherwise>
-											<td><fmt:formatNumber value="${oneFund.last_price}" type="number"
-								maxFractionDigits="2"  minFractionDigits="2" /></td>
-										</c:otherwise>
-									</c:choose>
-									<td><input type="text" name="price" value="" /> <input
-										type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
-								</tr>
+				</tbody>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						name="button" class="btn btn-success" value="Submit" /></td>
+				</tr>
+			</table>
 
-							</c:forEach>
-						</c:if>
-
-					</tbody>
-					<tr><td colspan="2" align="center"><input type="submit"
-					name="button" class="btn btn-success" value="Submit" /></td></tr>
-					
-
-				</table>
-
-
-				
-
-
-			</form></div>
+		</form>
+	</div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
