@@ -11,6 +11,7 @@ import util.ConvertUtil;
 import databeans.PositionBean;
 import databeans.TransactionBean;
 import exception.AmountOutOfBoundException;
+import exception.SharesOutOfBoundException;
 
 public class PositionDAO extends GenericDAO<PositionBean> {
 	public PositionDAO(ConnectionPool connectionPool, String tableName)
@@ -27,7 +28,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	}
 
 	public void updateAvailableShares(int fund_id, int customer_id, double sellingShares)
-			throws RollbackException, AmountOutOfBoundException {
+			throws RollbackException, SharesOutOfBoundException {
 		try {
 			Transaction.begin();
 			PositionBean position = read(fund_id, customer_id);
@@ -39,7 +40,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 				double availableShares = ConvertUtil.convertShareLongToDouble(position.getAvailable_shares());
 				double newAvailableShares = availableShares - sellingShares;
 				if (newAvailableShares < 0)
-					throw new AmountOutOfBoundException(availableShares,
+					throw new SharesOutOfBoundException(availableShares,
 							sellingShares);
 				else {
 					position.setAvailable_shares(ConvertUtil.coverShareDoubleToLong(newAvailableShares));
@@ -54,14 +55,12 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	}
 	
 	public void updateShares(int fund_id, int customer_id, double shares)
-			throws RollbackException, AmountOutOfBoundException {
+			throws RollbackException {
 		try {
 			Transaction.begin();
 			PositionBean position = read(fund_id, customer_id);
 			if (position == null) {
-				throw new RollbackException("This position:" + "fund_id:"
-						+ fund_id + "customer_id" + customer_id
-						+ " does not exist");
+				throw new RollbackException("Customer does not own this shares !");
 			} else {
 				
 					position.setShares(ConvertUtil.coverShareDoubleToLong(shares));

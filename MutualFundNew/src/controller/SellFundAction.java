@@ -23,6 +23,7 @@ import databeans.PositionAndFundBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
 import exception.AmountOutOfBoundException;
+import exception.SharesOutOfBoundException;
 import formbeans.SellFundForm;
 
 public class SellFundAction extends Action {
@@ -123,7 +124,7 @@ public class SellFundAction extends Action {
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "sellFund.jsp";
-		} catch (AmountOutOfBoundException e) {
+		} catch (SharesOutOfBoundException e) {
 			errors.add(e.getMessage());
 			return "sellFund.jsp";
 		}

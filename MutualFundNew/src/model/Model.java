@@ -32,7 +32,7 @@ public class Model {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
 			
-			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
+			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL,"root","");
 			customerDAO  = new  CustomerDAO(pool, "Customer");
 			employeeDAO = new EmployeeDAO(pool,"Employee");
 			transactionDAO = new TransactionDAO(pool,"Transaction");
