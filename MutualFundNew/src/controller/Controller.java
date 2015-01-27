@@ -80,11 +80,17 @@ public class Controller extends HttpServlet {
 
         if (action.equals("index.do")) {
         	// Allow these actions without logging in
+        	
 			return Action.perform(action,request);
         }
         
         if (customer == null && employee == null) {
         	// If the user hasn't logged in, direct him to the login page
+        	if(!action.equals(" "))
+        	{
+        		errors.add("Please login in first");
+        		return "index.jsp";
+        	}
 			return Action.perform("index.do",request);
         }
         
