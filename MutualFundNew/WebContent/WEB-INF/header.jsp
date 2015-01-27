@@ -106,6 +106,7 @@
 					<li><a href="viewAllCustomerTransactionHistory.do"> View Customer Transaction History </a></li>
 					<li><a href="depositCheck.do"> Deposit Check </a></li>
 					<li><a href="createFund.do"> Create Fund </a></li>
+					<li><a href="viewAllFunds.do"> Research Fund </a></li>
 					<!-- <li><a href="viewTransactionHistory.do"> Transaction History </a></li> -->
 					<li><a href="transitionDayAction.do"> Transition Day </a></li>
 					<%
