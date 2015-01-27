@@ -75,7 +75,7 @@ public class SellFundAction extends Action {
 				return "index.do";
 			}
 			
-			CustomerBean latestCustomer = customerDAO.read(customer);
+			CustomerBean latestCustomer = customerDAO.read(customer.getCustomer_id());
 			
 			request.setAttribute("balance", ConvertUtil.convertAmountLongToDouble(latestCustomer.getBalance()));
 			
