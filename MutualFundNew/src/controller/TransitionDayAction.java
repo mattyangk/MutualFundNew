@@ -251,6 +251,7 @@ public class TransitionDayAction extends Action {
 						transactions[i].setExecute_date(form
 								.getTransitionDateAsDate());
 						transactionDAO.update(transactions[i]);
+						customerDAO.updateCash(transactions[i].getCustomer_id(),customer.getCash());
 						continue;
 					}
 					

@@ -102,6 +102,9 @@
 								<c:when test="${!transaction.is_complete && transaction.trasaction_type.equals('buy') }">
 									<td>(pending)</td>
 								</c:when>
+								<c:when test="${transaction.is_complete && !transaction.is_success && transaction.trasaction_type.equals('buy') }">
+									<td>(failed)</td>
+								</c:when>
 								<c:otherwise>
 									<td><fmt:formatNumber value="${transaction.shares/1000}" type="number"
 								maxFractionDigits="3" minFractionDigits="3"/></td>
@@ -112,6 +115,9 @@
 							<c:choose>
 								<c:when test="${!transaction.is_complete && transaction.trasaction_type.equals('sell')}">
 									<td>(pending)</td>
+								</c:when>
+								<c:when test="${transaction.is_complete && !transaction.is_success && transaction.trasaction_type.equals('sell')}">
+									<td>(failed)</td>
 								</c:when>
 								<c:otherwise>
 									<td><fmt:formatNumber value="${transaction.amount/100}"  type="number"

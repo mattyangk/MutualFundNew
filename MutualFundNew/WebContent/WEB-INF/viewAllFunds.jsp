@@ -40,8 +40,15 @@
 				<tr>
 					<td><a href="researchFund.do?fundname=${fund.name}">${fund.name}</a></td>
 					<td>${fund.symbol}</td>
-					<td><fmt:formatNumber value="${fund.price/100}" type="number"
-								maxFractionDigits="2" minFractionDigits="2" /></td>
+					<c:choose>
+						<c:when test="${fund.price/100 <= 0}">
+							<td>Not Available</td>
+						</c:when>
+						<c:otherwise>
+							<td><fmt:formatNumber value="${fund.price/100}"
+									type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach>
 
