@@ -15,6 +15,7 @@ public class TransactionAndPriceBean {
 	private boolean is_complete;
 	private boolean is_success;
 	private long price;
+	private String customer_name;
 
 	public int getTransaction_id() {
 		return transaction_id;
@@ -87,6 +88,12 @@ public class TransactionAndPriceBean {
 	}
 	public void setPrice(long price) {
 		this.price = price;
+	}
+	public String getCustomer_name() {
+		return customer_name;
+	}
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
 	}
 	
 	
