@@ -102,7 +102,7 @@ public class Controller extends HttpServlet {
     		 return "index.jsp";
     	 }   
        }
-       if(action.equals("transactionHistory.do") || action.equals("viewAllFunds.do")||action.equals("researchFund.do"))
+       if(action.equals("transactionHistory.do") )
        {
     	   if(customer==null)
     	   { 
