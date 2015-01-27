@@ -27,13 +27,14 @@ public class RequestCheckForm extends FormBean  {
     public List<String> getValidationErrors() {
         List<String> errors = new ArrayList<String>();
 
-        if (amount == null || amount.length() == 0) errors.add("Deposit Amount is required");
-        
+        if (amount == null || amount.trim().length() == 0) errors.add("Deposit Amount is required");
+        else{      
         try {
 			Double.parseDouble(amount);
 		} catch (NumberFormatException e) {
 			errors.add("Amount is not an double");
 		}
+        }
         
         System.out.println("original : "+getRequestAmountAsDouble());
 		BigDecimal bd = new BigDecimal(getRequestAmountAsDouble());

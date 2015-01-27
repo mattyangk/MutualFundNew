@@ -42,10 +42,10 @@ public class SellFundForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		if (share == null || share.length() == 0) {
+		if (share == null || share.trim().length() == 0) {
 			errors.add("Number of shares is required");
 		}
-		if(fundname==null||fundname.length()==0){
+		if(fundname==null||fundname.trim().length()==0){
 			errors.add("fundname of fund is required");
 		}
 		

@@ -34,13 +34,16 @@ public class DepositCheckForm extends FormBean  {
 
       
         if (username == null || username.trim().length() == 0) errors.add("Username is required");
+        
         if (amount == null || amount.length() == 0) errors.add("Deposit Amount is required");
+        else{
 
         try {
 			Double.parseDouble(amount);
 		} catch (NumberFormatException e) {
 			errors.add("Invalid Amount");
 		}
+        }
         
         System.out.println("original : "+getDepositAmountAsDouble());
 		BigDecimal bd = new BigDecimal(getDepositAmountAsDouble());
