@@ -47,10 +47,16 @@ public class BuyFundAction extends Action {
 		request.setAttribute("successes", successes);
 
 		try {
-			FundBean[] funds = fundDAO.getAllFunds();
-			request.setAttribute("funds", funds);
-			
+	
 			HttpSession session = request.getSession();
+			CustomerBean customer = (CustomerBean) session
+					.getAttribute("customer");
+			CustomerBean latestCustomer = customerDAO.read(customer);
+			
+			request.setAttribute("balance", ConvertUtil.convertAmountLongToDouble(latestCustomer.getBalance()));
+			FundBean[] funds = fundDAO.getAllFunds();			
+			request.setAttribute("funds", funds);
+
 
 			BuyFundForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
@@ -79,9 +85,6 @@ public class BuyFundAction extends Action {
 			}
 			
 			
-
-			CustomerBean customer = (CustomerBean) session
-					.getAttribute("customer");
 			customerDAO.updateBalance(customer.getCustomer_id(),
 					form.getFundAmountAsDouble());
 
