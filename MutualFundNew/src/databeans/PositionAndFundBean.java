@@ -7,6 +7,8 @@ public class PositionAndFundBean {
 	private int customer_id;
 	private long shares;
 	private long available_shares;
+	private long price;
+	
 	public int getFund_id() {
 		return fund_id;
 	}
@@ -43,5 +45,12 @@ public class PositionAndFundBean {
 	public void setAvailable_shares(long available_shares) {
 		this.available_shares = available_shares;
 	}
+	public long getPrice() {
+		return price;
+	}
+	public void setPrice(long price) {
+		this.price = price;
+	}
+	
 	
 }

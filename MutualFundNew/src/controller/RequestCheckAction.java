@@ -61,11 +61,18 @@ public class RequestCheckAction extends Action{
 			
 			
 			HttpSession session = request.getSession();
-			CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+			CustomerBean customer = (CustomerBean) session
+					.getAttribute("customer");
+			
 			if (customer == null) {
 				errors.add("session expired");
 				return "index.do";
 			}
+			
+			CustomerBean latestCustomer = customerDAO.read(customer);			
+			request.setAttribute("balance", ConvertUtil.convertAmountLongToDouble(latestCustomer.getBalance()));
+			
+
 //			System.out.println(customer.getUsername());
 //			System.out.println(customer.getCash());
 			

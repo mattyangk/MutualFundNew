@@ -7,7 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.CustomerDAO;
 import model.FundDAO;
+import model.FundPriceHistoryDAO;
 import model.Model;
 import model.PositionDAO;
 import model.TransactionDAO;
@@ -19,6 +21,7 @@ import org.mybeans.form.FormBeanFactory;
 import util.ConvertUtil;
 import databeans.CustomerBean;
 import databeans.FundBean;
+import databeans.FundPriceHistoryBean;
 import databeans.PositionAndFundBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
@@ -34,11 +37,15 @@ public class SellFundAction extends Action {
 	private PositionDAO positionDAO;
 	private FundDAO fundDAO;
 	private TransactionDAO transactionDAO;
+	private CustomerDAO customerDAO;
+	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public SellFundAction(Model model) {
 		positionDAO = model.getPositionDAO();
 		fundDAO = model.getFundDAO();
 		transactionDAO = model.getTransactionDAO();
+		customerDAO = model.getCustomerDAO();
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 
 	@Override
@@ -59,16 +66,28 @@ public class SellFundAction extends Action {
 			request.setAttribute("form", form);
 			
 			HttpSession session = request.getSession();
+			
 			CustomerBean customer = (CustomerBean) session
 					.getAttribute("customer");
 			
+			if (customer == null) {
+				errors.add("session expired");
+				return "index.do";
+			}
+			
+			CustomerBean latestCustomer = customerDAO.read(customer);
+			
+			request.setAttribute("balance", ConvertUtil.convertAmountLongToDouble(latestCustomer.getBalance()));
+			
 			FundBean[] funds = fundDAO.getAllFunds();
 			ArrayList<PositionAndFundBean> positionAndFunds = new ArrayList<PositionAndFundBean>();
+			Date latestDay = fundPriceHistoryDAO.findLatestDate();
 			for (int i = 0; i < funds.length; i++) {
 				PositionBean position = positionDAO.read(funds[i].getFund_id(), customer.getCustomer_id());
 				if (position == null) {
 					continue;
 				}
+				FundPriceHistoryBean price = fundPriceHistoryDAO.read(funds[i].getFund_id(), latestDay);
 				PositionAndFundBean positionAndFund = new PositionAndFundBean();
 				positionAndFund.setAvailable_shares(position.getAvailable_shares());
 				positionAndFund.setCustomer_id(customer.getCustomer_id());
@@ -76,18 +95,15 @@ public class SellFundAction extends Action {
 				positionAndFund.setName(funds[i].getName());
 				positionAndFund.setShares(position.getShares());
 				positionAndFund.setSymbol(funds[i].getSymbol());
+				positionAndFund.setPrice(price.getPrice());
 				positionAndFunds.add(positionAndFund);
+				
 				System.out.println("test  " + positionAndFund.getAvailable_shares());
 			}
 			
 			
 			request.setAttribute("positionAndFunds", positionAndFunds.toArray(new PositionAndFundBean[positionAndFunds.size()]));
-			
-			if (customer == null) {
-				errors.add("session expired");
-				return "sellFund.jsp";
-			}
-			
+
 			if (!form.isPresent()) {
 				System.out.println("No param");
 				return "sellFund.jsp";
