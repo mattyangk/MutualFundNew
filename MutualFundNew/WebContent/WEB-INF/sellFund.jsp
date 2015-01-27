@@ -7,6 +7,7 @@
 <%
 	PositionAndFundBean[] funds = (PositionAndFundBean[]) request.getAttribute("positionAndFunds");
     DecimalFormat df = new DecimalFormat("0.000");
+    DecimalFormat df2= new DecimalFormat("0.00");
 %>
 <jsp:include page="header.jsp" />
 <script src="js/validate.js"></script>
@@ -30,6 +31,8 @@
         $("#symbol").text("<%=funds[0].getSymbol()%>");
 		$("#shares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[0].getShares()))%>");
 		$("#ashares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[0].getAvailable_shares()))%>");
+		$("#price").text("<%=df2.format(ConvertUtil.convertAmountLongToDouble(funds[0].getPrice()))%>");
+		
 		
 		$("select").change(function() {
 			var str = "";
@@ -48,6 +51,7 @@
 			        $("#symbol").text("<%=funds[i].getSymbol()%>");
 			        $("#shares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[i].getShares()))%>");
 					$("#ashares").text("<%=df.format(ConvertUtil.convertShareLongToDouble(funds[i].getAvailable_shares()))%>");
+					$("#price").text("<%=df2.format(ConvertUtil.convertAmountLongToDouble(funds[i].getPrice()))%>");
 				}
 			<%
 				}
@@ -73,6 +77,7 @@
 				<td>Ticker</td>
 				<td>Shares</td>
 				<td>Available Shares</td>
+				<td>Unit Price</td>
 				<td>Shares For Sale</td>
 			</tr>
 			<tr>
@@ -89,6 +94,8 @@
 				<td id="symbol"></td>
 				<td id="shares"></td>
 				<td id="ashares"></td>
+				<td id="price"></td>
+				
 				<td align="left"><input type="text" name="share" class="form-control" value="" style="width:100px"/> </td>
 			</tr>
 			<tr><td colspan="2" align="left"><input type="submit"
