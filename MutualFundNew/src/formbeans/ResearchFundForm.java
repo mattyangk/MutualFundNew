@@ -19,9 +19,10 @@ public class ResearchFundForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		if (fundname == null || fundname.length() == 0) {
+		if (fundname == null || fundname.trim().length() == 0) {
 			errors.add("fundname is required");
 		}
+		if (fundname.trim().length() > 60)  errors.add("The fundname can not be more than 60 characters");
 		
 		return errors;
 	}

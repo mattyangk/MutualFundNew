@@ -41,10 +41,12 @@ public class BuyFundForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		if (fundname == null || fundname.length() == 0) {
+		if (fundname == null || fundname.trim().length() == 0) {
 			errors.add("Fundname is required");
 		}
-		if (amount == null || amount.length() == 0) {
+		if (fundname.trim().length() > 20)  errors.add("The username can not be more than 20 characters");
+		
+		if (amount == null || amount.trim().length() == 0) {
 			errors.add("Amount is required");
 		} else if (!amount.matches("-?\\d+(\\.\\d+)?")) {
 			errors.add("Invalid amount");

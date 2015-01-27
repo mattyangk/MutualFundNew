@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 
@@ -35,8 +34,6 @@ public class ViewAllFundsAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors",errors);
-
-		HttpSession session = request.getSession();
 		
 		try {
 			FundBean[] funds = fundDAO.getAllFunds();
@@ -65,7 +62,7 @@ public class ViewAllFundsAction extends Action {
 				fundPriceDetails[i] = fundPrice;
 			}
 			
-			session.setAttribute("fundPriceDetails", fundPriceDetails);
+			request.setAttribute("fundPriceDetails", fundPriceDetails);
 			
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

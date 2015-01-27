@@ -82,10 +82,32 @@ public class CreateCustomerAccoutForm extends FormBean{
         List<String> errors = new ArrayList<String>();
 
         if (username == null || username.trim().length() == 0) errors.add("Username is required");
+        if (username.trim().length() > 60)  errors.add("The username can not be more than 60 characters");
+        
         if (password == null || password.length() == 0) errors.add("Password is required");
+        if (password.length() > 60)  errors.add("The password can not be more than 60 characters");
         
+        if (firstname.trim().length() > 60)  errors.add("The firstname can not be more than 60 characters");
         
-
+        if (lastname.trim().length() > 60)  errors.add("The lastname can not be more than 60 characters");
+        
+        if (addr_line1.trim().length() > 60)  errors.add("The address line1 can not be more than 60 characters");
+        
+        if (addr_line2.trim().length() > 60)  errors.add("The address line2 can not be more than 60 characters");
+        
+        if (city.trim().length() > 30)  errors.add("The city can not be more than 30 characters");
+        
+        if (!(state.trim().length() == 2 || state.trim().length() == 0))  errors.add("Invalid State");
+           
+        if (!(zip.trim().length() == 5 || zip.trim().length() == 0))  errors.add("Invalid zip");
+        if (zip.trim().length()==5){
+        try {
+			Integer.parseInt(zip);
+		} catch (NumberFormatException e) {
+			errors.add("Invalid zip");
+		}
+        }
+               
         return errors;
     }
 	

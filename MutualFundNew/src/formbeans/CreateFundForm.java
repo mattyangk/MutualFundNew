@@ -35,10 +35,11 @@ public class CreateFundForm extends FormBean{
 	public List<String>getValidationErrors() {
 		List<String> errors=new ArrayList<String>();
 		
-		if(fundname==null||fundname.length()==0)
+		if(fundname==null||fundname.trim().length()==0)
 			errors.add("Please type fundname");
+		if (fundname.trim().length() > 20)  errors.add("The fundname can not be more than 20 characters");
 		
-		if(symbol==null||symbol.length()==0)
+		if(symbol==null||symbol.trim().length()==0)
 			errors.add("Please type Ticker");
 		
 		if(symbol.length()<1||symbol.length()>5)

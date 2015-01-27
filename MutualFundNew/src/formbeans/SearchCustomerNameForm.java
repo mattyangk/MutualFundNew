@@ -21,15 +21,11 @@ public class SearchCustomerNameForm extends FormBean {
 	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		if ( username.length() == 0||username == null ) {
+		if ( username.trim().length() == 0||username == null ) {
 			errors.add("Please type the Customer's username");
 		}
+		if (username.trim().length() > 60)  errors.add("The username can not be more than 60 characters");
 		return errors;
 	}
-	  
 	
-	
-	
-	
-
 }
