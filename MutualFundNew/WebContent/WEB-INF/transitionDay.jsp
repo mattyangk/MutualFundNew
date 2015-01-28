@@ -32,7 +32,7 @@
 
 				<tr>
 					<td>Trading Day:</td>
-					<td><input type="text" name="transitionDate" value=" " /></td>
+					<td><input type="text" name="transitionDate" value="${form.transitionDate}" /></td>
 				</tr>
 			</table>
 
@@ -52,7 +52,7 @@
 
 				<tbody>
 					<c:if test="${requestScope.allFunds!= null}">
-						<c:forEach items="${requestScope.allFunds}" var="oneFund">
+						<c:forEach items="${requestScope.allFunds}" var="oneFund" varStatus="loop">
 							<tr>
 								<td>${oneFund.fund_name}</td>
 								<td>${oneFund.fund_symbol}</td>
@@ -66,7 +66,7 @@
 												type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 									</c:otherwise>
 								</c:choose>
-								<td><input type="text" name="price" value="" /> <input
+								<td><input type="text" name="price" value="${form.price[loop.index]}" /> <input
 									type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
 							</tr>
 

@@ -128,6 +128,28 @@ public class TransitionDayAction extends Action {
 				
 				try {
 					Double.parseDouble(price[i]);
+					
+					double newPrice=Double.parseDouble(price[i]);
+					System.out.println("original : "+newPrice);
+					BigDecimal bd = new BigDecimal(newPrice);
+					bd = bd.setScale(2, RoundingMode.HALF_UP);
+					double newPriceRounded = bd.doubleValue();    
+					System.out.println("rounded : "+newPriceRounded);
+					
+					if(newPrice > 100000000000.00){
+						errors.add("Max. Price allowed is $100000000000.00 !");
+						return "transitionDay.jsp";
+					}
+					
+					if(newPrice < 0.01){
+						errors.add("Invalid Transaction ! Fund Price cannot be less than $0.01");
+						return "transitionDay.jsp";
+					}
+					else if((newPrice!=newPriceRounded) && (newPrice-newPriceRounded) < 0.01){
+						errors.add("Fund Price can only have upto 2 places of decimal !");
+						return "transitionDay.jsp";
+					}
+					
 				} catch (NumberFormatException e) {
 					// call getValidationErrors() to detect this
 					errors.add("Provide valid Prices for funds");
@@ -141,20 +163,7 @@ public class TransitionDayAction extends Action {
 					return "transitionDay.jsp";
 				}
 				
-				System.out.println("original : "+newPrice);
-				BigDecimal bd = new BigDecimal(newPrice);
-				bd = bd.setScale(2, RoundingMode.HALF_UP);
-				double newPriceRounded = bd.doubleValue();    
-				System.out.println("rounded : "+newPriceRounded);
 				
-				if(newPrice < 0.01){
-					errors.add("Invalid Transaction ! Fund Price cannot be less than $0.01");
-					return "transitionDay.jsp";
-				}
-				else if((newPrice!=newPriceRounded) && (newPrice-newPriceRounded) < 0.01){
-					errors.add("Fund Price can only have upto 2 places of decimal !");
-					return "transitionDay.jsp";
-				}
 				
 				one.setFund_id(Integer.parseInt(fund_id[i]));
 				one.setPrice(ConvertUtil.convertAmountDoubleToLong(Double.parseDouble(price[i])));

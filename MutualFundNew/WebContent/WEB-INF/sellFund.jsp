@@ -72,7 +72,7 @@
 		<table class="table">
 			<tr>
 				<td>Available Balance</td>
-				<td align="right"><fmt:formatNumber value="${customer.balance / 100}"
+				<td><fmt:formatNumber value="${customer.balance / 100}"
 						type="currency" /></td>
 				<td></td>
 				<td></td>
@@ -104,7 +104,7 @@
 				<td id="symbol"></td>
 				<td id="shares"></td>
 				<td id="ashares"></td>
-				<td align="right" id="price"></td>
+				<td id="price"></td>
 
 				<td align="left"><input type="text" name="share"
 					class="form-control" value="" style="width: 100px" value="${form.share}"/></td>

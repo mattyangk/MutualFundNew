@@ -15,6 +15,23 @@
 
 		});
 	});
+
+	function amountSorter(a, b) {
+		a = + a.replace(",", "");
+		b = + b.replace(",", "");
+		re = /^\d+\.{0,1}(\d{1,2}){0,1}$/;
+		if (!re.test(a)) 
+			return 1;
+		if (!re.test(b)) 
+			return -1;
+		if (a > b)
+			return 1;
+		if (a < b)
+			return -1;
+		return 0;
+
+	}
+
 </script>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -28,7 +45,7 @@
 			<tr>
 				<th data-align="center" data-sortable="true">Fund Name</th>
 				<th data-align="center" data-sortable="true">Fund Symbol</th>
-				<th data-align="center" data-sortable="true">Latest Price</th>
+				<th data-align="right" data-sortable="true" data-sorter="amountSorter">Latest Price</th>
 			</tr>
 
 		</thead>
@@ -45,7 +62,7 @@
 							<td>Not Available</td>
 						</c:when>
 						<c:otherwise>
-							<td><fmt:formatNumber value="${fund.price/100}"
+							<td style="text-align: right;" ><fmt:formatNumber value="${fund.price/100}"
 									type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 						</c:otherwise>
 					</c:choose>
