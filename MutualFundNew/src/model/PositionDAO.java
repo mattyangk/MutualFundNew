@@ -33,9 +33,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 			Transaction.begin();
 			PositionBean position = read(fund_id, customer_id);
 			if (position == null) {
-				throw new RollbackException("This position:" + "fund_id:"
-						+ fund_id + "customer_id" + customer_id
-						+ " does not exist");
+				throw new RollbackException("You do not own this fund!");
 			} else {
 				double availableShares = ConvertUtil.convertShareLongToDouble(position.getAvailable_shares());
 				double newAvailableShares = availableShares - sellingShares;
