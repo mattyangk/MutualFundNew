@@ -12,7 +12,7 @@ import org.mybeans.form.FormBean;
 public class SellFundForm extends FormBean {
 	private String share;
 	private String fundname;
-	
+
 	public String getFundname() {
 		return fundname;
 	}
@@ -29,7 +29,7 @@ public class SellFundForm extends FormBean {
 	public void setShare(String share) {
 		this.share = trimAndConvert(share, "<>\"");
 	}
-	
+
 	public double getShareAsDouble() {
 		try {
 			return Double.parseDouble(share);
@@ -38,35 +38,43 @@ public class SellFundForm extends FormBean {
 			return -1;
 		}
 	}
-	
+
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		if (share == null || share.trim().length() == 0) {
-			errors.add("Number of shares is required");
-		}
+
 		if(fundname==null||fundname.trim().length()==0){
 			errors.add("fundname of fund is required");
 		}
-		
-		System.out.println("original : "+getShareAsDouble());
-		BigDecimal bdShares = new BigDecimal(getShareAsDouble());
-		bdShares = bdShares.setScale(3, RoundingMode.HALF_UP);
-		double roundedShares = bdShares.doubleValue();    
-		System.out.println("rounded : "+roundedShares);
-        
-		if(getShareAsDouble() > 100000000000.00){
-			errors.add("Max. Number allowed is 100000000000.000 !");
+		if (share == null || share.trim().length() == 0) {
+			errors.add("Number of shares is required");
+		} else{
+			try{
+				Double.parseDouble(share);
+
+				System.out.println("original : "+getShareAsDouble());
+				BigDecimal bdShares = new BigDecimal(getShareAsDouble());
+				bdShares = bdShares.setScale(3, RoundingMode.HALF_UP);
+				double roundedShares = bdShares.doubleValue();    
+				System.out.println("rounded : "+roundedShares);
+
+				if(getShareAsDouble() > 100000000000.00){
+					errors.add("Max. Number allowed is 100000000000.000 !");
+				}
+
+				if(getShareAsDouble() < 0.001){
+					errors.add("Invalid Transaction ! Shares cannot be less than 0.001");
+				}
+				else if((getShareAsDouble()!=roundedShares) && (getShareAsDouble()-roundedShares) < 0.001){
+					errors.add("Shares can only have upto 3 places of decimal !");
+				}
+
+			}catch (NumberFormatException e) {
+				errors.add("Invalid Shares");
+			}
+
 		}
-		
-        if(getShareAsDouble() < 0.001){
-			errors.add("Invalid Transaction ! Shares cannot be less than 0.001");
-		}
-		else if((getShareAsDouble()!=roundedShares) && (getShareAsDouble()-roundedShares) < 0.001){
-			errors.add("Shares can only have upto 3 places of decimal !");
-		}
-		
-		
+
 		return errors;
 	}
 }
