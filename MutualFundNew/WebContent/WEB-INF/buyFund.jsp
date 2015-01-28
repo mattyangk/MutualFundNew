@@ -66,7 +66,7 @@
 
 			<tr>
 				<td>Available Balance</td>
-				<td><fmt:formatNumber value="${customer.balance / 100}"
+				<td align="right"><fmt:formatNumber value="${customer.balance / 100}"
 						type="currency" /></td>
 			</tr>
 
@@ -88,7 +88,7 @@
 
 			<tr>
 				<td>Unit Price</td>
-				<td id="price"></td>
+				<td id="price" align="right"></td>
 			</tr>
 
 
