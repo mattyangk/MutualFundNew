@@ -72,9 +72,9 @@
 
 				<th>Ticker</th>
 
-				<th align="right">Shares</th>
+				<th style="text-align:right">Shares</th>
 				
-				<th align="right">Available Shares</th>
+				<th style="text-align:right">Available Shares</th>
 			<tr>
 
 
