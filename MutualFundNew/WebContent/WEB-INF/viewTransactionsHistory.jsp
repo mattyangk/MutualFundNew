@@ -21,7 +21,7 @@
 	function amountSorter(a, b) {
 		a = + a.replace(",", "");
 		b = + b.replace(",", "");
-		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
+		re = /^\d+\.{0,1}(\d{1,2}){0,1}$/;
 		if (!re.test(a)) 
 			return 1;
 		if (!re.test(b)) 
