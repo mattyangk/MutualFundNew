@@ -63,8 +63,7 @@ public class BuyFundAction extends Action {
 			}
 
 			CustomerBean latestCustomer = customerDAO.read(customer.getCustomer_id());
-			request.setAttribute("balance", ConvertUtil
-					.convertAmountLongToDouble(latestCustomer.getBalance()));
+			request.setAttribute("customer", latestCustomer);
 
 			FundBean[] fundsWithoutPrice = fundDAO.getAllFunds();
 			FundPriceDetailBean[] funds = new FundPriceDetailBean[fundsWithoutPrice.length];

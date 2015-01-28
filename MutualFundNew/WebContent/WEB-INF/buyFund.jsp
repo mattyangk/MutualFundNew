@@ -66,7 +66,7 @@
 
 			<tr>
 				<td>Available Balance</td>
-				<td><fmt:formatNumber value="${customer.balance}"
+				<td><fmt:formatNumber value="${customer.balance / 100}"
 						type="currency" /></td>
 			</tr>
 

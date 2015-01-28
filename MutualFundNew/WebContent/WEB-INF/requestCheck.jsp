@@ -8,16 +8,18 @@
 	<h1 class="page-header">Request Check</h1>
 	<jsp:include page="error.jsp" />
 	<jsp:include page="message.jsp" />
-    
+
 	<p class="amountInputFeedback" style="color: red"></p>
 
 	<form method="POST" action="requestCheck.do">
 
 		<table class="table">
-            <tr>
-               <td>Balance:</td>
-               <td><fmt:formatNumber value="${customer.balance}"
-					type="currency" /></td>
+			<tr>
+				<td>Available Balance</td>
+				<td><fmt:formatNumber value="${customer.balance / 100}"
+						type="currency" /></td>
+			</tr>
+
 			<tr>
 				<td>Amount</td>
 				<td><input type="text" name="amount" class="form-control"
