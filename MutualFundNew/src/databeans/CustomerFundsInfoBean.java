@@ -6,6 +6,14 @@ public class CustomerFundsInfoBean {
 	private String fund_name;
 	private String fund_symbol;
 	private long shares;
+	private long available_shares;
+	
+	public long getAvailable_shares() {
+		return available_shares;
+	}
+	public void setAvailable_shares(long available_shares) {
+		this.available_shares = available_shares;
+	}
 	public int getFund_id() {
 		return fund_id;
 	}

@@ -323,6 +323,8 @@ public class TransitionDayAction extends Action {
 						transactions[i].setExecute_date(form
 								.getTransitionDateAsDate());
 						transactionDAO.update(transactions[i]);
+						PositionBean onePosition = positionDAO.read(fundID,customerID);
+						positionDAO.updateShares(fundID, customerID, onePosition.getShares());
 						continue;
 					}
 					

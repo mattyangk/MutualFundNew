@@ -73,6 +73,7 @@ public class ViewCustomerAccountAction extends Action {
 					fundInfo[i].setFund_name(theFund.getName());
 					fundInfo[i].setFund_symbol(theFund.getSymbol());
 					fundInfo[i].setShares(Positions[i].getShares());
+					fundInfo[i].setAvailable_shares(Positions[i].getAvailable_shares());
 				}
 				
 				request.setAttribute("fundInfo",fundInfo);
