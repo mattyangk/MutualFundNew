@@ -73,7 +73,7 @@ public class ResetPwdAction extends Action{
 			
 			CustomerBean customer=customerDAO.getCustomerByUsername(userName);
 			if(customer==null){
-				errors.add("There is no such user： "+userName);
+				errors.add("There is no such user: "+userName);
 				return "resetPwd.jsp";
 			} else{
 			

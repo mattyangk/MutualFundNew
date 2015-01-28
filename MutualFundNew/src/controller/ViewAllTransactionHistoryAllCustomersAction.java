@@ -13,6 +13,7 @@ import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.TransactionAndPriceBean;
 import databeans.TransactionBean;
+import model.CustomerDAO;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
@@ -20,11 +21,13 @@ import model.TransactionDAO;
 
 public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 
+	private CustomerDAO customerDAO;
 	private TransactionDAO transactionDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public ViewAllTransactionHistoryAllCustomersAction(Model model) {
+		customerDAO = model.getCustomerDAO();
 		transactionDAO = model.getTransactionDAO();
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
@@ -42,12 +45,12 @@ public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 
 		HttpSession session = request.getSession();
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+
 		TransactionBean[] allTransactions = null;
 		TransactionAndPriceBean[] allTransactionWithPrices = null;
 		try {
 			allTransactions = transactionDAO
 					.getAllTransactions();
-
 			if (allTransactions == null) {
 				errors.add("No Transactions !");
 				return "viewAllTransactionHistoryAllCustomers.jsp";
@@ -76,7 +79,8 @@ public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 							.getTransaction_id());
 					transactionWithPrice.setTrasaction_type(allTransactions[i]
 							.getTrasaction_type());
-					transactionWithPrice.setCustomer_name(customer.getUsername());
+					CustomerBean tranCustomer = customerDAO.read(allTransactions[i].getCustomer_id());
+					transactionWithPrice.setCustomer_name(tranCustomer.getUsername());
 
 					if (allTransactions[i].getFund_id() > 0) {
 						FundBean fund = fundDAO.read(allTransactions[i]
