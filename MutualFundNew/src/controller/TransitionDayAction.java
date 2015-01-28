@@ -260,7 +260,7 @@ public class TransitionDayAction extends Action {
 						transactions[i].setExecute_date(form
 								.getTransitionDateAsDate());
 						transactionDAO.update(transactions[i]);
-						customerDAO.updateCash(transactions[i].getCustomer_id(),customer.getCash());
+						customerDAO.updateCash(transactions[i].getCustomer_id(),ConvertUtil.convertAmountLongToDouble(customer.getCash()));
 						continue;
 					}
 					
@@ -333,7 +333,7 @@ public class TransitionDayAction extends Action {
 								.getTransitionDateAsDate());
 						transactionDAO.update(transactions[i]);
 						PositionBean onePosition = positionDAO.read(fundID,customerID);
-						positionDAO.updateShares(fundID, customerID, onePosition.getShares());
+						positionDAO.updateShares(fundID, customerID, ConvertUtil.convertShareLongToDouble(onePosition.getShares()));
 						continue;
 					}
 					
