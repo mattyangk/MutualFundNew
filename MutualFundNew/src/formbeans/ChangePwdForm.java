@@ -6,9 +6,19 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class ChangePwdForm extends FormBean {
-
+    private String oldPassword;
 	private String newPassword;
 	private String rePassword;
+	
+	
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String s) {
+		this.oldPassword = trimAndConvert(s, "<>\"");
+	}
 
 	public String getrePassword() {
 		return rePassword;
@@ -28,6 +38,10 @@ public class ChangePwdForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
+		
+		if(oldPassword==null||oldPassword.length()==0){
+			errors.add("Old Password is required");
+		}
 
 		if (newPassword == null || newPassword.length() == 0) {
 			errors.add("New Password is required");

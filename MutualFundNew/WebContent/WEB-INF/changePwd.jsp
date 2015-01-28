@@ -12,6 +12,15 @@
 	<form method="POST" action="changePwd.do">
 
 		<table class="table">
+		
+		<tr>
+		  <td>Old Password</td>
+		  <td><input type="password" name="oldPassword" class="form-control"
+					value="" /></td>
+		
+		</tr>
+		
+		
 
 			<tr>
 				<td>New Password</td>
