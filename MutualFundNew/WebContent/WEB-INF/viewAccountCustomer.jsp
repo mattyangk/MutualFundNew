@@ -72,9 +72,9 @@
 
 				<th>Ticker</th>
 
-				<th>Shares</th>
+				<th align="right">Shares</th>
 				
-				<th>Available Shares</th>
+				<th align="right">Available Shares</th>
 			<tr>
 
 
@@ -86,9 +86,9 @@
 
 						<td>${fund.fund_symbol}</td>
 
-						<td><fmt:formatNumber value="${fund.shares/1000}" type="number"
+						<td align="right"><fmt:formatNumber value="${fund.shares/1000}" type="number"
 								maxFractionDigits="3" minFractionDigits="3"/></td>
-						<td><fmt:formatNumber value="${fund.available_shares/1000}" type="number"
+						<td align="right"><fmt:formatNumber value="${fund.available_shares/1000}" type="number"
 								maxFractionDigits="3" minFractionDigits="3"/></td>
 
 					</tr>

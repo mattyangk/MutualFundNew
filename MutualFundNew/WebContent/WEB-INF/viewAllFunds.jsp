@@ -45,7 +45,7 @@
 			<tr>
 				<th data-align="center" data-sortable="true">Fund Name</th>
 				<th data-align="center" data-sortable="true">Fund Symbol</th>
-				<th data-align="right" data-sortable="true" data-sorter="amountSorter">Latest Price</th>
+				<th data-align="right" data-sortable="true" data-sorter="amountSorter">Latest Price($)</th>
 			</tr>
 
 		</thead>

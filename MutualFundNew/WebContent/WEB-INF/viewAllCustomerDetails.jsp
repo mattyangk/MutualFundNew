@@ -28,7 +28,7 @@
 			<tr>
 				<th data-align="center" data-sortable="true">User Name</th>
 				<th data-align="center" data-sortable="true">Name</th>
-				<th data-align="right" data-sortable="true">Cash</th>
+				<th data-align="right" data-sortable="true">Cash($)</th>
 			</tr>
 
 		</thead>
@@ -41,7 +41,7 @@
 					<td><a href="showCustomerInfo.do?customername=${customer.username}">${customer.username}</a></td>
 					<td>${customer.firstname} ${customer.lastname}</td>
 					<td align="right"><fmt:formatNumber value="${customer.cash/100}"
-					type="currency" /></td>
+					type="number" maxFractionDigits="2" minFractionDigits="2"/></td>
 				</tr>
 			</c:forEach>
 

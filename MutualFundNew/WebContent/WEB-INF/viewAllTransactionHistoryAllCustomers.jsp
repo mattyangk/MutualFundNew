@@ -57,10 +57,10 @@
 				<th data-align="center" data-sortable="true">Date</th>
 				<th data-align="center" data-sortable="true">Type</th>
 				<th data-align="right" data-sortable="true"
-					data-sorter="amountSorter">Amount</th>
+					data-sorter="amountSorter">Amount($)</th>
 				<th data-align="center" data-sortable="true">Fund</th>
 				<th data-align="right" data-sortable="true"
-					data-sorter="amountSorter">Price</th>
+					data-sorter="amountSorter">Price($)</th>
 				<th data-align="right" data-sortable="true"
 					data-sorter="shareSorter">Shares</th>
 				<th data-align="center" data-sortable="true">Status</th>
