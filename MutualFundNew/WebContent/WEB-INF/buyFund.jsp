@@ -95,7 +95,7 @@
 			<tr>
 				<td>Amount</td>
 				<td><input type="text" name="amount" class="form-control"
-					value="" style="width: 20%" /></td>
+					value="${form.amount}" style="width: 20%" /></td>
 			</tr>
 
 			<tr>

@@ -16,13 +16,13 @@
 			<tr>
 				<td>Fund Name</td>
 				<td><input type="text" name="fundname" class="form-control"
-					value="" /></td>
+					value="${form.fundname}" /></td>
 
 			</tr>
 			<tr>
 				<td>Ticker</td>
 				<td><input type="text" name="symbol" class="form-control"
-					value="" /></td>
+					value="${form.symbol}" /></td>
 
 			</tr>
 

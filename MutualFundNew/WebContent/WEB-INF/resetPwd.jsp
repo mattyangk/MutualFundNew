@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 		<table class="table">
 			<tr>
 				<td>Customer Username</td>
-				<td><input type="text" name="username" class="form-control" value="" /></td>
+				<td><input type="text" name="username" class="form-control" value="${form.username}" /></td>
 			</tr>
 			<tr>
 				<td>New Password</td>

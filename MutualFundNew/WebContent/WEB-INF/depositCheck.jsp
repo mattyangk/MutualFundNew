@@ -18,12 +18,12 @@
 			<tr>
 				<td>Customer Username</td>
 				<td><input type="text" name="username" class="form-control"
-					value="" /></td>
+					value="${form.username}" /></td>
 			</tr>
 			<tr>
 				<td>Deposit Amount</td>
 				<td><input type="text" name="amount" class="form-control"
-					value="" /></td>
+					value="${form.amount}" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

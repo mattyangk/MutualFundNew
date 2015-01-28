@@ -16,7 +16,7 @@
 			<tr>
 				<td>User Name</td>
 				<td><input type="text" name="username" class="form-control"
-					value="" /></td>
+					value="${form.username}" /></td>
 			</tr>
 
 			<tr>
@@ -29,14 +29,14 @@
 			<tr>
 				<td>First Name</td>
 				<td><input type="text" name="firstname" class="form-control"
-					value="" /></td>
+					value="${form.firstname}" /></td>
 
 			</tr>
 
 			<tr>
 				<td>Last Name</td>
 				<td><input type="text" name="lastname" class="form-control"
-					value="" /></td>
+					value="${form.lastname}" /></td>
 
 			</tr>
 
