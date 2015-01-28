@@ -39,14 +39,16 @@ public class CreateEmployeeAccoutForm extends FormBean{
         List<String> errors = new ArrayList<String>();
 
         if (username == null || username.trim().length() == 0) errors.add("Username is required");
-        if (username.trim().length() > 60)  errors.add("The username can not be more than 60 characters");
+        else if (username.trim().length() > 60)  errors.add("The username can not be more than 60 characters");
         
-        if (password == null || password.length() == 0) errors.add("Password is required");
-        if (password.length() > 60)  errors.add("The password can not be more than 60 characters");
+        else if (password == null || password.length() == 0) errors.add("Password is required");
+        else if (password.length() > 60)  errors.add("The password can not be more than 60 characters");
         
-        if (firstname.trim().length() > 60)  errors.add("The firstname can not be more than 60 characters");
+        else if (firstname == null || firstname.trim().length() == 0) errors.add("Firstname is required");
+        else if (firstname.trim().length() > 60)  errors.add("The firstname can not be more than 60 characters");
         
-        if (lastname.trim().length() > 60)  errors.add("The lastname can not be more than 60 characters");
+        else if (lastname == null || lastname.trim().length() == 0) errors.add("Lastname is required");
+        else if (lastname.trim().length() > 60)  errors.add("The lastname can not be more than 60 characters");
 
         return errors;
     }
