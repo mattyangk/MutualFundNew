@@ -10,7 +10,7 @@
 <%
 	FundPriceDetailBean[] funds = (FundPriceDetailBean[]) request
 	.getAttribute("funds");
-	DecimalFormat df = new DecimalFormat("#,###.00");
+	DecimalFormat df = new DecimalFormat("#,##0.00");
 
 	
 %>
