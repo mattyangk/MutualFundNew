@@ -55,7 +55,7 @@ public class TransitionForm  extends FormBean {
 			String s=price[i];
 			if(s==null||s.length()==0)
 				errors.add("Please type new prices for all funds");
-			
+				break;			
 		}
 		
 		return errors;
