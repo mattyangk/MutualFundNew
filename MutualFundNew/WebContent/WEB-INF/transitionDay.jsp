@@ -43,8 +43,8 @@
 						<th>FundName</th>
 						<th>Ticker</th>
 						<th>Last trading date</th>
-						<th>Last trading price</th>
-						<th>New Closing Price</th>
+						<th style="text-align:right;">Last trading price($)</th>
+						<th style="text-align:right;">New Closing Price($)</th>
 
 					</tr>
 				</thead>
@@ -62,11 +62,11 @@
 										<td>Not Available</td>
 									</c:when>
 									<c:otherwise>
-										<td><fmt:formatNumber value="${oneFund.last_price/100}"
+										<td style="text-align:right;"><fmt:formatNumber value="${oneFund.last_price/100}"
 												type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 									</c:otherwise>
 								</c:choose>
-								<td><input type="text" name="price" value="${form.price[loop.index]}" /> <input
+								<td style="text-align:right;"><input type="text" name="price" value="${form.price[loop.index]}" /> <input
 									type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
 							</tr>
 
