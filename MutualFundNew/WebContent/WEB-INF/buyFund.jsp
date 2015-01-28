@@ -10,7 +10,9 @@
 <%
 	FundPriceDetailBean[] funds = (FundPriceDetailBean[]) request
 	.getAttribute("funds");
-	DecimalFormat df = new DecimalFormat("0.00");
+	DecimalFormat df = new DecimalFormat("#,###.00");
+
+	
 %>
 
 <script src="js/validate.js"></script>
@@ -87,7 +89,7 @@
 			</tr>
 
 			<tr>
-				<td>Unit Price</td>
+				<td>Latest Price</td>
 				<td id="price"></td>
 			</tr>
 
