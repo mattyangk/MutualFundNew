@@ -51,15 +51,6 @@ public class RequestCheckAction extends Action{
 			RequestCheckForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			
-			if (!form.isPresent()) {
-				return "requestCheck.jsp";
-			}
-			errors.addAll(form.getValidationErrors());
-			if (!errors.isEmpty()) {
-				return "requestCheck.jsp";
-			}
-			
-			
 			HttpSession session = request.getSession();
 			CustomerBean customer = (CustomerBean) session
 					.getAttribute("customer");
@@ -70,7 +61,18 @@ public class RequestCheckAction extends Action{
 			}
 			
 			CustomerBean latestCustomer = customerDAO.read(customer.getCustomer_id());
-			request.setAttribute("customer", latestCustomer);			
+			request.setAttribute("customer", latestCustomer);	
+			
+			if (!form.isPresent()) {
+				return "requestCheck.jsp";
+			}
+			errors.addAll(form.getValidationErrors());
+			if (!errors.isEmpty()) {
+				return "requestCheck.jsp";
+			}
+			
+		
+				
 
 //			System.out.println(customer.getUsername());
 //			System.out.println(customer.getCash());
