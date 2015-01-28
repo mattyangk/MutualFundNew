@@ -53,9 +53,19 @@ public class TransitionForm  extends FormBean {
 		for(int i=0;i<price.length;i++)
 		{
 			String s=price[i];
-			if(s==null||s.length()==0)
+			if(s==null||s.length()==0){	
 				errors.add("Please type new prices for all funds");
-				break;			
+				break;	
+			}
+		}
+		
+		for(int i=0;i<fund_id.length;i++)
+		{
+			String s=fund_id[i];
+			if(s==null||s.length()==0){	
+				errors.add("Please provide fund Ids for all funds");
+				break;	
+			}
 		}
 		
 		return errors;

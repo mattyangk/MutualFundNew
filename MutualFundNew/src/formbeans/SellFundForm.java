@@ -18,7 +18,7 @@ public class SellFundForm extends FormBean {
 	}
 
 	public void setFundname(String fundname) {
-		this.fundname = fundname;
+		this.fundname = trimAndConvert(fundname, "<>\"");;
 	}
 
 

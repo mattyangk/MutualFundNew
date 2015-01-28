@@ -126,6 +126,11 @@ public class TransitionDayAction extends Action {
 					return "transitionDay.jsp";
 				}
 				
+				if (fund_id[i] == null || fund_id[i].length() == 0) {
+					errors.add("Should provide fund Id for all funds");
+					return "transitionDay.jsp";
+				}
+				
 				try {
 					Double.parseDouble(price[i]);
 					
@@ -156,14 +161,20 @@ public class TransitionDayAction extends Action {
 					return "transitionDay.jsp";
 				}
 				
+				try {
+					Integer.parseInt(fund_id[i]);
+				} catch (NumberFormatException e) {
+					// call getValidationErrors() to detect this
+					errors.add("Invalid fund Id for funds");
+					return "transitionDay.jsp";
+				}
+				
 				FundPriceHistoryBean one = new FundPriceHistoryBean();
 				double newPrice=Double.parseDouble(price[i]);
 				if(newPrice<0)
 				{	errors.add("Should put price above zero");
 					return "transitionDay.jsp";
 				}
-				
-				
 				
 				one.setFund_id(Integer.parseInt(fund_id[i]));
 				one.setPrice(ConvertUtil.convertAmountDoubleToLong(Double.parseDouble(price[i])));

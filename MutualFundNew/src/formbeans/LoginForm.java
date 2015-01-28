@@ -27,7 +27,7 @@ public class LoginForm extends FormBean  {
         List<String> errors = new ArrayList<String>();
 
         if (username == null || username.trim().length() == 0) errors.add("Username is required");
-        else if (password == null || password.length() == 0) errors.add("Password is required");
+        if (password == null || password.length() == 0) errors.add("Password is required");
 
         return errors;
     }

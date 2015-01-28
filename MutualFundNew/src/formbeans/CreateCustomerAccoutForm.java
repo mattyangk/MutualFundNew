@@ -84,24 +84,24 @@ public class CreateCustomerAccoutForm extends FormBean{
         if (username == null || username.trim().length() == 0) errors.add("Username is required");
         else if (username.trim().length() > 60)  errors.add("The username can not be more than 60 characters");
         
-        else if (password == null || password.length() == 0) errors.add("Password is required");
+        if (password == null || password.length() == 0) errors.add("Password is required");
         else if (password.length() > 60)  errors.add("The password can not be more than 60 characters");
         
-        else if (firstname == null || firstname.trim().length() == 0) errors.add("Firstname is required");
+        if (firstname == null || firstname.trim().length() == 0) errors.add("Firstname is required");
         else if (firstname.trim().length() > 60)  errors.add("The firstname can not be more than 60 characters");
         
-        else if (lastname == null || lastname.trim().length() == 0) errors.add("Lastname is required");
+        if (lastname == null || lastname.trim().length() == 0) errors.add("Lastname is required");
         else if (lastname.trim().length() > 60)  errors.add("The lastname can not be more than 60 characters");
         
-        else if (addr_line1.trim().length() > 60)  errors.add("The address line1 can not be more than 60 characters");
+        if (addr_line1.trim().length() > 60)  errors.add("The address line1 can not be more than 60 characters");
         
-        else if (addr_line2.trim().length() > 60)  errors.add("The address line2 can not be more than 60 characters");
+        if (addr_line2.trim().length() > 60)  errors.add("The address line2 can not be more than 60 characters");
         
-        else if (city.trim().length() > 30)  errors.add("The city can not be more than 30 characters");
+        if (city.trim().length() > 30)  errors.add("The city can not be more than 30 characters");
         
-        else if (!(state.trim().length() == 2 || state.trim().length() == 0))  errors.add("Invalid State");
+        if (!(state.trim().length() == 2 || state.trim().length() == 0))  errors.add("Invalid State");
            
-        else if (!(zip.trim().length() == 5 || zip.trim().length() == 0))  errors.add("Invalid zip");
+        if (!(zip.trim().length() == 5 || zip.trim().length() == 0))  errors.add("Invalid zip");
         else if (zip.trim().length()==5){
         try {
 			Integer.parseInt(zip);
