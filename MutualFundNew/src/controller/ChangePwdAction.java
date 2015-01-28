@@ -63,7 +63,7 @@ public class ChangePwdAction extends Action{
 			}
 			String oldPwd=form.getOldPassword();
 			String firstPwd = form.getNewPassword();
-			String secondPwd = form.getrePassword();
+			String secondPwd = form.getRePassword();
 			
 			if(!oldPwd.equals(employee.getPassword()))
 			{

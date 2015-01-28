@@ -37,12 +37,12 @@ public class CreateFundForm extends FormBean{
 		
 		if(fundname==null||fundname.trim().length()==0)
 			errors.add("Please type fundname");
-		if (fundname.trim().length() > 20)  errors.add("The fundname can not be more than 20 characters");
+		else if (fundname.trim().length() > 20)  errors.add("The fundname can not be more than 20 characters");
 		
-		if(symbol==null||symbol.trim().length()==0)
+		else if(symbol==null||symbol.trim().length()==0)
 			errors.add("Please type Ticker");
 		
-		if(symbol.length()<1||symbol.length()>5)
+		else if(symbol.length()<1||symbol.length()>5)
 			errors.add("Ticker shoud be 1 to 5 characters.");
 		
 		if (fundname.matches(".*[<>\"].*") ) {
