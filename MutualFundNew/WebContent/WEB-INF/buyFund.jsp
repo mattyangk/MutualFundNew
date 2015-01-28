@@ -23,7 +23,7 @@
 
 
 	<jsp:include page="error.jsp" />
-	<jsp:include page="message.jsp" />
+	
 
 
 	<script>

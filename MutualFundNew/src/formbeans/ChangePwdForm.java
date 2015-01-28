@@ -38,12 +38,12 @@ public class ChangePwdForm extends FormBean {
 			errors.add("Old Password is required");
 		}
 
-		else if (newPassword == null || newPassword.length() == 0) {
+		if (newPassword == null || newPassword.length() == 0) {
 			errors.add("New Password is required");
 		}
 		else if (newPassword.length() > 60)  errors.add("The password can not be more than 60 characters");
 
-		else if (rePassword == null || rePassword.length() == 0) {
+		if (rePassword == null || rePassword.length() == 0) {
 			errors.add("Please confirm the new password");
 		}
 		else if (rePassword.length() > 60)  errors.add("The password can not be more than 60 characters");

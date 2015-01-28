@@ -12,7 +12,6 @@ import org.genericdao.RollbackException;
 
 import util.ConvertUtil;
 import databeans.FundPriceHistoryBean;
-import databeans.TransactionBean;
 
 public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean>{
 	public FundPriceHistoryDAO(ConnectionPool connectionPool, String tableName)

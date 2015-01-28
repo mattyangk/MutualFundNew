@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 
@@ -50,29 +49,7 @@ public class viewOneCustomerTransactionHistoryAction extends Action{
 			return "manage.jsp";
 		}
 		return "employeeViewTransactionsHistory.jsp";
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

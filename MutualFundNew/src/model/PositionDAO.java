@@ -9,8 +9,6 @@ import org.genericdao.Transaction;
 
 import util.ConvertUtil;
 import databeans.PositionBean;
-import databeans.TransactionBean;
-import exception.AmountOutOfBoundException;
 import exception.SharesOutOfBoundException;
 
 public class PositionDAO extends GenericDAO<PositionBean> {
@@ -24,6 +22,11 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 
 		PositionBean[] positions = match(MatchArg.equals("customer_id",
 				id));
+		if(positions == null || positions.length ==0){
+			System.out.println("customer has no positions");
+			return null;
+		}
+		
 		return positions;
 	}
 

@@ -60,7 +60,7 @@ public class TransitionDayAction extends Action {
 
 			if (allFunds == null || allFunds.length == 0) {
 				System.out.println("No fund");
-				errors.add("No fund has been created yet");
+				errors.add("No funds have been created yet");
 				return "transitionDay.jsp";
 			}
 
@@ -179,6 +179,14 @@ public class TransitionDayAction extends Action {
 				one.setFund_id(Integer.parseInt(fund_id[i]));
 				one.setPrice(ConvertUtil.convertAmountDoubleToLong(Double.parseDouble(price[i])));
 				one.setPrice_date(newLateDate);
+				
+				FundBean checkFund = fundDAO.getFundById(Integer.parseInt(fund_id[i]));
+				if(checkFund == null){
+					System.out.println("some wrong id is input");
+					errors.add("Fund Id does not exist");
+					return "transitionDay.jsp";
+				}
+				
 				fundpriceHistoryDAO.create(one);
 				System.out.println("updating");
 			}

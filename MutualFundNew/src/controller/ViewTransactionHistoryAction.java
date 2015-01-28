@@ -10,11 +10,9 @@ import org.genericdao.RollbackException;
 
 import databeans.CustomerBean;
 import databeans.FundBean;
-import databeans.FundPriceDetailBean;
 import databeans.FundPriceHistoryBean;
 import databeans.TransactionAndPriceBean;
 import databeans.TransactionBean;
-import model.CustomerDAO;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
@@ -22,13 +20,11 @@ import model.TransactionDAO;
 
 public class ViewTransactionHistoryAction extends Action {
 
-	private CustomerDAO customerDAO;
 	private TransactionDAO transactionDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public ViewTransactionHistoryAction(Model model) {
-		customerDAO = model.getCustomerDAO();
 		transactionDAO = model.getTransactionDAO();
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();

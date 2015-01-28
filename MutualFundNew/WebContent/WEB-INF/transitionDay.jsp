@@ -12,7 +12,7 @@
 	<h1 class="page-header">Transition Day</h1>
 	<div>
 		<jsp:include page="error.jsp" />
-		<jsp:include page="message.jsp" />
+		
 
 		<p class="priceInputFeedback" style="color: red"></p>
 		<form action="transitionDayAction.do" method="POST">

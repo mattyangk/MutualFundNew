@@ -44,7 +44,6 @@ public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 		request.setAttribute("errors",errors);
 
 		HttpSession session = request.getSession();
-		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 
 		TransactionBean[] allTransactions = null;
 		TransactionAndPriceBean[] allTransactionWithPrices = null;

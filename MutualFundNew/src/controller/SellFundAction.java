@@ -25,7 +25,6 @@ import databeans.FundPriceHistoryBean;
 import databeans.PositionAndFundBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
-import exception.AmountOutOfBoundException;
 import exception.SharesOutOfBoundException;
 import formbeans.SellFundForm;
 

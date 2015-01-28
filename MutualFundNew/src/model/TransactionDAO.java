@@ -2,18 +2,14 @@ package model;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
-import org.genericdao.Transaction;
 
-import databeans.CustomerBean;
 import databeans.TransactionBean;
-import exception.AmountOutOfBoundException;
 
 public class TransactionDAO extends GenericDAO<TransactionBean> {
 
@@ -25,7 +21,10 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 	public TransactionBean[] getAllTransactions() throws RollbackException {
 
 		TransactionBean[] transactions = match();
-
+		if(transactions == null || transactions.length==0){
+			System.out.println("no transactions");
+			return null;
+		}
 		return transactions;
 
 	}
@@ -34,6 +33,11 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 
 		TransactionBean[] pendingTransactions = match(MatchArg.equals(
 				"is_complete", false));
+		if(pendingTransactions == null || pendingTransactions.length==0){
+			System.out.println("no pending transactions");
+			return null;
+		}
+		
 		sortInAscending(pendingTransactions);
 		return pendingTransactions;
 	}
@@ -43,6 +47,11 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 
 		TransactionBean[] transactions = match(MatchArg.equals("customer_id",
 				id));
+		if(transactions == null || transactions.length==0){
+			System.out.println("no transactions");
+			return null;
+		}
+
 		sortInDescending(transactions);
 		return transactions;
 	}

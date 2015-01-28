@@ -6,7 +6,6 @@ import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 
-import databeans.CustomerBean;
 import databeans.FundBean;
 
 public class FundDAO extends GenericDAO<FundBean> {
@@ -20,6 +19,7 @@ public class FundDAO extends GenericDAO<FundBean> {
 		FundBean[] funds = match(MatchArg.equals("fund_id", id));
 		if (funds.length != 1) {
 			System.out.println("not such fund");
+			return null;
 		}
 		return funds[0];
 	}
@@ -38,6 +38,7 @@ public class FundDAO extends GenericDAO<FundBean> {
 		FundBean[] funds = match();
 		if (funds.length == 0) {
 			System.out.println("no fund");
+			return null;
 		}
 		return funds;
 	}
