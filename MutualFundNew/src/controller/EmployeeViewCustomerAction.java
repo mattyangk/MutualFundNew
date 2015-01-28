@@ -46,7 +46,7 @@ public class EmployeeViewCustomerAction  extends Action{
 			{
 				messages="The customer does not have any fund yet";
 				request.setAttribute("message", messages);
-				return "showCustomerInfo.jsp";
+				return "viewAccountCustomer.jsp";
 			}
 			
 			else{
@@ -61,16 +61,17 @@ public class EmployeeViewCustomerAction  extends Action{
 					fundInfo[i].setFund_name(theFund.getName());
 					fundInfo[i].setFund_symbol(theFund.getSymbol());
 					fundInfo[i].setShares(Positions[i].getShares());
+					fundInfo[i].setAvailable_shares(Positions[i].getAvailable_shares());
 				}
 				
 				request.setAttribute("fundInfo",fundInfo);
 			}
 		}catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "showCustomerInfo.jsp";
+			return "viewAccountCustomer.jsp";
 		} 
 		
-		return "showCustomerInfo.jsp";
+		return "viewAccountCustomer.jsp";
 	}
 
 }
