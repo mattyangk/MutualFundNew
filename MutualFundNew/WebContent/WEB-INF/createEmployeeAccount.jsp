@@ -14,33 +14,34 @@
 		<table class="table">
 
 			<tr>
-				<td>User Name</td>
+				<td>User Name*</td>
 				<td><input type="text" name="username" class="form-control"
 					value="${form.username}" /></td>
 			</tr>
 
 			<tr>
-				<td>Password</td>
+				<td>Password*</td>
 				<td><input type="password" name="password" class="form-control"
 					value="" /></td>
 
 			</tr>
 
 			<tr>
-				<td>First Name</td>
+				<td>First Name*</td>
 				<td><input type="text" name="firstname" class="form-control"
 					value="${form.firstname}" /></td>
 
 			</tr>
 
 			<tr>
-				<td>Last Name</td>
+				<td>Last Name*</td>
 				<td><input type="text" name="lastname" class="form-control"
 					value="${form.lastname}" /></td>
 
 			</tr>
 
 			<tr>
+			    <td>* is required field </td>
 				<td colspan="2" align="center"><input type="submit"
 					name="button" class="btn btn-success" value="Create An Employee" /></td>
 			</tr>
