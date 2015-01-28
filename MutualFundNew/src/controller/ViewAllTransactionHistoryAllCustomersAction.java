@@ -13,7 +13,6 @@ import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.TransactionAndPriceBean;
 import databeans.TransactionBean;
-import model.CustomerDAO;
 import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
@@ -21,13 +20,11 @@ import model.TransactionDAO;
 
 public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 
-	private CustomerDAO customerDAO;
 	private TransactionDAO transactionDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public ViewAllTransactionHistoryAllCustomersAction(Model model) {
-		customerDAO = model.getCustomerDAO();
 		transactionDAO = model.getTransactionDAO();
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
@@ -53,24 +50,20 @@ public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 
 			if (allTransactions == null) {
 				errors.add("No Transactions !");
-				return "viewAllTransactionsHistoryAllCustomers.jsp";
+				return "viewAllTransactionHistoryAllCustomers.jsp";
 			} else {
 				allTransactionWithPrices = new TransactionAndPriceBean[allTransactions.length];
 				for (int i = 0; i < allTransactions.length; i++) {
-					FundBean fund = fundDAO.read(allTransactions[i]
-							.getFund_id());
+
 					TransactionAndPriceBean transactionWithPrice = new TransactionAndPriceBean();
 					transactionWithPrice.setAmount(allTransactions[i]
 							.getAmount());
 					transactionWithPrice.setCustomer_id(allTransactions[i]
 							.getCustomer_id());
-					customer = customerDAO.read(allTransactions[i].getCustomer_id());
-					transactionWithPrice.setCustomer_name(customer.getUsername());
 					transactionWithPrice.setExecute_date(allTransactions[i]
 							.getExecute_date());
 					transactionWithPrice.setFund_id(allTransactions[i]
 							.getFund_id());
-					transactionWithPrice.setFund_name(fund.getName());
 					transactionWithPrice.setIs_complete(allTransactions[i]
 							.isIs_complete());
 					transactionWithPrice.setIs_success(allTransactions[i]
@@ -83,12 +76,21 @@ public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 							.getTransaction_id());
 					transactionWithPrice.setTrasaction_type(allTransactions[i]
 							.getTrasaction_type());
-					if (allTransactions[i].getExecute_date() != null) {
-						FundPriceHistoryBean price = fundPriceHistoryDAO.read(
-								allTransactions[i].getFund_id(),
-								allTransactions[i].getExecute_date());
-						transactionWithPrice.setPrice(price.getPrice());
+					transactionWithPrice.setCustomer_name(customer.getUsername());
+
+					if (allTransactions[i].getFund_id() > 0) {
+						FundBean fund = fundDAO.read(allTransactions[i]
+								.getFund_id());
+						transactionWithPrice.setFund_name(fund.getName());
+						if (allTransactions[i].getExecute_date() != null) {
+							FundPriceHistoryBean price = fundPriceHistoryDAO
+									.read(allTransactions[i].getFund_id(),
+											allTransactions[i]
+													.getExecute_date());
+							transactionWithPrice.setPrice(price.getPrice());
+						}
 					}
+
 					allTransactionWithPrices[i] = transactionWithPrice;
 				}
 			}
@@ -100,7 +102,7 @@ public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 			errors.add(e.getMessage());
 			return "manage.jsp";
 		}
-		return "viewAllTransactionsHistoryAllCustomers.jsp";
+		return "viewAllTransactionHistoryAllCustomers.jsp";
 	}
 
 }
