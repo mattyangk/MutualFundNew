@@ -103,7 +103,7 @@
 					<li><a href="resetPwd.do"> Reset Customer Password </a></li>
 		
 					<li><a href="viewAllCustomerDetails.do"> View Customer Account </a></li>
-					<li><a href="viewAllCustomerTransactionHistory.do"> View Customer Transaction History </a></li>
+					<!-- <li><a href="viewAllCustomerTransactionHistory.do"> View Customer Transaction History </a></li> -->
 					<li><a href="viewAllTransactionsHistory.do"> View All Transactions History </a></li>
 					<li><a href="depositCheck.do"> Deposit Check </a></li>
 					<li><a href="createFund.do"> Create Fund </a></li>
