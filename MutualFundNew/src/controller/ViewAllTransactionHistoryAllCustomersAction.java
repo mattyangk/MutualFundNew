@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 
@@ -42,8 +41,6 @@ public class ViewAllTransactionHistoryAllCustomersAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors",errors);
-
-		HttpSession session = request.getSession();
 
 		TransactionBean[] allTransactions = null;
 		TransactionAndPriceBean[] allTransactionWithPrices = null;
