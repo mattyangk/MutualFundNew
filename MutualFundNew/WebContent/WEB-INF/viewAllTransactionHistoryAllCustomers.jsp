@@ -19,8 +19,13 @@
 	});
 
 	function amountSorter(a, b) {
-		a = a.replace(",", "");
-		b = b.replace(",", "");
+		a = + a.replace(",", "");
+		b = + b.replace(",", "");
+		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
+		if (!re.test(a)) 
+			return 1;
+		if (!re.test(b)) 
+			return -1;
 		if (a > b)
 			return 1;
 		if (a < b)
@@ -30,11 +35,12 @@
 	}
 
 	function shareSorter(a, b) {
-		a = a.replace(",", "");
-		b = b.replace(",", "");
-		if (a == '--')
+		a = + a.replace(",", "");
+		b = + b.replace(",", "");
+		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
+		if (!re.test(a)) 
 			return 1;
-		if (b == '--')
+		if (!re.test(b)) 
 			return -1;
 		if (a > b)
 			return 1;
