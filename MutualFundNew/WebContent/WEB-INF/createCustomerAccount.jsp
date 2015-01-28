@@ -27,14 +27,14 @@
 			</tr>
 
 			<tr>
-				<td>First Name</td>
+				<td>First Name*</td>
 				<td><input type="text" name="firstname" class="form-control"
 					value="${form.firstname}" /></td>
 
 			</tr>
 
 			<tr>
-				<td>Last Name</td>
+				<td>Last Name*</td>
 				<td><input type="text" name="lastname" class="form-control"
 					value="${form.lastname}" /></td>
 
@@ -72,6 +72,7 @@
 			</tr>
 
 			<tr>
+			    <td>* is required field </td>
 				<td colspan="2" align="center"><input type="submit"
 					name="button" class="btn btn-success" value="Create An Customer" /></td>
 			</tr>

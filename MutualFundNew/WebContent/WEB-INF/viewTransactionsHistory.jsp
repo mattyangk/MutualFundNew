@@ -21,7 +21,7 @@
 	function amountSorter(a, b) {
 		a = + a.replace(",", "");
 		b = + b.replace(",", "");
-		re = /^\d+\.{0,1}(\d{1,2}){0,1}$/;
+		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
 		if (!re.test(a)) 
 			return 1;
 		if (!re.test(b)) 
@@ -97,7 +97,7 @@
 								<td>--</td>
 							</c:if>
 							<c:if test="${(transaction.amount/100) !=0}">
-								<td><fmt:formatNumber value="${transaction.amount/100}"
+								<td align="right"><fmt:formatNumber value="${transaction.amount/100}"
 										type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 							</c:if>
 
@@ -140,7 +140,7 @@
 									<td>(failed)</td>
 								</c:when>
 								<c:otherwise>
-									<td><fmt:formatNumber value="${transaction.amount/100}"
+									<td align="right"><fmt:formatNumber value="${transaction.amount/100}"
 											type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 								</c:otherwise>
 							</c:choose>
@@ -150,7 +150,7 @@
 							<td>N/A</td>
 							</c:if>
 							<c:if test="${transaction.price!=0 }">
-							<td><fmt:formatNumber value="${transaction.price/100}"
+							<td align="right"><fmt:formatNumber value="${transaction.price/100}"
 									type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 							</c:if>
 
@@ -164,7 +164,7 @@
 									<td>(failed)</td>
 								</c:when>
 								<c:otherwise>
-									<td><fmt:formatNumber value="${transaction.shares/1000}"
+									<td align="right"><fmt:formatNumber value="${transaction.shares/1000}"
 											type="number" maxFractionDigits="3" minFractionDigits="3" /></td>
 								</c:otherwise>
 							</c:choose>

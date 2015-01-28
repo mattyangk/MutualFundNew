@@ -87,7 +87,7 @@
 				<td>Ticker</td>
 				<td>Shares</td>
 				<td>Available Shares</td>
-				<td>Unit Price</td>
+				<td>Latest Price</td>
 				<td>Shares For Sale</td>
 			</tr>
 			<tr>
