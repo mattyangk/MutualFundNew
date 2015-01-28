@@ -92,7 +92,7 @@
 								<td>--</td>
 							</c:if>
 							<c:if test="${(transaction.amount/100) !=0}">
-								<td><fmt:formatNumber value="${transaction.amount/100}"
+								<td align="right"><fmt:formatNumber value="${transaction.amount/100}"
 										type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 							</c:if>
 
@@ -135,7 +135,7 @@
 									<td>(failed)</td>
 								</c:when>
 								<c:otherwise>
-									<td><fmt:formatNumber value="${transaction.amount/100}"
+									<td align="right"><fmt:formatNumber value="${transaction.amount/100}"
 											type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 								</c:otherwise>
 							</c:choose>
@@ -145,7 +145,7 @@
 							<td>N/A</td>
 							</c:if>
 							<c:if test="${transaction.price!=0 }">
-							<td><fmt:formatNumber value="${transaction.price/100}"
+							<td align="right"><fmt:formatNumber value="${transaction.price/100}"
 									type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
 							</c:if>
 
