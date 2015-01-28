@@ -58,8 +58,7 @@ public class ViewTransactionHistoryAction extends Action {
 			} else {
 				allTransactionWithPrices = new TransactionAndPriceBean[allTransactions.length];
 				for (int i = 0; i < allTransactions.length; i++) {
-					FundBean fund = fundDAO.read(allTransactions[i]
-							.getFund_id());
+
 					TransactionAndPriceBean transactionWithPrice = new TransactionAndPriceBean();
 					transactionWithPrice.setAmount(allTransactions[i]
 							.getAmount());
@@ -69,7 +68,6 @@ public class ViewTransactionHistoryAction extends Action {
 							.getExecute_date());
 					transactionWithPrice.setFund_id(allTransactions[i]
 							.getFund_id());
-					transactionWithPrice.setFund_name(fund.getName());
 					transactionWithPrice.setIs_complete(allTransactions[i]
 							.isIs_complete());
 					transactionWithPrice.setIs_success(allTransactions[i]
@@ -82,12 +80,20 @@ public class ViewTransactionHistoryAction extends Action {
 							.getTransaction_id());
 					transactionWithPrice.setTrasaction_type(allTransactions[i]
 							.getTrasaction_type());
-					if (allTransactions[i].getExecute_date() != null) {
-						FundPriceHistoryBean price = fundPriceHistoryDAO.read(
-								allTransactions[i].getFund_id(),
-								allTransactions[i].getExecute_date());
-						transactionWithPrice.setPrice(price.getPrice());
+
+					if (allTransactions[i].getFund_id() > 0) {
+						FundBean fund = fundDAO.read(allTransactions[i]
+								.getFund_id());
+						transactionWithPrice.setFund_name(fund.getName());
+						if (allTransactions[i].getExecute_date() != null) {
+							FundPriceHistoryBean price = fundPriceHistoryDAO
+									.read(allTransactions[i].getFund_id(),
+											allTransactions[i]
+													.getExecute_date());
+							transactionWithPrice.setPrice(price.getPrice());
+						}
 					}
+
 					allTransactionWithPrices[i] = transactionWithPrice;
 				}
 			}
