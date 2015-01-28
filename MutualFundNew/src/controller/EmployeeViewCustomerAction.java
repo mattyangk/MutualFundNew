@@ -37,9 +37,15 @@ public class EmployeeViewCustomerAction  extends Action{
 			String customerName=(String)request.getParameter("customername");
 		    CustomerBean theCustomer=customerDAO.getCustomerByUsername(customerName);
 		
+		    if(theCustomer==null){
+				errors.add("No Such Customer!");
+				return "viewAccountCustomer.jsp";
+			}
+		    
 			int CustomerID=theCustomer.getCustomer_id();
 			PositionBean [] Positions=positionDAO.getPositionsByCustomerId(CustomerID);
 			
+						
 			request.setAttribute("customer",theCustomer);
 			
 			if(Positions==null)

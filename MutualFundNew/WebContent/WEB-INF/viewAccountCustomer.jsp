@@ -11,97 +11,101 @@
 	<h1 class="page-header">Customer Account Information</h1>
 	<jsp:include page="error.jsp" />
 	<jsp:include page="message.jsp" />
-	<table class="table">
-	        
+	<c:if test="${not empty customer}">
+		<table class="table">
+
 			<tr>
 				<td>User ID: ${customer.customer_id}</td>
-				</tr>
+			</tr>
 			<tr>
 				<td>User Name: ${customer.username}</td>
 
 			</tr>
 			<tr>
 				<td>First Name: ${customer.firstname}</td>
-				</tr>
+			</tr>
 			<tr>
 				<td>Last Name: ${customer.lastname}</td>
 			</tr>
 			<tr>
-				<td>Address:<br>${customer.addr_line1}<br> ${customer.addr_line2 }
+				<td>Address:<br>${customer.addr_line1}<br>
+					${customer.addr_line2 }
 				</td>
 
 			</tr>
 			<tr>
 				<td>City: ${customer.city}</td>
-				</tr>
+			</tr>
 			<tr>
 				<td>State: ${customer.state}</td>
-				</tr>
+			</tr>
 			<tr>
 				<td>Zip: ${customer.zip}</td>
 			</tr>
 
 			<tr>
 				<td>Cash: <fmt:formatNumber value="${customer.cash/100}"
-					type="currency" /></td>
-				</tr>
+						type="currency" /></td>
+			</tr>
 			<tr>
-				<td>Available Balance: <fmt:formatNumber value="${customer.balance/100}"
-					type="currency" /></td>
+				<td>Available Balance: <fmt:formatNumber
+						value="${customer.balance/100}" type="currency" /></td>
 			</tr>
 		</table>
-		
-		
+
+
 		<table class="table">
 
-		<thead>
+			<thead>
 
-			<tr>
-				<td>Fund List</td>
-		</thead>
-        <c:choose>
-		<c:when test="${empty fundInfo}">
-		<tr><td>You don't have any fund now.</td></tr>
-		</c:when>
-	    <c:otherwise>
-		<tbody>
-
-			<tr>
-
-				<th>Fund Name</th>
-
-				<th>Ticker</th>
-
-				<th style="text-align:right">Shares</th>
-				
-				<th style="text-align:right">Available Shares</th>
-			<tr>
-
-
-				<c:forEach items="${fundInfo}" var="fund">
-
+				<tr>
+					<td>Fund List</td>
+			</thead>
+			<c:choose>
+				<c:when test="${empty fundInfo}">
 					<tr>
-
-						<td>${fund.fund_name}</td>
-
-						<td>${fund.fund_symbol}</td>
-
-						<td align="right"><fmt:formatNumber value="${fund.shares/1000}" type="number"
-								maxFractionDigits="3" minFractionDigits="3"/></td>
-						<td align="right"><fmt:formatNumber value="${fund.available_shares/1000}" type="number"
-								maxFractionDigits="3" minFractionDigits="3"/></td>
-
+						<td>You don't have any fund now.</td>
 					</tr>
+				</c:when>
+				<c:otherwise>
+					<tbody>
 
-				</c:forEach>
-			
+						<tr>
 
-		</tbody>
-			</c:otherwise>
-	</c:choose>
+							<th>Fund Name</th>
 
-	</table>
+							<th>Ticker</th>
 
-		
-		
+							<th style="text-align: right">Shares</th>
+
+							<th style="text-align: right">Available Shares</th>
+						<tr>
+
+
+							<c:forEach items="${fundInfo}" var="fund">
+
+								<tr>
+
+									<td>${fund.fund_name}</td>
+
+									<td>${fund.fund_symbol}</td>
+
+									<td align="right"><fmt:formatNumber
+											value="${fund.shares/1000}" type="number"
+											maxFractionDigits="3" minFractionDigits="3" /></td>
+									<td align="right"><fmt:formatNumber
+											value="${fund.available_shares/1000}" type="number"
+											maxFractionDigits="3" minFractionDigits="3" /></td>
+
+								</tr>
+
+							</c:forEach>
+					</tbody>
+				</c:otherwise>
+			</c:choose>
+
+		</table>
+
+	</c:if>
+
 </div>
