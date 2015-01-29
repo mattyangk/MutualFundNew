@@ -37,6 +37,10 @@ public class ViewAllFundsAction extends Action {
 		
 		try {
 			FundBean[] funds = fundDAO.getAllFunds();
+			if (funds == null || funds.length == 0) {
+				request.setAttribute("fundPriceDetails", null);
+				return "viewAllFunds.jsp";
+			}
 			FundPriceDetailBean[] fundPriceDetails = new FundPriceDetailBean[funds.length];
 			Date latestDay = fundPriceHistoryDAO.findLatestDate();
 			for (int i = 0; i < funds.length; i++) {
