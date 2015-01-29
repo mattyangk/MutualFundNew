@@ -7,6 +7,8 @@ public class CustomerFundsInfoBean {
 	private String fund_symbol;
 	private long shares;
 	private long available_shares;
+	private long price;
+	private long total;
 	
 	public long getAvailable_shares() {
 		return available_shares;
@@ -38,5 +40,18 @@ public class CustomerFundsInfoBean {
 	public void setShares(long shares) {
 		this.shares = shares;
 	}
+	public long getPrice() {
+		return price;
+	}
+	public void setPrice(long price) {
+		this.price = price;
+	}
+	public long getTotal() {
+		return total;
+	}
+	public void setTotal(long total) {
+		this.total = total;
+	}
+	
 
 }

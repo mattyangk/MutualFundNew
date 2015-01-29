@@ -93,7 +93,7 @@ public class LoginAction extends Action {
 				if (customer.getPassword().equals(form.getPassword())) {
 					//System.out.println("adding customer to session" + customer.getUsername());
 					session.setAttribute("customer", customer);
-					return "manage.jsp";
+					return "viewAccount.do";
 				} else {
 					errors.add("User Name or password is not correct");
 					return "index.jsp";
