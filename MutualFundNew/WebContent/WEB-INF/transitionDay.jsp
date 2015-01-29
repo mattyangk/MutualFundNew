@@ -90,7 +90,8 @@
 					</tbody>
 				</c:if>
 				<tr>
-					<td colspan="2" align="center"><input type="submit"
+					<td></td><td></td><td></td><td></td>
+					<td colspan="2" align="right"><input type="submit"
 						name="button" class="btn btn-success" value="Submit" /></td>
 				</tr>
 			</table>

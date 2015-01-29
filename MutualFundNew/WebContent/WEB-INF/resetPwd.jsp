@@ -23,6 +23,7 @@ pageEncoding="UTF-8"%>
 				<td><input type="password" name="rePassword" class="form-control" value="" /></td>
 			</tr>
 			<tr>
+				<td></td>
 				<td colspan="2" align="center"><input type="submit"
 					name="button" class="btn btn-success" value="Reset Password For Customer" /></td>
 			</tr>

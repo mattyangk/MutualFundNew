@@ -97,6 +97,7 @@
 				</tr>
 
 				<tr>
+					<td></td>
 					<td colspan="2" align="left"><input type="submit"
 						name="button" class="btn btn-success" value="Buy Fund" /></td>
 				</tr>

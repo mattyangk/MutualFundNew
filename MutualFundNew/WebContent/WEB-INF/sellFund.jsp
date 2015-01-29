@@ -111,13 +111,15 @@
 						value="${form.share}" /></td>
 				</tr>
 				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 					<td colspan="2" align="left"><input type="submit"
 						name="button" class="btn btn-success" value="Sell Shares" /></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					
 				</tr>
 
 			</table>

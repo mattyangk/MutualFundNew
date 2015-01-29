@@ -26,7 +26,8 @@
 					value="${form.amount}" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
+				<td></td>
+				<td colspan="2" align="left"><input type="submit"
 					name="button" class="btn btn-success" value="Deposit Check" /></td>
 			</tr>
 		</table>

@@ -38,6 +38,7 @@
 			
 
 			<tr>
+				<td></td>
 				<td colspan="2" align="center"><input type="submit"
 					name="button" class="btn btn-success" value="Reset Password" /></td>
 			</tr>
