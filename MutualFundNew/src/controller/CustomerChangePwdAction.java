@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.EmployeeDAO;
 import model.CustomerDAO;
 import model.Model;
 
@@ -15,7 +14,6 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.CustomerBean;
-import databeans.EmployeeBean;
 import formbeans.ChangePwdForm;
 
 public class CustomerChangePwdAction extends Action{
@@ -65,7 +63,7 @@ public class CustomerChangePwdAction extends Action{
 			}
 			String oldPwd=form.getOldPassword();
 			String firstPwd = form.getNewPassword();
-			String secondPwd = form.getrePassword();
+			String secondPwd = form.getRePassword();
 			
 			if(!oldPwd.equals(customer.getPassword()))
 			{
