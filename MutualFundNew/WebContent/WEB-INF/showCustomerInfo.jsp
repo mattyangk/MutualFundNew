@@ -16,73 +16,82 @@
 
 		<tr>
 
-			<td>User ID: ${customer.customer_id}</td>
+			<td>User ID:</td><td>${customer.customer_id}</td>
 
 		</tr>
 
 		<tr>
 
-			<td>User Name: ${customer.username }</td>
+			<td>User Name:</td><td> ${customer.username }</td>
 
 
 		</tr>
 
 		<tr>
 
-			<td>First Name: ${customer.firstname }</td>
+			<td>First Name:</td><td> ${customer.firstname }</td>
 
 		</tr>
 
 		<tr>
 
-			<td>Last Name: ${customer.lastname }</td>
+			<td>Last Name:</td><td> ${customer.lastname }</td>
 
 		</tr>
 
 		<tr>
 
-			<td>Address 1: ${customer.addr_line1}</td>
+			<td>Address 1:</td><td>${customer.addr_line1}</td>
 
 		</tr>
 
 		<tr>
 
-			<td>Address 2: ${customer.addr_line2 }</td>
+			<td>Address 2:</td><td> ${customer.addr_line2 }</td>
 
 		</tr>
 
 		<tr>
 
-			<td>City: ${customer.city }</td>
+			<td>City:</td><td> ${customer.city }</td>
 
 		</tr>
 
 		<tr>
 
-			<td>State: ${customer.state}</td>
+			<td>State:</td><td>${customer.state}</td>
 
 		</tr>
 
 		<tr>
 
-			<td>Zip: ${customer.zip }</td>
+			<td>Zip:</td><td> ${customer.zip }</td>
 
 		</tr>
 
 
 		<tr>
 
-			<td>Cash: <fmt:formatNumber value="${customer.cash/100}"
+			<td>Cash:</td><td> <fmt:formatNumber value="${customer.cash/100}"
 					type="currency" /></td>
 
 		</tr>
 
 		<tr>
 
-			<td>Available Balance: <fmt:formatNumber value="${customer.balance/100}"
+			<td>Available Balance:</td><td> <fmt:formatNumber value="${customer.balance/100}"
 					type="currency" /></td>
 
 		</tr>
+		<tr>
+				<td>Last Trading Date:</td>
+				<c:if test="${empty lastestDay}">
+				<td>Not Available</td>
+				</c:if>
+				<c:if test="${!empty latestDay }">
+				<td>${latestDay}</td>
+				</c:if>
+			</tr>
 
 	</table>
 
@@ -107,8 +116,13 @@
 
 				<th>Ticker</th>
 
-				<th>Shares</th>
+				<th style="text-align:right">Shares</th>
+				
+				<th style="text-align:right">Available Shares</th>
+				<th style="text-align:right">Price($)</th>
+				<th style="text-align:right">Total Value($)</th>
 			<tr>
+
 
 
 				<c:forEach items="${fundInfo}" var="fund">
@@ -121,15 +135,15 @@
 
 						<td><fmt:formatNumber value="${fund.shares/1000}" type="number"
 								maxFractionDigits="3" minFractionDigits="3"/></td>
-
+						
+                        <td align="right"><fmt:formatNumber value="${fund.price/100}" type="number"
+								maxFractionDigits="2" minFractionDigits="2"/></td>
+						<td align="right"><fmt:formatNumber value="${fund.total/100}" type="number"
+								maxFractionDigits="2" minFractionDigits="2"/></td>
 					</tr>
 
 				</c:forEach>
-			<tr>
-
-				<td>${message}</td>
-
-			</tr>
+		
 
 		</tbody>
 		</c:otherwise>

@@ -56,7 +56,7 @@
 				<td>Not Available</td>
 				</c:if>
 				<c:if test="${!empty latestDay }">
-				<td>${lastestDay}</td>
+				<td>${latestDay}</td>
 				</c:if>
 			</tr>
 		</table>
