@@ -52,12 +52,14 @@
 			</tr>
 			<tr>
 				<td>Last Trading Date:</td>
-				<c:if test="${empty lastestDay}">
-				<td>Not Available</td>
-				</c:if>
-				<c:if test="${!empty latestDay }">
-				<td>${latestDay}</td>
-				</c:if>
+				<c:choose>
+					<c:when test="${empty lastestDay}">
+						<td>Not Available</td>
+					</c:when>
+					<c:otherwise>
+						<td>${latestDay}</td>
+					</c:otherwise>
+				</c:choose>
 			</tr>
 		</table>
 		

@@ -56,7 +56,16 @@ public class ViewCustomerAccountAction extends Action {
 			PositionBean [] Positions=positionDAO.getPositionsByCustomerId(CustomerID);
 			Date latestDay = fundPriceHistoryDAO.findLatestDate();
 			
-			request.setAttribute("latestDay", latestDay);
+			String theDate = null;
+			if(latestDay != null){
+				theDate = dateFormat.format(latestDay);
+
+			}
+			
+			SimpleDateFormat dateFormat = new java.text.SimpleDateFormat(
+					"yyyy-MM-dd");
+			
+			request.setAttribute("latestDay", theDate);
 			
 			customer = customerDAO.read(customer.getCustomer_id());
 			session.setAttribute("customer", customer);
