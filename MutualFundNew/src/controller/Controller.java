@@ -105,7 +105,7 @@ public class Controller extends HttpServlet {
     		 return "index.jsp";
     	 }   
        }
-       if(action.equals("transactionHistory.do")||action.equals("CustomerChangePwd.do") )
+       if(action.equals("transactionHistory.do")||action.equals("customerChangePwd.do") )
        {
     	   if(customer==null)
     	   { 
