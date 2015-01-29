@@ -27,9 +27,12 @@
 	<script>
 		<%if (funds != null && funds.length > 0) {%>
 		$(document).ready ( function () {
-	
-			$("#price").text("<%=df.format(ConvertUtil.convertAmountLongToDouble(funds[0].getPrice()))%>");
-
+			<%if (funds[0].getPrice() != 0) { %>
+				$("#price").text("<%=df.format(ConvertUtil.convertAmountLongToDouble(funds[0].getPrice()))%>");
+			<%} else {%>
+				$("#price").text("Not Available");
+			<%}%>
+			
 			$("select").change(function() {
 				var str = "";
 				$("select option:selected").each(function() {
