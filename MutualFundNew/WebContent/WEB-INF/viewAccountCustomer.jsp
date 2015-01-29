@@ -56,7 +56,7 @@
 				<td>Not Available</td>
 				</c:if>
 				<c:if test="${!empty latestDay }">
-				<td>${lastestday}</td>
+				<td>${lastestDay}</td>
 				</c:if>
 			</tr>
 		</table>
@@ -85,8 +85,8 @@
 				<th style="text-align:right">Shares</th>
 				
 				<th style="text-align:right">Available Shares</th>
-				<th style="text-align:right">Price</th>
-				<th style="text-align:right">Position</th>
+				<th style="text-align:right">Price($)</th>
+				<th style="text-align:right">Total Value($)</th>
 			<tr>
 
 
