@@ -27,7 +27,7 @@ public class CustomerChangePwdAction extends Action{
 	}
 
 	public String getName() {
-		return "CustomerChangePwd.do";
+		return "customerChangePwd.do";
 	}
 
 	public String perform(HttpServletRequest request) {

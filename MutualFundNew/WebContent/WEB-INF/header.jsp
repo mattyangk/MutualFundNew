@@ -88,6 +88,7 @@
 					<%
 						if (customer != null) {
 					%>
+					<li><a href="customerChangePwd.do"> Change Password </a></li>
 					<li><a href="viewAccount.do"> View Account </a></li>
 					<li><a href="buyFund.do"> Buy Fund </a></li>
 					<li><a href="sellFund.do"> Sell Fund </a></li>

@@ -51,6 +51,7 @@ public class Controller extends HttpServlet {
         Action.add(new viewAllCustomerTransactionHistoryAction(model));
         Action.add(new viewOneCustomerTransactionHistoryAction(model));
         Action.add(new ViewAllTransactionHistoryAllCustomersAction(model));
+        Action.add(new CustomerChangePwdAction(model));
         
     }
 
