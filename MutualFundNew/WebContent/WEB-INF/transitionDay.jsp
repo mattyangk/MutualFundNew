@@ -12,7 +12,7 @@
 	<h1 class="page-header">Transition Day</h1>
 	<div>
 		<jsp:include page="error.jsp" />
-		
+
 
 		<p class="priceInputFeedback" style="color: red"></p>
 		<form action="transitionDayAction.do" method="POST">
@@ -32,48 +32,57 @@
 
 				<tr>
 					<td>Trading Day:</td>
-					<td><input type="text" name="transitionDate" value="${form.transitionDate}" /></td>
+					<td><input type="text" name="transitionDate"
+						value="${form.transitionDate}" /></td>
 				</tr>
 			</table>
 
 
+
 			<table class="table">
-				<thead>
-					<tr>
-						<th>FundName</th>
-						<th>Ticker</th>
-						<th>Last trading date</th>
-						<th style="text-align:right;">Last trading price($)</th>
-						<th style="text-align:right;">New Closing Price($)</th>
+				<c:if test="${not empty allFunds}">
 
-					</tr>
-				</thead>
+					<thead>
+						<tr>
+
+							<th>FundName</th>
+							<th>Ticker</th>
+							<th>Last trading date</th>
+							<th style="text-align: right;">Last trading price($)</th>
+							<th style="text-align: right;">New Closing Price($)</th>
+
+						</tr>
+					</thead>
 
 
-				<tbody>
-					<c:if test="${requestScope.allFunds!= null}">
-						<c:forEach items="${requestScope.allFunds}" var="oneFund" varStatus="loop">
-							<tr>
-								<td>${oneFund.fund_name}</td>
-								<td>${oneFund.fund_symbol}</td>
-								<td>${oneFund.last_date}</td>
-								<c:choose>
-									<c:when test="${oneFund.last_price/100 < 0}">
-										<td>Not Available</td>
-									</c:when>
-									<c:otherwise>
-										<td style="text-align:right;"><fmt:formatNumber value="${oneFund.last_price/100}"
-												type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-									</c:otherwise>
-								</c:choose>
-								<td style="text-align:right;"><input type="text" name="price" value="${form.price[loop.index]}" /> <input
-									type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
-							</tr>
+					<tbody>
+						<c:if test="${requestScope.allFunds!= null}">
+							<c:forEach items="${requestScope.allFunds}" var="oneFund"
+								varStatus="loop">
+								<tr>
+									<td>${oneFund.fund_name}</td>
+									<td>${oneFund.fund_symbol}</td>
+									<td>${oneFund.last_date}</td>
+									<c:choose>
+										<c:when test="${oneFund.last_price/100 < 0}">
+											<td>Not Available</td>
+										</c:when>
+										<c:otherwise>
+											<td style="text-align: right;"><fmt:formatNumber
+													value="${oneFund.last_price/100}" type="number"
+													maxFractionDigits="2" minFractionDigits="2" /></td>
+										</c:otherwise>
+									</c:choose>
+									<td style="text-align: right;"><input type="text"
+										name="price" value="${form.price[loop.index]}" /> <input
+										type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
+								</tr>
 
-						</c:forEach>
-					</c:if>
+							</c:forEach>
+						</c:if>
 
-				</tbody>
+					</tbody>
+				</c:if>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
 						name="button" class="btn btn-success" value="Submit" /></td>

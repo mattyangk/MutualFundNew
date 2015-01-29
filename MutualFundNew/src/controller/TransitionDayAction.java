@@ -50,51 +50,51 @@ public class TransitionDayAction extends Action {
 		List<String> successes = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		request.setAttribute("successes", successes);
-		
+
 		try {
 			TransitionForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 
 			FundBean[] allFunds = fundDAO.getAllFunds();// distinct different
-														// funds;
+			// funds;
 
-			if (allFunds == null || allFunds.length == 0) {
-				System.out.println("No fund");
-				errors.add("No funds have been created yet");
-				return "transitionDay.jsp";
-			}
-
-			LastPriceForFundsBean[] funds = new LastPriceForFundsBean[allFunds.length];
-
-			// can be null if it's the first run
-			
 			SimpleDateFormat dateFormat = new java.text.SimpleDateFormat(
 					"yyyy-MM-dd");
-			
+
 			Date latestDate = fundpriceHistoryDAO.findLatestDate();
 			String theDate = null;
-		    if(latestDate != null){
-		    	theDate = dateFormat.format(latestDate);
-				
-		    }
+			if(latestDate != null){
+				theDate = dateFormat.format(latestDate);
+
+			}
 			request.setAttribute("theLastDate", theDate);
 
-			for (int i = 0; i < funds.length; i++) {
-				LastPriceForFundsBean onefund = new LastPriceForFundsBean();
-				onefund.setFund_id(allFunds[i].getFund_id());
-				onefund.setFund_name(allFunds[i].getName());
-				onefund.setLast_date(theDate);
-				onefund.setLast_price(ConvertUtil.convertAmountDoubleToLong(fundpriceHistoryDAO.findLatestPrice(onefund.getFund_id())));
-				onefund.setFund_symbol(allFunds[i].getSymbol());
-				System.out.println(i);
+			if (allFunds != null && allFunds.length != 0) {
+				System.out.println("No fund");
 
-				double lastPrice = fundpriceHistoryDAO
-						.findLatestPrice(allFunds[i].getFund_id());
-				onefund.setLast_price(ConvertUtil.convertAmountDoubleToLong(lastPrice));
-				funds[i] = onefund;
+				LastPriceForFundsBean[] funds = new LastPriceForFundsBean[allFunds.length];
+
+				// can be null if it's the first run
+
+
+				for (int i = 0; i < funds.length; i++) {
+					LastPriceForFundsBean onefund = new LastPriceForFundsBean();
+					onefund.setFund_id(allFunds[i].getFund_id());
+					onefund.setFund_name(allFunds[i].getName());
+					onefund.setLast_date(theDate);
+					onefund.setLast_price(ConvertUtil.convertAmountDoubleToLong(fundpriceHistoryDAO.findLatestPrice(onefund.getFund_id())));
+					onefund.setFund_symbol(allFunds[i].getSymbol());
+					System.out.println(i);
+
+					double lastPrice = fundpriceHistoryDAO
+							.findLatestPrice(allFunds[i].getFund_id());
+					onefund.setLast_price(ConvertUtil.convertAmountDoubleToLong(lastPrice));
+					funds[i] = onefund;
+				}
+
+				request.setAttribute("allFunds", funds);
+
 			}
-
-			request.setAttribute("allFunds", funds);
 
 			if (!form.isPresent()) {
 				return "transitionDay.jsp";
@@ -105,96 +105,96 @@ public class TransitionDayAction extends Action {
 				return "transitionDay.jsp";
 			}
 			
-			
-		
 			Date newLateDate = dateFormat.parse(form.getTransitionDate());
-						
+
 			if (latestDate != null && newLateDate.compareTo(latestDate) <= 0) {
 				errors.add("The input date is not after the latest transition date: " + latestDate);
 				System.out.println("The input date is not after the latest transition date: " + latestDate);
 				return "transitionDay.jsp";
 			}
 
-			String[] price = form.getPrice(); // start to get the value from the
-												// form
-			String[] fund_id = form.getFund_id();
+			if (allFunds != null && allFunds.length != 0) {
 
-			// update the historyPirce table first;
-			for (int i = 0; i < price.length; i++) {
-				if (price[i] == null || price[i].length() == 0) {
-					errors.add("Should type all price for all funds");
-					return "transitionDay.jsp";
-				}
-				
-				if (fund_id[i] == null || fund_id[i].length() == 0) {
-					errors.add("Should provide fund Id for all funds");
-					return "transitionDay.jsp";
-				}
-				
-				try {
-					Double.parseDouble(price[i]);
-					
+				String[] price = form.getPrice(); // start to get the value from the
+				// form
+				String[] fund_id = form.getFund_id();
+
+				// update the historyPirce table first;
+				for (int i = 0; i < price.length; i++) {
+					if (price[i] == null || price[i].length() == 0) {
+						errors.add("Should type all price for all funds");
+						return "transitionDay.jsp";
+					}
+
+					if (fund_id[i] == null || fund_id[i].length() == 0) {
+						errors.add("Should provide fund Id for all funds");
+						return "transitionDay.jsp";
+					}
+
+					try {
+						Double.parseDouble(price[i]);
+
+						double newPrice=Double.parseDouble(price[i]);
+						System.out.println("original : "+newPrice);
+						BigDecimal bd = new BigDecimal(newPrice);
+						bd = bd.setScale(2, RoundingMode.HALF_UP);
+						double newPriceRounded = bd.doubleValue();    
+						System.out.println("rounded : "+newPriceRounded);
+
+						if(newPrice > 100000000000.00){
+							errors.add("Max. Price allowed is $100000000000.00 !");
+							return "transitionDay.jsp";
+						}
+
+						if(newPrice < 0.01){
+							errors.add("Invalid Transaction ! Fund Price cannot be less than $0.01");
+							return "transitionDay.jsp";
+						}
+						else if((newPrice!=newPriceRounded) && (newPrice-newPriceRounded) < 0.01){
+							errors.add("Fund Price can only have upto 2 places of decimal !");
+							return "transitionDay.jsp";
+						}
+
+					} catch (NumberFormatException e) {
+						// call getValidationErrors() to detect this
+						errors.add("Provide valid Prices for funds");
+						return "transitionDay.jsp";
+					}
+
+					try {
+						Integer.parseInt(fund_id[i]);
+					} catch (NumberFormatException e) {
+						// call getValidationErrors() to detect this
+						errors.add("Invalid fund Id for funds");
+						return "transitionDay.jsp";
+					}
+
+					FundPriceHistoryBean one = new FundPriceHistoryBean();
 					double newPrice=Double.parseDouble(price[i]);
-					System.out.println("original : "+newPrice);
-					BigDecimal bd = new BigDecimal(newPrice);
-					bd = bd.setScale(2, RoundingMode.HALF_UP);
-					double newPriceRounded = bd.doubleValue();    
-					System.out.println("rounded : "+newPriceRounded);
-					
-					if(newPrice > 100000000000.00){
-						errors.add("Max. Price allowed is $100000000000.00 !");
-						return "transitionDay.jsp";
+					if(newPrice<0)
+					{	errors.add("Should put price above zero");
+					return "transitionDay.jsp";
 					}
-					
-					if(newPrice < 0.01){
-						errors.add("Invalid Transaction ! Fund Price cannot be less than $0.01");
-						return "transitionDay.jsp";
-					}
-					else if((newPrice!=newPriceRounded) && (newPrice-newPriceRounded) < 0.01){
-						errors.add("Fund Price can only have upto 2 places of decimal !");
-						return "transitionDay.jsp";
-					}
-					
-				} catch (NumberFormatException e) {
-					// call getValidationErrors() to detect this
-					errors.add("Provide valid Prices for funds");
-					return "transitionDay.jsp";
-				}
-				
-				try {
-					Integer.parseInt(fund_id[i]);
-				} catch (NumberFormatException e) {
-					// call getValidationErrors() to detect this
-					errors.add("Invalid fund Id for funds");
-					return "transitionDay.jsp";
-				}
-				
-				FundPriceHistoryBean one = new FundPriceHistoryBean();
-				double newPrice=Double.parseDouble(price[i]);
-				if(newPrice<0)
-				{	errors.add("Should put price above zero");
-					return "transitionDay.jsp";
-				}
-				
-				one.setFund_id(Integer.parseInt(fund_id[i]));
-				one.setPrice(ConvertUtil.convertAmountDoubleToLong(Double.parseDouble(price[i])));
-				one.setPrice_date(newLateDate);
-				
-				FundBean checkFund = fundDAO.getFundById(Integer.parseInt(fund_id[i]));
-				if(checkFund == null){
-					System.out.println("some wrong id is input");
-					errors.add("Fund Id does not exist");
-					return "transitionDay.jsp";
-				}
-				
-				fundpriceHistoryDAO.create(one);
-				System.out.println("updating");
-			}
 
+					one.setFund_id(Integer.parseInt(fund_id[i]));
+					one.setPrice(ConvertUtil.convertAmountDoubleToLong(Double.parseDouble(price[i])));
+					one.setPrice_date(newLateDate);
+
+					FundBean checkFund = fundDAO.getFundById(Integer.parseInt(fund_id[i]));
+					if(checkFund == null){
+						System.out.println("some wrong id is input");
+						errors.add("Fund Id does not exist");
+						return "transitionDay.jsp";
+					}
+
+					fundpriceHistoryDAO.create(one);
+					System.out.println("updating");
+				}
+			}
 			// Then update pending transaction based on the queue.
 			TransactionBean[] transactions = transactionDAO
 					.readPendingTransInOrder();// Successfully check all the
-												// pending transaction?
+			// pending transaction?
 
 			System.out.println("got all pending transactions !");
 
@@ -265,13 +265,13 @@ public class TransitionDayAction extends Action {
 							.findLatestPrice(transactions[i].getFund_id());
 					double newShares = ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount())
 							/ newFundPrice;// be careful to the number;
-					
+
 					System.out.println("original newShares : "+newShares);
 					BigDecimal bdShares = new BigDecimal(newShares);
 					bdShares = bdShares.setScale(3, RoundingMode.HALF_UP);
 					double roundedShares = bdShares.doubleValue();    
 					System.out.println("rounded roundedShares : "+roundedShares);
-					
+
 					if(newShares < 0.001){
 						errors.add("Transaction id: "+ transactions[i].getTransaction_id()+ " failed ! Shares cannot be less than 0.001 shares.");
 						transactions[i].setIs_success(false);
@@ -282,7 +282,7 @@ public class TransitionDayAction extends Action {
 						customerDAO.updateCash(transactions[i].getCustomer_id(),ConvertUtil.convertAmountLongToDouble(customer.getCash()));
 						continue;
 					}
-					
+
 					double amountDeducted = ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount());
 					double newCash = cash - amountDeducted;
 
@@ -291,7 +291,7 @@ public class TransitionDayAction extends Action {
 					bdCash = bdCash.setScale(2, RoundingMode.HALF_UP);
 					newCash = bdCash.doubleValue();    
 					System.out.println("rounded newCash : "+newCash);
-					
+
 					transactions[i].setExecute_date(form
 							.getTransitionDateAsDate());
 					transactions[i].setShares(ConvertUtil.coverShareDoubleToLong(roundedShares));
@@ -308,7 +308,7 @@ public class TransitionDayAction extends Action {
 						double currentShares = ConvertUtil.convertShareLongToDouble(onePosition.getShares());
 						System.out.println("newShares :" + currentShares
 								+ roundedShares);
-						
+
 						positionDAO.updateShares(fundID, customerID, currentShares + roundedShares);
 
 					} else {
@@ -335,15 +335,15 @@ public class TransitionDayAction extends Action {
 					double newShares = ConvertUtil.convertShareLongToDouble(transactions[i].getShares());
 
 					//System.out.println("the price is " + newFundPrice + "the amount is " + amount + " and the newShare is " + newShares);
-					
+
 					////////////////////////////////////////////////////
-					
+
 					System.out.println("original amount : "+amount);
 					BigDecimal bdAmount = new BigDecimal(amount);
 					bdAmount = bdAmount.setScale(2, RoundingMode.HALF_UP);
 					double roundedAmount = bdAmount.doubleValue();    
 					System.out.println("rounded roundedAmount : "+roundedAmount);
-					
+
 					if(amount < 0.01){
 						errors.add("Transaction id: "+ transactions[i].getTransaction_id()+ " failed ! Amount cannot be less than $0.01.");
 						transactions[i].setIs_success(false);
@@ -355,7 +355,7 @@ public class TransitionDayAction extends Action {
 						positionDAO.updateShares(fundID, customerID, ConvertUtil.convertShareLongToDouble(onePosition.getShares()));
 						continue;
 					}
-					
+
 					double amountAdded = amount;
 					double newCash = cash + amountAdded;
 
@@ -364,7 +364,7 @@ public class TransitionDayAction extends Action {
 					bdCash = bdCash.setScale(2, RoundingMode.HALF_UP);
 					newCash = bdCash.doubleValue();    
 					System.out.println("rounded newCash : "+newCash);
-					
+
 					/////////////////////////////////////////////////////
 
 					transactions[i].setAmount(ConvertUtil.convertAmountDoubleToLong(amount));
@@ -377,8 +377,8 @@ public class TransitionDayAction extends Action {
 					transactionDAO.update(transactions[i]);
 
 					if (positionDAO.read(fundID,customerID) != null) { // need
-																		// to be
-																		// done
+						// to be
+						// done
 						// TODO POSITIONDAO.READ ORDER
 						PositionBean onePosition = positionDAO.read(fundID,customerID);
 						double currentShares = ConvertUtil.convertShareLongToDouble(onePosition.getShares());
@@ -401,7 +401,7 @@ public class TransitionDayAction extends Action {
 				} // end switch
 
 			} // end for loop;
-			
+
 			successes.add("Transition Day was Successful !");
 
 		} catch (RollbackException e) {
@@ -420,7 +420,7 @@ public class TransitionDayAction extends Action {
 			if (Transaction.isActive())
 				Transaction.rollback();
 		}
-		
+
 		return "manage.jsp";
 	}
 }

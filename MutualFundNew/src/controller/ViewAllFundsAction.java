@@ -38,7 +38,8 @@ public class ViewAllFundsAction extends Action {
 		try {
 			FundBean[] funds = fundDAO.getAllFunds();
 			if (funds == null || funds.length == 0) {
-				request.setAttribute("fundPriceDetails", null);
+				System.out.println("no funds to view!");
+				errors.add("There are no funds to view!");
 				return "viewAllFunds.jsp";
 			}
 			FundPriceDetailBean[] fundPriceDetails = new FundPriceDetailBean[funds.length];

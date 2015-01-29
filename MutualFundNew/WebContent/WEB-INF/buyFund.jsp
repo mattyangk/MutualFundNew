@@ -11,8 +11,6 @@
 	FundPriceDetailBean[] funds = (FundPriceDetailBean[]) request
 	.getAttribute("funds");
 	DecimalFormat df = new DecimalFormat("#,##0.00");
-
-	
 %>
 
 <script src="js/validate.js"></script>
@@ -23,13 +21,11 @@
 
 
 	<jsp:include page="error.jsp" />
-	
+
 
 
 	<script>
-		<%
-			if (funds != null && funds.length > 0) {
-		%>
+		<%if (funds != null && funds.length > 0) {%>
 		$(document).ready ( function () {
 	
 			$("#price").text("<%=df.format(ConvertUtil.convertAmountLongToDouble(funds[0].getPrice()))%>");
@@ -41,69 +37,68 @@
 				});
 				//alert (str);
 		
-			<%
-				for (int i = 0; i < funds.length; i++) {
-			%>
+			<%for (int i = 0; i < funds.length; i++) {%>
 				var name = "<%=funds[i].getName()%>";
 				if(str.trim() == name.trim()){
 					
 		        	$("#price").text("<%=df.format(ConvertUtil.convertAmountLongToDouble(funds[i].getPrice()))%>");
-				}
-			<%
-				}
-			%>
-			});
+												}
+	<%}%>
 		});
-		<%
-			}
-		%>
+						});
+	<%}%>
 		
 	</script>
 
 
 
 	<p class="amountInputFeedback" style="color: red"></p>
-	<form method="POST" action="buyFund.do">
-		<table class="table">
 
-			<tr>
-				<td>Available Balance</td>
-				<td><fmt:formatNumber value="${customer.balance / 100}"
-						type="currency" /></td>
-			</tr>
+	<c:if test="${not empty funds}">
+		<form method="POST" action="buyFund.do">
 
-			<tr>
-				<td>Fund Name</td>
+			<table class="table">
 
-				<td><select id="select" name="fundname">
-						<%
-							if (funds != null) {
-								for (FundPriceDetailBean fund : funds) {
-						%>
-						<option value="<%=fund.getName()%>"><%=fund.getName()%></option>
-						<%
-							}
-							}
-						%>
-				</select></td>
-			</tr>
+				<tr>
+					<td>Available Balance</td>
+					<td><fmt:formatNumber value="${customer.balance / 100}"
+							type="currency" /></td>
+				</tr>
 
-			<tr>
-				<td>Latest Price</td>
-				<td id="price"></td>
-			</tr>
+				<tr>
+					<td>Fund Name</td>
+
+					<td><select id="select" name="fundname">
+							<%
+								if (funds != null) {
+										for (FundPriceDetailBean fund : funds) {
+							%>
+							<option value="<%=fund.getName()%>"><%=fund.getName()%></option>
+							<%
+								}
+									}
+							%>
+					</select></td>
+				</tr>
+
+				<tr>
+					<td>Latest Price</td>
+					<td id="price"></td>
+				</tr>
 
 
-			<tr>
-				<td>Amount</td>
-				<td><input type="text" name="amount" class="form-control"
-					value="${form.amount}" style="width: 20%" /></td>
-			</tr>
+				<tr>
+					<td>Amount</td>
+					<td><input type="text" name="amount" class="form-control"
+						value="${form.amount}" style="width: 20%" /></td>
+				</tr>
 
-			<tr>
-				<td colspan="2" align="left"><input type="submit" name="button"
-					class="btn btn-success" value="Buy Fund" /></td>
-			</tr>
-		</table>
-	</form>
+				<tr>
+					<td colspan="2" align="left"><input type="submit"
+						name="button" class="btn btn-success" value="Buy Fund" /></td>
+				</tr>
+			</table>
+		</form>
+
+	</c:if>
 </div>

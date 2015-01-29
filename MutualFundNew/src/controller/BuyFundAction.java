@@ -66,6 +66,12 @@ public class BuyFundAction extends Action {
 			request.setAttribute("customer", latestCustomer);
 
 			FundBean[] fundsWithoutPrice = fundDAO.getAllFunds();
+			if(fundsWithoutPrice == null){
+				System.out.println("no funds !");
+				errors.add("There are no funds to buy!");
+				return "buyFund.jsp";
+			}
+			
 			FundPriceDetailBean[] funds = new FundPriceDetailBean[fundsWithoutPrice.length];
 			Date latestDay = fundPriceHistoryDAO.findLatestDate();
 			if (fundsWithoutPrice != null) {

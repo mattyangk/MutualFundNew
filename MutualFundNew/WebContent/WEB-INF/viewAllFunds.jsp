@@ -17,12 +17,12 @@
 	});
 
 	function amountSorter(a, b) {
-		a = + a.replace(",", "");
-		b = + b.replace(",", "");
+		a = +a.replace(",", "");
+		b = +b.replace(",", "");
 		re = /^\d+\.{0,1}(\d{1,2}){0,1}$/;
-		if (!re.test(a)) 
+		if (!re.test(a))
 			return 1;
-		if (!re.test(b)) 
+		if (!re.test(b))
 			return -1;
 		if (a > b)
 			return 1;
@@ -31,44 +31,49 @@
 		return 0;
 
 	}
-
 </script>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<h1 class="page-header">All Funds</h1>
 	<jsp:include page="error.jsp" />
-	
-	<table data-height="600" data-sort-name="name" data-sort-order="desc"
-		data-search="true" data-pagination="true">
 
-		<thead>
-			<tr>
-				<th data-align="center" data-sortable="true">Fund Name</th>
-				<th data-align="center" data-sortable="true">Fund Symbol</th>
-				<th data-align="right" data-sortable="true" data-sorter="amountSorter">Latest Price($)</th>
-			</tr>
+	<c:if test="${not empty fundPriceDetails}">
 
-		</thead>
+		<table data-height="600" data-sort-name="name" data-sort-order="desc"
+			data-search="true" data-pagination="true">
 
-
-		<tbody>
-
-			<c:forEach var="fund" items="${fundPriceDetails}">
+			<thead>
 				<tr>
-					<td><a href="researchFund.do?fundname=${fund.name}">${fund.name}</a></td>
-					<td>${fund.symbol}</td>
-					<c:choose>
-						<c:when test="${fund.price/100 <= 0}">
-							<td>Not Available</td>
-						</c:when>
-						<c:otherwise>
-							<td style="text-align: right;" ><fmt:formatNumber value="${fund.price/100}"
-									type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-						</c:otherwise>
-					</c:choose>
+					<th data-align="center" data-sortable="true">Fund Name</th>
+					<th data-align="center" data-sortable="true">Fund Symbol</th>
+					<th data-align="right" data-sortable="true"
+						data-sorter="amountSorter">Latest Price($)</th>
 				</tr>
-			</c:forEach>
 
-		</tbody>
-	</table>
+			</thead>
+
+
+			<tbody>
+
+				<c:forEach var="fund" items="${fundPriceDetails}">
+					<tr>
+						<td><a href="researchFund.do?fundname=${fund.name}">${fund.name}</a></td>
+						<td>${fund.symbol}</td>
+						<c:choose>
+							<c:when test="${fund.price/100 <= 0}">
+								<td>Not Available</td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align: right;"><fmt:formatNumber
+										value="${fund.price/100}" type="number" maxFractionDigits="2"
+										minFractionDigits="2" /></td>
+							</c:otherwise>
+						</c:choose>
+					</tr>
+				</c:forEach>
+
+			</tbody>
+		</table>
+
+	</c:if>
 </div>

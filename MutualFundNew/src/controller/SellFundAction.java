@@ -78,6 +78,13 @@ public class SellFundAction extends Action {
 			request.setAttribute("customer", latestCustomer);			
 			
 			FundBean[] funds = fundDAO.getAllFunds();
+			
+			if(funds == null){
+				System.out.println("no funds created !");
+				errors.add("There are no funds to sell!");
+				return "sellFund.jsp";
+			}
+			
 			ArrayList<PositionAndFundBean> positionAndFunds = new ArrayList<PositionAndFundBean>();
 			Date latestDay = fundPriceHistoryDAO.findLatestDate();
 			for (int i = 0; i < funds.length; i++) {
@@ -99,6 +106,11 @@ public class SellFundAction extends Action {
 				System.out.println("test  " + positionAndFund.getAvailable_shares());
 			}
 			
+			if(positionAndFunds == null || positionAndFunds.size() ==0){
+				System.out.println("no funds to sell !");
+				errors.add("There are no funds to sell!");
+				return "sellFund.jsp";
+			}
 			
 			request.setAttribute("positionAndFunds", positionAndFunds.toArray(new PositionAndFundBean[positionAndFunds.size()]));
 

@@ -19,9 +19,6 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<h1 class="page-header">Sell Fund</h1>
 	<jsp:include page="error.jsp" />
-	
-
-	<div></div>
 
 	<script>
 
@@ -68,59 +65,63 @@
 	</script>
 
 	<p class="shareInputFeedback" style="color: red"></p>
-	<form method="POST" action="sellFund.do">
-		<table class="table">
-			<tr>
-				<td>Available Balance</td>
-				<td><fmt:formatNumber value="${customer.balance / 100}"
-						type="currency" /></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
 
-			<tr>
-				<td>Fund Name</td>
-				<td>Fund ID</td>
-				<td>Ticker</td>
-				<td>Shares</td>
-				<td>Available Shares</td>
-				<td>Latest Price</td>
-				<td>Shares For Sale</td>
-			</tr>
-			<tr>
-				<td><select id="select" name="fundname">
-						<c:choose>
-							<c:when test="${not empty positionAndFunds }">
-								<c:forEach var="sell" items="${positionAndFunds}">
-									<option value="${sell.name}">${sell.name}</option>
-								</c:forEach>
-							</c:when>
-						</c:choose>
-				</select></td>
-				<td id="fund_id"></td>
-				<td id="symbol"></td>
-				<td id="shares"></td>
-				<td id="ashares"></td>
-				<td id="price"></td>
+	<c:if test="${not empty positionAndFunds}">
 
-				<td align="left"><input type="text" name="share"
-					class="form-control" value="" style="width: 100px" value="${form.share}"/></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="left"><input type="submit" name="button"
-					class="btn btn-success" value="Sell Shares" /></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+		<form method="POST" action="sellFund.do">
+			<table class="table">
+				<tr>
+					<td>Available Balance</td>
+					<td><fmt:formatNumber value="${customer.balance / 100}"
+							type="currency" /></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 
+				<tr>
+					<td>Fund Name</td>
+					<td>Fund ID</td>
+					<td>Ticker</td>
+					<td>Shares</td>
+					<td>Available Shares</td>
+					<td>Latest Price</td>
+					<td>Shares For Sale</td>
+				</tr>
+				<tr>
+					<td><select id="select" name="fundname">
+							<c:choose>
+								<c:when test="${not empty positionAndFunds }">
+									<c:forEach var="sell" items="${positionAndFunds}">
+										<option value="${sell.name}">${sell.name}</option>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+					</select></td>
+					<td id="fund_id"></td>
+					<td id="symbol"></td>
+					<td id="shares"></td>
+					<td id="ashares"></td>
+					<td id="price"></td>
 
+					<td align="left"><input type="text" name="share"
+						class="form-control" value="" style="width: 100px"
+						value="${form.share}" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="left"><input type="submit"
+						name="button" class="btn btn-success" value="Sell Shares" /></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 
-		</table>
-	</form>
+			</table>
+		</form>
+
+	</c:if>
 </div>
