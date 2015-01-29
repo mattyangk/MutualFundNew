@@ -16,7 +16,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean>{
 
 	public EmployeeBean getEmployeeByUsername(String username)
 			throws RollbackException {
-		EmployeeBean[] employee = match(MatchArg.equals("username", username));
+		EmployeeBean[] employee = match(MatchArg.equalsIgnoreCase("username", username));
 		if (employee.length != 1) {
 			System.out.println("not correct number of employees");
 			return null;

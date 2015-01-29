@@ -28,7 +28,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 
 	public CustomerBean getCustomerByUsername(String username)
 			throws RollbackException {
-		CustomerBean[] customer = match(MatchArg.equals("username", username));
+		CustomerBean[] customer = match(MatchArg.equalsIgnoreCase("username", username));
 		if (customer.length != 1) {
 			System.out.println("not correct number of customers");
 			return null;
