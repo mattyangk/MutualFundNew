@@ -19,13 +19,16 @@
 	});
 
 	function amountSorter(a, b) {
+		
 		a = + a.replace(",", "");
 		b = + b.replace(",", "");
+		
 		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
 		if (!re.test(a)) 
-			return 1;
+			a = Number.MAX_VALUE;
 		if (!re.test(b)) 
-			return -1;
+			b = Number.MAX_VALUE;
+		
 		if (a > b)
 			return 1;
 		if (a < b)
@@ -35,13 +38,16 @@
 	}
 
 	function shareSorter(a, b) {
+		
 		a = + a.replace(",", "");
 		b = + b.replace(",", "");
+		
 		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
 		if (!re.test(a)) 
-			return 1;
+			a = Number.MAX_VALUE;
 		if (!re.test(b)) 
-			return -1;
+			b = Number.MAX_VALUE;
+
 		if (a > b)
 			return 1;
 		if (a < b)
