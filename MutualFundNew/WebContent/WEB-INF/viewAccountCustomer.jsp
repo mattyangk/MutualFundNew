@@ -87,7 +87,7 @@
 				<th style="text-align:right">Shares</th>
 				
 				<th style="text-align:right">Available Shares</th>
-				<th style="text-align:right">Price($)</th>
+				<th style="text-align:right">Latest Price($)</th>
 				<th style="text-align:right">Total Value($)</th>
 			<tr>
 
