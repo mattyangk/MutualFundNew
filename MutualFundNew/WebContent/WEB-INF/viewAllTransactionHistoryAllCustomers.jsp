@@ -20,8 +20,8 @@
 
 	function amountSorter(a, b) {
 		
-		a = + a.replace(",", "");
-		b = + b.replace(",", "");
+		a = + a.replace(/,/g, "");
+		b = + b.replace(/,/g, "");
 		
 		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
 		if (!re.test(a)) 
@@ -39,8 +39,8 @@
 
 	function shareSorter(a, b) {
 		
-		a = + a.replace(",", "");
-		b = + b.replace(",", "");
+		a = + a.replace(/,/g, "");
+		b = + b.replace(/,/g, "");
 		
 		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
 		if (!re.test(a)) 
