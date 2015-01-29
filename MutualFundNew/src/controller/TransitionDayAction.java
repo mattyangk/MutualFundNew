@@ -198,6 +198,11 @@ public class TransitionDayAction extends Action {
 
 			System.out.println("got all pending transactions !");
 
+			if(transactions == null || transactions.length == 0 ){
+				successes.add("Transition Day was Successful !");
+				return "manage.jsp";				
+			}
+			
 			for (int i = 0; i < transactions.length; i++) {
 				CustomerBean customer = customerDAO.read(transactions[i]
 						.getCustomer_id());
