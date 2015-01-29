@@ -64,13 +64,7 @@ public class ChangePwdAction extends Action{
 			String oldPwd=form.getOldPassword();
 			String firstPwd = form.getNewPassword();
 			String secondPwd = form.getRePassword();
-			
-			if(!oldPwd.equals(employee.getPassword()))
-			{
-				errors.add("Please type the correct old password!");
-				return "changePwd.jsp";
-			}
-			
+						
 		
 			if (!firstPwd.equals(secondPwd)) {
 				errors.add("Two passwords are not the same. Please enter again");
