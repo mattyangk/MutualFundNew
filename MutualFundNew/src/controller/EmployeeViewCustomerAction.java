@@ -1,6 +1,7 @@
 package controller;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,8 +54,18 @@ public class EmployeeViewCustomerAction  extends Action{
 						
 			request.setAttribute("customer",theCustomer);
 			
-			Date latestDay = fundPriceHistoryDAO.findLatestDate();			
-			request.setAttribute("latestDay", latestDay);
+			Date latestDay = fundPriceHistoryDAO.findLatestDate();	
+			
+			SimpleDateFormat dateFormat = new java.text.SimpleDateFormat(
+					"yyyy-MM-dd");
+			
+			String theDate = null;
+			if(latestDay != null){
+				theDate = dateFormat.format(latestDay);
+			}
+			System.out.println("theDate "+theDate);
+			request.setAttribute("latestDay", theDate);
+			
 			
 			if(Positions==null || latestDay == null)
 			{

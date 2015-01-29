@@ -1,6 +1,7 @@
 package controller;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,16 +56,14 @@ public class ViewCustomerAccountAction extends Action {
 			int CustomerID=customer.getCustomer_id();
 			PositionBean [] Positions=positionDAO.getPositionsByCustomerId(CustomerID);
 			Date latestDay = fundPriceHistoryDAO.findLatestDate();
+			SimpleDateFormat dateFormat = new java.text.SimpleDateFormat(
+					"yyyy-MM-dd");
 			
 			String theDate = null;
 			if(latestDay != null){
 				theDate = dateFormat.format(latestDay);
-
 			}
-			
-			SimpleDateFormat dateFormat = new java.text.SimpleDateFormat(
-					"yyyy-MM-dd");
-			
+			System.out.println("theDate "+theDate);			
 			request.setAttribute("latestDay", theDate);
 			
 			customer = customerDAO.read(customer.getCustomer_id());

@@ -53,7 +53,7 @@
 			<tr>
 				<td>Last Trading Date:</td>
 				<c:choose>
-					<c:when test="${empty lastestDay}">
+					<c:when test="${empty latestDay}">
 						<td>Not Available</td>
 					</c:when>
 					<c:otherwise>
