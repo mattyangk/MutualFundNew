@@ -38,6 +38,7 @@ public class Controller extends HttpServlet {
         Action.add(new CreateFundAction(model));
         Action.add(new ChangePwdAction(model));
         Action.add(new BuyFundAction(model));
+        Action.add(new CustomerChangePwdAction(model));
         Action.add(new EmployeeViewCustomerAction(model));
         Action.add(new ViewCustomerAccountAction(model));
         Action.add(new ViewTransactionHistoryAction(model));
@@ -103,7 +104,7 @@ public class Controller extends HttpServlet {
     		 return "index.jsp";
     	 }   
        }
-       if(action.equals("transactionHistory.do") )
+       if(action.equals("transactionHistory.do")||action.equals("CustomerChangePwd.do") )
        {
     	   if(customer==null)
     	   { 
