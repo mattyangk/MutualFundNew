@@ -37,8 +37,6 @@
 				</tr>
 			</table>
 
-
-
 			<table class="table">
 				<c:if test="${not empty allFunds}">
 
@@ -62,10 +60,18 @@
 								<tr>
 									<td>${oneFund.fund_name}</td>
 									<td>${oneFund.fund_symbol}</td>
-									<td>${oneFund.last_date}</td>
 									<c:choose>
-										<c:when test="${oneFund.last_price/100 < 0}">
-											<td>Not Available</td>
+										<c:when test="${empty oneFund.last_date || oneFund.last_price/100 <= 0}">
+											<td>No Last Trading Date</td>
+										</c:when>
+										<c:otherwise>
+											<td>${oneFund.last_date}</td>
+										</c:otherwise>
+									</c:choose>
+									
+									<c:choose>
+										<c:when test="${oneFund.last_price/100 <= 0}">
+											<td style="text-align: right;">Not Available</td>
 										</c:when>
 										<c:otherwise>
 											<td style="text-align: right;"><fmt:formatNumber
