@@ -77,17 +77,17 @@ public class CustomerChangePwdAction extends Action{
 				return "customerChangePwd.jsp";
 			}
 			
-			customer.setPassword(firstPwd);			
-			customerDAO.update(customer);
+					
+			customerDAO.updatePassword(customer.getCustomer_id(), oldPwd, firstPwd);
 			
 			successes.add("Password has been changed!");
 			
 			
 		} catch (RollbackException e) {
-			errors.add(e.toString());
+			errors.add(e.getMessage());
 			return "customerChangePwd.jsp";
 		} catch (FormBeanException e) {
-			errors.add(e.toString());
+			errors.add(e.getMessage());
 			return "customerChangePwd.jsp";
 		}
 		

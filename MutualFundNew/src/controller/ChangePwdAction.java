@@ -77,8 +77,7 @@ public class ChangePwdAction extends Action{
 				return "changePwd.jsp";
 			}
 			
-			employee.setPassword(firstPwd);			
-			employeeDAO.update(employee);
+			employeeDAO.updatePassword(employee.getEmployee_id(), oldPwd, firstPwd);
 			
 			successes.add("Password has been changed!");
 			

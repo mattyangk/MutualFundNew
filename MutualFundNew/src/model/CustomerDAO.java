@@ -26,9 +26,28 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 
 	}
 
+	public void updatePassword(int id, String oldPassword, String newPassword)
+			throws RollbackException {
+		try {
+			Transaction.begin();
+			CustomerBean customer = read(id);
+			if (customer.getPassword().equals(oldPassword)) {
+				customer.setPassword(newPassword);
+				update(customer);
+			} else {
+				throw new RollbackException("Old passowrd is not correct");
+			}
+			Transaction.commit();
+		} finally {
+			if (Transaction.isActive())
+				Transaction.rollback();
+		}
+	}
+
 	public CustomerBean getCustomerByUsername(String username)
 			throws RollbackException {
-		CustomerBean[] customer = match(MatchArg.equalsIgnoreCase("username", username));
+		CustomerBean[] customer = match(MatchArg.equalsIgnoreCase("username",
+				username));
 		if (customer.length != 1) {
 			System.out.println("not correct number of customers");
 			return null;
@@ -37,7 +56,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 	}
 
 	public void updateBalance(int id, double amount) throws RollbackException,
-	AmountOutOfBoundException {
+			AmountOutOfBoundException {
 		try {
 			Transaction.begin();
 			CustomerBean customer = read(id);
@@ -45,12 +64,14 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 				throw new RollbackException("This customer:" + id
 						+ " does not exist");
 			} else {
-				double balance = ConvertUtil.convertAmountLongToDouble(customer.getBalance());
+				double balance = ConvertUtil.convertAmountLongToDouble(customer
+						.getBalance());
 				double newBalance = balance - amount;
 				if (newBalance < 0)
 					throw new AmountOutOfBoundException(balance, amount);
 				else {
-					customer.setBalance(ConvertUtil.convertAmountDoubleToLong(newBalance));
+					customer.setBalance(ConvertUtil
+							.convertAmountDoubleToLong(newBalance));
 					update(customer);
 				}
 			}
@@ -61,8 +82,8 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		}
 	}
 
-	public void updateCash(int customer_id, double amount) throws RollbackException,
-	AmountOutOfBoundException {
+	public void updateCash(int customer_id, double amount)
+			throws RollbackException, AmountOutOfBoundException {
 		try {
 			Transaction.begin();
 			CustomerBean customer = read(customer_id);
@@ -71,7 +92,8 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 						+ " does not exist");
 			} else {
 				customer.setCash(ConvertUtil.convertAmountDoubleToLong(amount));
-				customer.setBalance(ConvertUtil.convertAmountDoubleToLong(amount));
+				customer.setBalance(ConvertUtil
+						.convertAmountDoubleToLong(amount));
 				update(customer);
 
 			}
