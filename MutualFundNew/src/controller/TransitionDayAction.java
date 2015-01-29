@@ -204,6 +204,9 @@ public class TransitionDayAction extends Action {
 			}
 			
 			for (int i = 0; i < transactions.length; i++) {
+				System.out.println();
+				System.out.println("transaction id: "+transactions[i].getTransaction_id());
+				
 				CustomerBean customer = customerDAO.read(transactions[i]
 						.getCustomer_id());
 				double cash = ConvertUtil.convertAmountLongToDouble(customer.getCash());
@@ -212,10 +215,18 @@ public class TransitionDayAction extends Action {
 				case "deposit": {
 					System.out.println("action : deposit");
 					double addMoney = ConvertUtil.convertAmountLongToDouble(transactions[i].getAmount());
-					System.out.println("new cash - deposit : "
-							+ (cash + addMoney));
-					customerDAO.updateCash(transactions[i].getCustomer_id(),
-							(cash + addMoney));
+					
+					System.out.println("new cash + deposit : "+ (cash + addMoney));
+					
+					double newCash = cash + addMoney;
+					System.out.println("original newCash : "+newCash);
+					BigDecimal bdCash = new BigDecimal(newCash);
+					bdCash = bdCash.setScale(2, RoundingMode.HALF_UP);
+					newCash = bdCash.doubleValue();    
+					System.out.println("rounded newCash : "+newCash);
+					
+					customerDAO.updateCash(transactions[i].getCustomer_id(),newCash);
+					
 					transactions[i].setExecute_date(form
 							.getTransitionDateAsDate());
 					transactions[i].setIs_complete(true);
@@ -229,9 +240,16 @@ public class TransitionDayAction extends Action {
 					if (ConvertUtil.convertAmountLongToDouble(customer.getCash()) >= awayMoney) {
 						System.out.println("new cash - request  : "
 								+ (cash - awayMoney));
-						customerDAO.updateCash(
-								transactions[i].getCustomer_id(),
-								(cash - awayMoney));
+						
+						double newCash = cash - awayMoney;
+						System.out.println("original newCash : "+newCash);
+						BigDecimal bdCash = new BigDecimal(newCash);
+						bdCash = bdCash.setScale(2, RoundingMode.HALF_UP);
+						newCash = bdCash.doubleValue();    
+						System.out.println("rounded newCash : "+newCash);
+						
+						customerDAO.updateCash(transactions[i].getCustomer_id(),newCash);
+						
 						transactions[i].setExecute_date(form
 								.getTransitionDateAsDate());
 						transactions[i].setIs_complete(true);

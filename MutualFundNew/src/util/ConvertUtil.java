@@ -1,5 +1,8 @@
 package util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class ConvertUtil {
 
 	public static double convertAmountLongToDouble(long amount) {
@@ -7,7 +10,15 @@ public class ConvertUtil {
 	}
 	
 	public static long convertAmountDoubleToLong(double amount) {
-		return (long) (amount * 100);
+		System.out.println();
+		System.out.println("amt. before rounding : "+amount);
+		double amt = amount;
+		BigDecimal bdAmount = new BigDecimal(amount);
+		bdAmount = bdAmount.setScale(2, RoundingMode.HALF_UP);
+		amt = bdAmount.doubleValue();
+		System.out.println("amt. after rounding : "+amt);
+		System.out.println("Amount being returned : "+((long)(amt * 100)));
+		return (long) (amt * 100);
 	}
 	
 	public static double convertShareLongToDouble(long share) {
@@ -15,7 +26,15 @@ public class ConvertUtil {
 	}
 	
 	public static long coverShareDoubleToLong(double share) {
-		return (long) (share * 1000);
+		System.out.println();
+		System.out.println("shares before rounding : "+share);
+		double shr = share;
+		BigDecimal bdShare = new BigDecimal(share);
+		bdShare = bdShare.setScale(3, RoundingMode.HALF_UP);
+		shr = bdShare.doubleValue();
+		System.out.println("shares after rounding : "+shr);
+		System.out.println("Shares being returned : "+((long)(shr * 1000)));
+		return (long) (shr * 1000);
 	}
 	
 }
