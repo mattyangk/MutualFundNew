@@ -14,7 +14,7 @@ public class ConvertUtil {
 		System.out.println("amt. before rounding : "+amount);
 		double amt = amount * 100;
 		BigDecimal bdAmount = new BigDecimal(amt);
-		bdAmount = bdAmount.setScale(2, RoundingMode.HALF_UP);
+		bdAmount = bdAmount.setScale(0, RoundingMode.HALF_UP);
 		amt = bdAmount.doubleValue();
 		System.out.println("amt. after rounding : "+(long)amt);
 		return (long)amt;
@@ -29,7 +29,7 @@ public class ConvertUtil {
 		System.out.println("shares before rounding : "+share);
 		double shr = share * 1000;
 		BigDecimal bdShare = new BigDecimal(shr);
-		bdShare = bdShare.setScale(3, RoundingMode.HALF_UP);
+		bdShare = bdShare.setScale(0, RoundingMode.HALF_UP);
 		shr = bdShare.doubleValue();
 		System.out.println("shares after rounding : "+ (long)shr);
 		return (long) shr;
