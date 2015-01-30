@@ -2,6 +2,8 @@ package formbeans;
 
 import org.mybeans.form.FormBean;
 
+import util.CheckFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class CreateFundForm extends FormBean{
 
 		if(fundname==null||fundname.trim().length()==0)
 			errors.add("Please type fundname");
+		else if (! CheckFormat.isValidString(fundname)) errors.add("Invalid fundname. Can only contain a-z,A-Z,0-9,_");
 		else if (fundname.trim().length() > 20)  errors.add("The fundname can not be more than 20 characters");
 
 		if(symbol==null||symbol.trim().length()==0)

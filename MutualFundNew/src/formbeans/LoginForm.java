@@ -13,6 +13,8 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
+import util.CheckFormat;
+
 public class LoginForm extends FormBean  {
     private String username;
     private String password;
@@ -28,7 +30,7 @@ public class LoginForm extends FormBean  {
 
         if (username == null || username.trim().length() == 0) errors.add("Username is required");
         if (password == null || password.length() == 0) errors.add("Password is required");
-
+        
         return errors;
     }
 
