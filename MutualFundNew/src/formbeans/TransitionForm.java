@@ -2,11 +2,15 @@ package formbeans;
 
 import org.mybeans.form.FormBean;
 
+import util.CheckFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TransitionForm extends FormBean {
 	private String transitionDate;
@@ -75,11 +79,9 @@ public class TransitionForm extends FormBean {
 				if (s == null || s.length() == 0) {
 					errors.add("Please type new prices for all funds");
 					break;
-				} else {
-					try {
-						Double.parseDouble(price[i]);
-					} catch (NumberFormatException e) {
-						errors.add("Not a Valid Format for Fund Price");
+				} else {		
+					if (!CheckFormat.isValidAmount(s)) {
+						errors.add("Not a Valid Format for price");
 						break;
 					}
 				}

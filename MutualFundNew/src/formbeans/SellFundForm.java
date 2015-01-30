@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
+import util.CheckFormat;
+
 
 
 public class SellFundForm extends FormBean {
@@ -66,6 +68,8 @@ public class SellFundForm extends FormBean {
 					errors.add("Invalid Transaction ! Shares cannot be less than 0.001");
 				}
 				else if((getShareAsDouble()!=roundedShares) && (getShareAsDouble()-roundedShares) < 0.001){
+					errors.add("Shares can only have upto 3 places of decimal !");
+				}  else if (!CheckFormat.isValidShare(share)) {
 					errors.add("Shares can only have upto 3 places of decimal !");
 				}
 

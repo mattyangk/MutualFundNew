@@ -11,4 +11,16 @@ public class CheckFormat {
 		return matcher.find();
 	}
 
+	public static boolean isValidAmount(String input) {
+		Pattern patter = Pattern.compile("^-{0,1}\\d+\\.{0,1}(\\d{1,2}){0,1}$");
+		Matcher matcher = patter.matcher(input);
+		return matcher.find();
+	}
+	
+	public static boolean isValidShare(String input) {
+		Pattern patter = Pattern.compile("^-{0,1}\\d+\\.{0,1}(\\d{1,3}){0,1}$");
+		Matcher matcher = patter.matcher(input);
+		return matcher.find();
+	}
+	
 }
