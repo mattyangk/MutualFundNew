@@ -35,7 +35,11 @@ public class viewAllCustomerTransactionHistoryAction extends Action{
 		}catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "manage.jsp";
-		}
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "manage.jsp";
+		} 
+		
 		return "viewAllCustomerTransactionHistory.jsp";
 	}
 }

@@ -51,7 +51,7 @@
 			<form class="navbar-form navbar-right" role="form" method="POST" action="index.do">
 				<div class="form-group">
 					<input type="text" placeholder="Username" name="username"
-						class="form-control">
+						class="form-control" value="${form.username}">
 				</div>
 				<div class="form-group">
 					<input type="password" placeholder="Password" name="password"

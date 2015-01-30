@@ -72,6 +72,9 @@ public class CreateFundAction extends Action {
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "createFund.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "createFund.jsp";
 		}
 		
 		

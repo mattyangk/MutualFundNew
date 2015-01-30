@@ -107,7 +107,7 @@
 					<td id="price"></td>
 
 					<td align="left"><input type="text" name="share"
-						class="form-control" value="" style="width: 100px"
+						class="form-control" style="width: 100px"
 						value="${form.share}" /></td>
 				</tr>
 				<tr>

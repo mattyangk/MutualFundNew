@@ -43,6 +43,9 @@ public class ViewAllCustomerDetailsAction extends Action {
 		}catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "manage.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "manage.jsp";
 		}
 		return "viewAllCustomerDetails.jsp";
 	}

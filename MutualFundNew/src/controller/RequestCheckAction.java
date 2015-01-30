@@ -71,12 +71,6 @@ public class RequestCheckAction extends Action{
 				return "requestCheck.jsp";
 			}
 			
-		
-				
-
-//			System.out.println(customer.getUsername());
-//			System.out.println(customer.getCash());
-			
 			customerDAO.updateBalance(customer.getCustomer_id(), form.getRequestAmountAsDouble());
 			
 			TransactionBean transaction = new TransactionBean();
@@ -99,6 +93,9 @@ public class RequestCheckAction extends Action{
 			return "requestCheck.jsp";
 		} catch (AmountOutOfBoundException e) {
 			System.out.println(e.getMessage());
+			errors.add(e.getMessage());
+			return "requestCheck.jsp";
+		} catch (Exception e) {
 			errors.add(e.getMessage());
 			return "requestCheck.jsp";
 		}

@@ -91,8 +91,13 @@ public class CreateEmployeeAccountAction extends Action {
 
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
+			return "createEmployeeAccount.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
+			return "createEmployeeAccount.jsp";
+		}catch (Exception e) {
+			errors.add(e.getMessage());
+			return "createEmployeeAccount.jsp";
 		}
 
 		return "manage.jsp";

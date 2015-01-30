@@ -427,7 +427,11 @@ public class TransitionDayAction extends Action {
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return "transitionDay.jsp";
-		} finally {
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "transitionDay.jsp";
+		}
+		  finally {
 			if (Transaction.isActive())
 				Transaction.rollback();
 		}
