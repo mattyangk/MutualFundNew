@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
+import util.CheckFormat;
+
 public class CreateCustomerAccoutForm extends FormBean{
 	private int customer_id;
 	private String username;
@@ -82,6 +84,7 @@ public class CreateCustomerAccoutForm extends FormBean{
         List<String> errors = new ArrayList<String>();
 
         if (username == null || username.trim().length() == 0) errors.add("Username is required");
+        else if (! CheckFormat.isValidString(username)) errors.add("Invalid username. Can only contain a-z,A-Z,0-9,_");
         else if (username.trim().length() > 60)  errors.add("The username can not be more than 60 characters");
         
         if (password == null || password.length() == 0) errors.add("Password is required");
@@ -102,7 +105,7 @@ public class CreateCustomerAccoutForm extends FormBean{
         if (!(state.trim().length() == 2 || state.trim().length() == 0))  errors.add("Invalid State");
            
         if (!(zip.trim().length() == 5 || zip.trim().length() == 0))  errors.add("Invalid zip");
-        else if (zip.trim().length()==5){
+        if (zip.trim().length()==5){
         try {
 			Integer.parseInt(zip);
 		} catch (NumberFormatException e) {
