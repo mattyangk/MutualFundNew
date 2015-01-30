@@ -65,7 +65,7 @@ public class TransitionForm extends FormBean {
 		}
 
 		if (price == null) {
-			errors.add("Price id is required");
+			errors.add("Price is required");
 		}
 
 		if (price != null && fund_id != null && price.length != 0

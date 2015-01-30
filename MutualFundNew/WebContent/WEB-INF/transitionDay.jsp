@@ -32,7 +32,8 @@
 
 				<tr>
 					<td>Trading Day:</td>
-					<td><input type="text" class="form-control" name="transitionDate" placeholder="YYYY-MM-DD"
+					<td><input type="text" class="form-control"
+						name="transitionDate" placeholder="YYYY-MM-DD"
 						value="${form.transitionDate}" /></td>
 				</tr>
 			</table>
@@ -61,14 +62,15 @@
 									<td>${oneFund.fund_name}</td>
 									<td>${oneFund.fund_symbol}</td>
 									<c:choose>
-										<c:when test="${empty oneFund.last_date || oneFund.last_price/100 <= 0}">
+										<c:when
+											test="${empty oneFund.last_date || oneFund.last_price/100 <= 0}">
 											<td>No Last Trading Date</td>
 										</c:when>
 										<c:otherwise>
 											<td>${oneFund.last_date}</td>
 										</c:otherwise>
 									</c:choose>
-									
+
 									<c:choose>
 										<c:when test="${oneFund.last_price/100 <= 0}">
 											<td style="text-align: right;">Not Available</td>
@@ -79,9 +81,10 @@
 													maxFractionDigits="2" minFractionDigits="2" /></td>
 										</c:otherwise>
 									</c:choose>
-									<td style="text-align: right;"><input type="text" class="form-control"
-										name="price" value="${form.price[loop.index]}" /> <input
-										type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
+									<td style="text-align: right;"><input type="text"
+										class="form-control" style="text-align: right;" name="price"
+										value="${form.price[loop.index]}" /> <input type="hidden"
+										name="fund_id" value="${oneFund.fund_id}" /></td>
 								</tr>
 
 							</c:forEach>
@@ -90,7 +93,10 @@
 					</tbody>
 				</c:if>
 				<tr>
-					<td></td><td></td><td></td><td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 					<td colspan="2" align="right"><input type="submit"
 						name="button" class="btn btn-success" value="Submit" /></td>
 				</tr>
