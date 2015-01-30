@@ -49,6 +49,7 @@ public class ResetPwdAction extends Action{
 
 			// Load the form parameters into a form bean
 			ResetPwdForm form = formBeanFactory.create(request);
+			request.setAttribute("form", form);
 
 			// If no params were passed, return with no errors so that the form
 			// will be
