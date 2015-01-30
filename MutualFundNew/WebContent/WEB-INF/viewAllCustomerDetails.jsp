@@ -15,6 +15,27 @@
 
 		});
 	});
+
+	function amountSorter(a, b) {
+		
+		a = + a.replace(/,/g, "");
+		b = + b.replace(/,/g, "");
+		
+		re = /^\d+\.{0,1}(\d{1,3}){0,1}$/;
+		if (!re.test(a)) 
+			a = Number.MAX_VALUE;
+		if (!re.test(b)) 
+			b = Number.MAX_VALUE;
+		
+		if (a > b)
+			return 1;
+		if (a < b)
+			return -1;
+		return 0;
+
+	}
+
+
 </script>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -28,7 +49,7 @@
 			<tr>
 				<th data-align="center" data-sortable="true">User Name</th>
 				<th data-align="center" data-sortable="true">Name</th>
-				<th data-align="right" data-sortable="true">Cash($)</th>
+				<th data-align="right" data-sorter="amountSorter" data-sortable="true">Cash($)</th>
 			</tr>
 
 		</thead>
