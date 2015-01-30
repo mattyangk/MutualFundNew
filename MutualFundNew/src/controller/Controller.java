@@ -131,7 +131,7 @@ public class Controller extends HttpServlet {
     		   return "index.jsp"; 
     	   }
        }        
-       if(action.equals("depositCheck.do")||action.equals("createFund.do")||action.equals("transitionDayAction.do"))
+       if(action.equals("depositCheck.do")||action.equals("createFund.do")||action.equals("transitionDayAction.do")||action.equals("viewAllTransactionsHistory.do"))
        {
     	   if(employee==null)
     	   {

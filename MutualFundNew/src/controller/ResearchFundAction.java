@@ -54,6 +54,13 @@ public class ResearchFundAction extends Action {
 			if (errors.size() != 0) {
 				return "researchFund.jsp";
 			}
+			
+			if(form.getFundname()==null||form.getFundname().length()==0)
+			{
+				errors.add("No fund selected!");
+				return "researchFund.jsp";
+				
+			}
 
 			FundBean fund = fundDAO.getFundByName(form.getFundname());
 			if (fund == null) {
