@@ -80,7 +80,14 @@ public class Controller extends HttpServlet {
         request.setAttribute("errors",errors);
 
         // System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
-
+        if (action.equals("aboutUs.do")) {
+        	return "aboutUs.jsp";
+        }
+        
+        if (action.equals("contactUs.do")) {
+        	return "contactUs.jsp";
+        }
+        
         if (action.equals("index.do")) {
         	// Allow these actions without logging in
         	
