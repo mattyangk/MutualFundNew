@@ -141,7 +141,7 @@
 
 							<td>${transaction.fund_name}</td>
 							<c:if test="${transaction.price==0 }">
-							<td>N/A</td>
+							<td>(pending)</td>
 							</c:if>
 							<c:if test="${transaction.price!=0 }">
 							<td><fmt:formatNumber value="${transaction.price/100}"
