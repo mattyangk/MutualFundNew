@@ -44,7 +44,7 @@ public class BuyFundForm extends FormBean {
 		if (fundname == null || fundname.trim().length() == 0) {
 			errors.add("Fundname is required");
 		}
-		if (fundname.trim().length() > 20)  errors.add("The username can not be more than 20 characters");
+		else if (fundname.trim().length() > 20)  errors.add("The username can not be more than 20 characters");
 
 		if (amount == null || amount.trim().length() == 0) {
 			errors.add("Amount is required");
