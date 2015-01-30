@@ -36,17 +36,12 @@ public class LogoutAction extends Action {
 		request.setAttribute("successes", successes);
         
         HttpSession session = request.getSession();
-        CustomerBean customer = (CustomerBean)session.getAttribute("customer");
-        EmployeeBean employee = (EmployeeBean)session.getAttribute("employee");
+
+        session.setAttribute("customer", null);
+        session.setAttribute("employee", null);
         
         
-        if (customer != null) {
-        	session.setAttribute("customer", null);
-        } else if (employee != null){
-        	session.setAttribute("employee", null);
-        } else {
-        	errors.add("Logout without login");
-        }
+        
         successes.add("Logged out successfully!");
         return "index.jsp";
 	}
