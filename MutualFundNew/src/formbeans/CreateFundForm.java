@@ -44,7 +44,7 @@ public class CreateFundForm extends FormBean{
 
 		if(symbol==null||symbol.trim().length()==0)
 			errors.add("Please type Ticker");
-
+		else if (! CheckFormat.isValidString(symbol)) errors.add("Invalid ticker. Can only contain a-z,A-Z,0-9,_");
 		else if(symbol.length()<1||symbol.length()>5)
 			errors.add("Ticker shoud be 1 to 5 characters.");
 
