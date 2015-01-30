@@ -40,19 +40,17 @@ public class ResetPwdForm extends FormBean {
 		if (username == null || username.length() == 0) {
 			errors.add("Username of customer is required");
 		}
-		
+
 		if (newPassword == null || newPassword.length() == 0) {
 			errors.add("New Password is required");
-		}
-		else if (newPassword.length() > 60)  errors.add("The password can not be more than 60 characters");
+		} else if (newPassword.length() > 60)
+			errors.add("The password can not be more than 60 characters");
 
 		if (rePassword == null || rePassword.length() == 0) {
 			errors.add("Please confirm the new password");
-		}
-		else if (newPassword.length() > 60)  errors.add("The password can not be more than 60 characters");
-
-		
-		else if (!newPassword.equals(rePassword)) {
+		} else if (newPassword.length() > 60) {
+			errors.add("The password can not be more than 60 characters");
+		} else if (!newPassword.equals(rePassword)) {
 			errors.add("Passwords do not match");
 		}
 

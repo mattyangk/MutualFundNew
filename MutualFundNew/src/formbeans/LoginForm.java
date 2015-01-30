@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
-import util.CheckFormat;
 
 public class LoginForm extends FormBean  {
     private String username;
