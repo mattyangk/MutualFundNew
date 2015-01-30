@@ -43,9 +43,12 @@
 			<%for (int i = 0; i < funds.length; i++) {%>
 				var name = "<%=funds[i].getName()%>";
 				if(str.trim() == name.trim()){
-					
-		        	$("#price").text("<%=df.format(ConvertUtil.convertAmountLongToDouble(funds[i].getPrice()))%>");
-												}
+					<%if (funds[i].getPrice() != 0) { %>
+						$("#price").text("<%=df.format(ConvertUtil.convertAmountLongToDouble(funds[i].getPrice()))%>");
+					<%} else {%>
+						$("#price").text("Not Available");
+					<%}%>
+				}
 	<%}%>
 		});
 						});

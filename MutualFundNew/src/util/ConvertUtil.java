@@ -12,13 +12,12 @@ public class ConvertUtil {
 	public static long convertAmountDoubleToLong(double amount) {
 		System.out.println();
 		System.out.println("amt. before rounding : "+amount);
-		double amt = amount;
-		BigDecimal bdAmount = new BigDecimal(amount);
+		double amt = amount * 100;
+		BigDecimal bdAmount = new BigDecimal(amt);
 		bdAmount = bdAmount.setScale(2, RoundingMode.HALF_UP);
 		amt = bdAmount.doubleValue();
-		System.out.println("amt. after rounding : "+amt);
-		System.out.println("Amount being returned : "+((long)(amt * 100)));
-		return (long) (amt * 100);
+		System.out.println("amt. after rounding : "+(long)amt);
+		return (long)amt;
 	}
 	
 	public static double convertShareLongToDouble(long share) {
@@ -28,13 +27,12 @@ public class ConvertUtil {
 	public static long coverShareDoubleToLong(double share) {
 		System.out.println();
 		System.out.println("shares before rounding : "+share);
-		double shr = share;
-		BigDecimal bdShare = new BigDecimal(share);
+		double shr = share * 1000;
+		BigDecimal bdShare = new BigDecimal(shr);
 		bdShare = bdShare.setScale(3, RoundingMode.HALF_UP);
 		shr = bdShare.doubleValue();
-		System.out.println("shares after rounding : "+shr);
-		System.out.println("Shares being returned : "+((long)(shr * 1000)));
-		return (long) (shr * 1000);
+		System.out.println("shares after rounding : "+ (long)shr);
+		return (long) shr;
 	}
 	
 }
