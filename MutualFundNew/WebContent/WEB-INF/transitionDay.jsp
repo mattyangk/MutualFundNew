@@ -32,7 +32,7 @@
 
 				<tr>
 					<td>Trading Day:</td>
-					<td><input type="text" name="transitionDate"
+					<td><input type="text" class="form-control" name="transitionDate" placeholder="YYYY-MM-DD"
 						value="${form.transitionDate}" /></td>
 				</tr>
 			</table>
@@ -79,7 +79,7 @@
 													maxFractionDigits="2" minFractionDigits="2" /></td>
 										</c:otherwise>
 									</c:choose>
-									<td style="text-align: right;"><input type="text"
+									<td style="text-align: right;"><input type="text" class="form-control"
 										name="price" value="${form.price[loop.index]}" /> <input
 										type="hidden" name="fund_id" value="${oneFund.fund_id}" /></td>
 								</tr>
