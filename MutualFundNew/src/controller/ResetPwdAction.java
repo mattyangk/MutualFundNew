@@ -91,7 +91,11 @@ public class ResetPwdAction extends Action{
 		} catch (FormBeanException e) {
 			errors.add(e.toString());
 			return "resetPwd.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "resetPwd.jsp";
 		}
+		
 		return "manage.jsp";
 	}
 

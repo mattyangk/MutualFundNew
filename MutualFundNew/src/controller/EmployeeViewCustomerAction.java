@@ -98,10 +98,13 @@ public class EmployeeViewCustomerAction  extends Action{
 				
 				request.setAttribute("fundInfo",fundInfo);
 			}
-		}catch (RollbackException e) {
+		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "viewAccountCustomer.jsp";
-		} 
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "viewAccountCustomer.jsp";
+		}
 		
 		return "viewAccountCustomer.jsp";
 	}

@@ -155,6 +155,9 @@ public class BuyFundAction extends Action {
 		} catch (AmountOutOfBoundException e) {
 			errors.add(e.getMessage());
 			return "buyFund.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "buyFund.jsp";
 		}
 
 		return "manage.jsp";

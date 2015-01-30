@@ -130,6 +130,10 @@ public class SellFundAction extends Action {
 			
 			FundBean fund = fundDAO.getFundByName(form.getFundname());
 
+			if(fund == null){
+				errors.add("Wrong fund name");
+				return "sellFund.jsp";
+			}
 			positionDAO.updateAvailableShares(fund.getFund_id(), customer.getCustomer_id(), form.getShareAsDouble());
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomer_id());
@@ -151,6 +155,9 @@ public class SellFundAction extends Action {
 			errors.add(e.getMessage());
 			return "sellFund.jsp";
 		} catch (SharesOutOfBoundException e) {
+			errors.add(e.getMessage());
+			return "sellFund.jsp";
+		} catch (Exception e) {
 			errors.add(e.getMessage());
 			return "sellFund.jsp";
 		}

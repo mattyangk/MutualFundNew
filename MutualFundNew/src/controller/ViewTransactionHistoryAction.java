@@ -98,8 +98,12 @@ public class ViewTransactionHistoryAction extends Action {
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "manage.jsp";
-		}
+			return "viewTransactionsHistory.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "viewTransactionsHistory.jsp";
+		} 
+
 		return "viewTransactionsHistory.jsp";
 	}
 

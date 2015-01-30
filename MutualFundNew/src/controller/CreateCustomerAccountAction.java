@@ -90,8 +90,13 @@ public class CreateCustomerAccountAction extends Action {
 
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
+			return "createCustomerAccount.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
+			return "createCustomerAccount.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "createCustomerAccount.jsp";
 		}
 
 		return "manage.jsp";

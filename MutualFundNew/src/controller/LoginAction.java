@@ -115,6 +115,9 @@ public class LoginAction extends Action {
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return "index.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "index.jsp";
 		}
 		
 		return "index.jsp";

@@ -72,6 +72,9 @@ public class ViewAllFundsAction extends Action {
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "viewAllFunds.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "viewAllFunds.jsp";
 		}
 
 		return "viewAllFunds.jsp";

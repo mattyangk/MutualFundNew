@@ -14,42 +14,45 @@ import model.Model;
 import model.TransactionDAO;
 
 public class viewOneCustomerTransactionHistoryAction extends Action{
-	
+
 	CustomerDAO customerDAO;
 	TransactionDAO transactionDAO;
-	
+
 	public viewOneCustomerTransactionHistoryAction(Model model)
 	{
 		customerDAO = model.getCustomerDAO();
 		transactionDAO = model.getTransactionDAO();
 	}
-	
+
 	public String getName() {
 		return "viewOneCustomerTransactionHistory.do";
 	}
-	
+
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors",errors);
 		String customerName=(String)request.getParameter("customername");
 		TransactionBean[] allTransactions = null;
-		
+
 		try {
 			CustomerBean customer=customerDAO.getCustomerByUsername(customerName);
 			allTransactions = transactionDAO.getTransactionsByCustomerId(customer.getCustomer_id());
-			
+
 			if(allTransactions==null){
 				errors.add("No Transactions !");
 				return "employeeViewTransactionsHistory.jsp";
 			}		
 			request.setAttribute("transactionsHistory", allTransactions);
 		} catch (RollbackException e) {
-			// TODO Auto-generated catch block
 			errors.add(e.getMessage());
-			return "manage.jsp";
+			return "employeeViewTransactionsHistory.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "employeeViewTransactionsHistory.jsp";
 		}
+
 		return "employeeViewTransactionsHistory.jsp";
-				
+
 	}
-	
+
 }

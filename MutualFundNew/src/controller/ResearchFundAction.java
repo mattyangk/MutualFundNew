@@ -97,6 +97,9 @@ public class ResearchFundAction extends Action {
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "researchFund.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "researchFund.jsp";
 		}
 
 		return "researchFund.jsp";

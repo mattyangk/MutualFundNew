@@ -52,23 +52,23 @@ public class ViewCustomerAccountAction extends Action {
 		CustomerBean customer = (CustomerBean)session.getAttribute("customer");
 
 		try{
-			
+
 			int CustomerID=customer.getCustomer_id();
 			PositionBean [] Positions=positionDAO.getPositionsByCustomerId(CustomerID);
 			Date latestDay = fundPriceHistoryDAO.findLatestDate();
 			SimpleDateFormat dateFormat = new java.text.SimpleDateFormat(
 					"yyyy-MM-dd");
-			
+
 			String theDate = null;
 			if(latestDay != null){
 				theDate = dateFormat.format(latestDay);
 			}
 			System.out.println("theDate "+theDate);			
 			request.setAttribute("latestDay", theDate);
-			
+
 			customer = customerDAO.read(customer.getCustomer_id());
 			session.setAttribute("customer", customer);
-			
+
 			if(customer==null){
 				return "manage.jsp";
 			}
@@ -78,10 +78,10 @@ public class ViewCustomerAccountAction extends Action {
 				request.setAttribute("message", messages);
 				return "viewAccountCustomer.jsp";
 			}
-			
+
 			else{
 				CustomerFundsInfoBean [] fundInfo=new CustomerFundsInfoBean[Positions.length];
-				
+
 				for(int i=0;i<fundInfo.length;i++)
 				{
 					FundBean theFund=fundDAO.getFundById(Positions[i].getFund_id());
@@ -97,17 +97,22 @@ public class ViewCustomerAccountAction extends Action {
 					double total = ConvertUtil.convertAmountLongToDouble(fundInfo[i].getPrice()) * ConvertUtil.convertShareLongToDouble(fundInfo[i].getShares());
 					total = new BigDecimal(total).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 					fundInfo[i].setTotal(ConvertUtil.convertAmountDoubleToLong(total));
-			
+
 				}
-				
+
 				request.setAttribute("fundInfo",fundInfo);
 			}
 
 		}catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "manage.jsp";
-		}
+			return "viewAccountCustomer.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
 			return "viewAccountCustomer.jsp";
 		}
-
+		
+		
+		return "viewAccountCustomer.jsp";
 	}
+
+}

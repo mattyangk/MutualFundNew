@@ -82,6 +82,9 @@ public class ChangePwdAction extends Action{
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return "changePwd.jsp";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "changePwd.jsp";
 		}
 		
 		return "manage.jsp";
