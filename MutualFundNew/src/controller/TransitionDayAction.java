@@ -119,6 +119,11 @@ public class TransitionDayAction extends Action {
 				// form
 				String[] fund_id = form.getFund_id();
 				
+				if(fund_id.length != allFundsCheck.length){
+					errors.add("Some funds price missing!");
+					return "transitionDay.jsp";
+				}
+				
 				// update the historyPirce table first;
 				for (int i = 0; i < price.length; i++) {
 					if (price[i] == null || price[i].length() == 0) {
@@ -132,8 +137,8 @@ public class TransitionDayAction extends Action {
 					}
 					
 					
-					if((fund_id.length != allFundsCheck.length) || (Integer.parseInt(fund_id[i]) != allFundsCheck[i].getFund_id())){
-						errors.add("Some funds price missing!");
+					if(Integer.parseInt(fund_id[i]) != allFundsCheck[i].getFund_id()){
+						errors.add("Fund Id mismatch!");
 						return "transitionDay.jsp";
 					}
 
