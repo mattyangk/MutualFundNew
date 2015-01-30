@@ -77,10 +77,10 @@ public class ChangePwdAction extends Action{
 			
 			
 		} catch (RollbackException e) {
-			errors.add(e.toString());
+			errors.add(e.getMessage());
 			return "changePwd.jsp";
 		} catch (FormBeanException e) {
-			errors.add(e.toString());
+			errors.add(e.getMessage());
 			return "changePwd.jsp";
 		}
 		
