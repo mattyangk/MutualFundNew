@@ -65,7 +65,6 @@ public class TransitionDayAction extends Action {
 			String theDate = null;
 			if(latestDate != null){
 				theDate = dateFormat.format(latestDate);
-
 			}
 			request.setAttribute("theLastDate", theDate);
 
@@ -108,17 +107,23 @@ public class TransitionDayAction extends Action {
 			Date newLateDate = dateFormat.parse(form.getTransitionDate());
 
 			if (latestDate != null && newLateDate.compareTo(latestDate) <= 0) {
-				errors.add("The input date is not after the latest transition date: " + latestDate);
-				System.out.println("The input date is not after the latest transition date: " + latestDate);
+				errors.add("The input date is not after the latest transition date: " + theDate);
+				System.out.println("The input date is not after the latest transition date: " + theDate);
 				return "transitionDay.jsp";
 			}
 
-			if (allFunds != null && allFunds.length != 0) {
+			FundBean[] allFundsCheck = fundDAO.getAllFunds();
+			if (allFunds != null && allFunds.length != 0 && allFundsCheck != null && allFundsCheck.length != 0 ) {
 
 				String[] price = form.getPrice(); // start to get the value from the
 				// form
 				String[] fund_id = form.getFund_id();
-
+				
+				if(fund_id.length != allFundsCheck.length){
+					errors.add("Some funds price missing!");
+					return "transitionDay.jsp";
+				}
+				
 				// update the historyPirce table first;
 				for (int i = 0; i < price.length; i++) {
 					if (price[i] == null || price[i].length() == 0) {
@@ -130,52 +135,35 @@ public class TransitionDayAction extends Action {
 						errors.add("Should provide fund Id for all funds");
 						return "transitionDay.jsp";
 					}
-
-					try {
-						Double.parseDouble(price[i]);
-
-						double newPrice=Double.parseDouble(price[i]);
-						System.out.println("original : "+newPrice);
-						BigDecimal bd = new BigDecimal(newPrice);
-						bd = bd.setScale(2, RoundingMode.HALF_UP);
-						double newPriceRounded = bd.doubleValue();    
-						System.out.println("rounded : "+newPriceRounded);
-
-						if(newPrice > 100000000000.00){
-							errors.add("Max. Price allowed is $100000000000.00 !");
-							return "transitionDay.jsp";
-						}
-
-						if(newPrice < 0.01){
-							errors.add("Invalid Transaction ! Fund Price cannot be less than $0.01");
-							return "transitionDay.jsp";
-						}
-						else if((newPrice!=newPriceRounded) && (newPrice-newPriceRounded) < 0.01){
-							errors.add("Fund Price can only have upto 2 places of decimal !");
-							return "transitionDay.jsp";
-						}
-
-					} catch (NumberFormatException e) {
-						// call getValidationErrors() to detect this
-						errors.add("Provide valid Prices for funds");
+					
+					
+					if(Integer.parseInt(fund_id[i]) != allFundsCheck[i].getFund_id()){
+						errors.add("Fund Id mismatch!");
 						return "transitionDay.jsp";
 					}
 
-					try {
-						Integer.parseInt(fund_id[i]);
-					} catch (NumberFormatException e) {
-						// call getValidationErrors() to detect this
-						errors.add("Invalid fund Id for funds");
+					double newPrice=Double.parseDouble(price[i]);
+					System.out.println("original : "+newPrice);
+					BigDecimal bd = new BigDecimal(newPrice);
+					bd = bd.setScale(2, RoundingMode.HALF_UP);
+					double newPriceRounded = bd.doubleValue();    
+					System.out.println("rounded : "+newPriceRounded);
+
+					if(newPrice > 100000000000.00){
+						errors.add("Max. Price allowed is $100000000000.00 !");
+						return "transitionDay.jsp";
+					}
+
+					if(newPrice < 0.01){
+						errors.add("Invalid Transaction ! Fund Price cannot be less than $0.01");
+						return "transitionDay.jsp";
+					}
+					else if((newPrice!=newPriceRounded) && (newPrice-newPriceRounded) < 0.01){
+						errors.add("Fund Price can only have upto 2 places of decimal !");
 						return "transitionDay.jsp";
 					}
 
 					FundPriceHistoryBean one = new FundPriceHistoryBean();
-					double newPrice=Double.parseDouble(price[i]);
-					if(newPrice<0)
-					{	errors.add("Should put price above zero");
-					return "transitionDay.jsp";
-					}
-
 					one.setFund_id(Integer.parseInt(fund_id[i]));
 					one.setPrice(ConvertUtil.convertAmountDoubleToLong(Double.parseDouble(price[i])));
 					one.setPrice_date(newLateDate);

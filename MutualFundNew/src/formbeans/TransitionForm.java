@@ -35,6 +35,7 @@ public class TransitionForm  extends FormBean {
 	public Date getTransitionDateAsDate(){
 		List<String> errors = new ArrayList<String>();
 		SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+		parser.setLenient(false);
 		Date date = null;
 		try {
 			date = parser.parse(transitionDate);
@@ -50,7 +51,6 @@ public class TransitionForm  extends FormBean {
 		if(!isValidDate(transitionDate))
 			errors.add("Not a Valid Format for TransitionDate ");
 
-
 		if(price!=null && fund_id!=null && price.length!=0 && fund_id.length!=0 ){
 			for(int i=0;i<price.length;i++)
 			{
@@ -58,6 +58,13 @@ public class TransitionForm  extends FormBean {
 				if(s==null||s.length()==0){	
 					errors.add("Please type new prices for all funds");
 					break;	
+				} else {
+					try{
+						Double.parseDouble(price[i]);
+					} catch (NumberFormatException e) {
+						errors.add("Not a Valid Format for Fund Price");
+						break;
+					}
 				}
 			}
 
@@ -68,7 +75,16 @@ public class TransitionForm  extends FormBean {
 					errors.add("Please provide fund Ids for all funds");
 					break;	
 				}
+				else {
+					try{
+						Integer.parseInt(fund_id[i]);
+					} catch (NumberFormatException e) {
+						errors.add("Not a Valid Format for Fund Id ");
+						break;
+					}
+				}
 			}
+
 		}
 		return errors;
 	}
@@ -78,9 +94,10 @@ public class TransitionForm  extends FormBean {
 
 	public boolean isValidDate(String s) {
 		try {
-			java.text.SimpleDateFormat sf = new java.text.SimpleDateFormat(
-					"yyyy-mm-dd");
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			sf.setLenient(false);
 			sf.parse(s);
+			System.out.println("date parsed ! value : "+sf.parse(s));
 		} catch (Exception ex) {
 			return false;
 		}
