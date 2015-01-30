@@ -1,10 +1,4 @@
-/*
- * 08-600 Java and J2EE Programming
- * Homework #9
- * Anjal Patni
- * apatni
- * 9th December 2014
- */
+
 
 package controller;
 

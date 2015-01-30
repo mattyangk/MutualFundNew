@@ -56,25 +56,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		return transactions;
 	}
 
-	/*
-	 * public TransactionBean[] getTransactionsByTransitionDay(Date date) throws
-	 * RollbackException {
-	 * 
-	 * TransactionBean[] transactions = match(MatchArg.equals("transition_date",
-	 * date)); return transactions; }
-	 */
 
-	/*
-	 * public void updateDate(int transaction_id, Date date) throws
-	 * RollbackException, AmountOutOfBoundException { try { Transaction.begin();
-	 * TransactionBean transaction = read(transaction_id); if (transaction ==
-	 * null) { throw new RollbackException("This transaction:" + transaction_id
-	 * + " does not exist"); } else { double = ; double newCash = cash + amount;
-	 * customer.setBalance(newCash); update(customer);
-	 * 
-	 * } Transaction.commit(); } finally { if (Transaction.isActive())
-	 * Transaction.rollback(); }
-	 */
 
 	public static void sortInAscending(TransactionBean[] a) {
 		Arrays.sort(a, new Comparator<TransactionBean>() {
