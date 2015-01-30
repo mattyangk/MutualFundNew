@@ -114,8 +114,8 @@
 					<%
 						} else {
 					%>
-					<li><a href="index.do"> About Us </a></li>
-					<li><a href="index.do"> Contact Us </a></li>
+					<li><a href="aboutUs.jsp"> About Us </a></li>
+					<li><a href="contact.jsp"> Contact Us </a></li>
 					<%
 						}
 					%>
